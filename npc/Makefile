@@ -36,7 +36,7 @@ sim:
 	@verilator -Wall vsrc/top.v csrc/main.cpp --cc --trace --exe --build
 	@make -j -C obj_dir -f Vtop.mk Vtop
 	@./obj_dir/Vtop
-	@pkill ./obj_dir/Vtop
+wave:
 	@gtkwave wave.vcd
 	
 include ../Makefile
