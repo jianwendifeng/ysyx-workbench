@@ -32,7 +32,7 @@ clean:
 
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	//@echo "Write this Makefile by yourself."
+	@echo "Write this Makefile by yourself."
 	verilator -Wall vsrc/top.v csrc/main.cpp --cc --trace --exe --build
 	make -j -C obj_dir -f Vtop.mk Vtop
 	./obj_dir/Vour_OnOff
