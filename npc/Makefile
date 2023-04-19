@@ -80,5 +80,5 @@ run: $(BIN)
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by yourself."
-	verilator -Wall --cc --exe --build ./csrc/$main.cpp ./vsrc/$top.v --trace	
+	verilator -Wall --cc --exe --build ./csrc/$ main.cpp ./vsrc/$ top.v --trace	
 include ../Makefile
