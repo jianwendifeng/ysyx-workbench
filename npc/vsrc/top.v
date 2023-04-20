@@ -1,12 +1,20 @@
 module top(
-  input a,
-  input b,
-  output f
+  input clk,
+  input rst,
+  output [15:0] led
 );
-  assign f = a ^ b;
+
+
+
+light light1(
+	.clk(clk),
+	.rst(rst),
+	.led(led)
+);
+
 endmodule
 
-/*module light(
+module light(
   input clk,
   input rst,
   output reg [15:0] led
@@ -21,4 +29,4 @@ endmodule
   end
 endmodule
 
-*/
+

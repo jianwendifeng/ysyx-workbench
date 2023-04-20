@@ -11,15 +11,23 @@ static Vtop top;
 
 void nvboard_bind_all_pins(Vtop* top);
 
-/*static void single_cycle() {
-  dut.clk = 0; dut.eval();
-  dut.clk = 1; dut.eval();
-}*/
+
+static void single_cycle() {
+  top.clk = 0; top.eval();
+  top.clk = 1; top.eval();
+}
+
+static void reset(int n) {
+  top.rst = 1;
+  while (n -- > 0) single_cycle();
+  top.rst = 0;
+}
 
 int main() {
 	nvboard_bind_all_pins(&top);
 	nvboard_init();
-/* 
+	reset(10);
+/*  
 	//const std::unique_ptr<VerilatedContext> contextp{new VerilatedContext};
 	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc, argv);
@@ -34,7 +42,7 @@ Vtop *top = new Vtop{contextp};
 	*/
 	
 	//while (!contextp->gotFinish()) { 
-	while(1){ 
+	while(1) {  
 		//nvboard_update();
 		//single_cycle();
 		
@@ -51,7 +59,8 @@ Vtop *top = new Vtop{contextp};
 		contextp->timeInc(1);
 		top->eval();
 		tfp->dump(contextp->time());
-*/
+*/	
+		single_cycle();
 		top.eval();
 		nvboard_update();
 		
