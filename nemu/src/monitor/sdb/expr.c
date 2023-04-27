@@ -129,7 +129,6 @@ static bool make_token(char *e) {
 }
 
 static int op_prec(int t){
-	printf("op_prec t :%c\n",t);
 	switch(t){ 
 		case '!':case TK_DEREF:return 0;
 		case '*':case '?':case'%':return 1;
@@ -142,7 +141,6 @@ static int op_prec(int t){
 }
 
 static inline int op_prec_cmp(int t1,int t2){
-	printf("cmp t1,t2:%d\t%d\n",t1,t2);
 	return op_prec(t1) - op_prec(t2);
 }
 
@@ -151,7 +149,6 @@ static int find_dominated_op(int s,int e,bool *success){
 	int bracket_level = 0;
 	int dominated_op = -1;
 	for(i = s ; i <= e ; i++){
-		printf("i:%d\n",i);
 		switch(tokens[i].type)
 		{
 			case TK_DEC: case TK_HEX: break;
@@ -164,11 +161,9 @@ static int find_dominated_op(int s,int e,bool *success){
 					}
 					break;
 			default:
-					printf("I:%d\tdominated_op:%d\t bracket_level:%d\tdominated_op:%d\ttokens[dominated_op].type:%c\ttokens[i].type:%c\n",i,dominated_op,bracket_level,dominated_op,tokens[dominated_op].type,tokens[i].type);
 				if(bracket_level == 0){
 					if(dominated_op == -1 || op_prec_cmp(tokens[dominated_op].type,tokens[i].type ) <0 || (op_prec_cmp(tokens[dominated_op].type,tokens[i].type) == 0 && tokens[i].type != '!' && tokens[i].type != TK_DEREF)){
 						dominated_op = i;
-						printf("I:%d\n",i);
 					}
 				}
 				break;
@@ -187,7 +182,7 @@ static word_t eval(int p,int q,bool *success) {
 	}
 	else if (p == q ) {
 		//single token
-		uint32_t val;
+		uint64_t val;
 		 switch(tokens[p].type){
 			case TK_DEC:
 					val = strtoul(tokens[p].str,NULL,0);
@@ -204,14 +199,12 @@ static word_t eval(int p,int q,bool *success) {
 		return eval(p+1,q-1,success);
 	}
  	else {   
-	 printf("find p,q:%d\t%d\n",p,q);//zhushi	
 		int dominated_op = find_dominated_op(p,q,success);
 		if(!*success){return 0;}
 		
 		int op_type = tokens[dominated_op].type;
-		printf("op+type%d\n",op_type);
 		if(op_type == '!' ) {
-			uint32_t val = eval(dominated_op +1,q,success);
+			uint64_t val = eval(dominated_op +1,q,success);
 			if(!*success){return 0;}
 
 			switch  (op_type){ 
@@ -221,8 +214,8 @@ static word_t eval(int p,int q,bool *success) {
 
 		}
 		
-		uint32_t val1 = eval(p,dominated_op-1,success);
-		uint32_t val2 = eval(dominated_op+1,q,success);
+		uint64_t val1 = eval(p,dominated_op-1,success);
+		uint64_t val2 = eval(dominated_op+1,q,success);
 		
 		if(!*success){return 0;}
 		switch (op_type) {
