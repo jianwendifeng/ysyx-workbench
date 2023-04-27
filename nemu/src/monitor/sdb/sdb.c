@@ -18,11 +18,17 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/vaddr.h>
 
 static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
+word_t expr();
+void list_watchpoint();
+bool delete_watchpoint(int no);
+void scan_watchpoint(vaddr_t pc);
+int set_watchpoint(char *e);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -59,10 +65,71 @@ static int cmd_si(char *args) {
   cpu_exec(step);
 	return 0;
 }
+
 static int cmd_info(char *args) {
   isa_reg_display();
 	return 0;
 }
+
+static int cmd_x(char *args){
+	if (args == NULL) {
+        printf("Wrong Command!\n");
+        return 0;
+    }
+	int len,addr,i;
+	sscanf(args,"%d %x",&len,&addr);
+	for(i=0;i<len;i++ ) {
+		printf("0x%ox\t0x%0lx\n",addr,vaddr_read(addr,4));
+		addr+=4;
+	}
+
+	return 0;
+}
+
+static int cmd_p(char *args){
+	if(args != NULL){
+		bool success;
+		word_t p_temp=expr(args,&success);
+		if(success){
+			printf("%lu\n",p_temp);
+		}
+		else {printf("Bad expression\n");}
+	}
+	return 0;
+}
+
+static int cmd_w(char *args){
+  printf("1234\n");
+  if(args == NULL){
+    Log("Press the w expr./n ");
+  }
+  else{
+    printf("Begin set\n");
+    int no = set_watchpoint(args);
+    printf("success set watchpoint\n");
+    if(no != -1){
+      printf("Set watchpoint #%d\n",no);
+    }else{
+      printf("Bad expression.\n");
+    }
+  }
+  return 0;
+}
+
+static int cmd_d(char *args){
+  char *arg = strtok(NULL, " ");
+  if (args ==  NULL){
+    printf("Press 'd number'\n");
+    return 0;
+  }else{
+      int no = sscanf(args,"%d",&no);
+      //printf("no:%d\n",no);
+      if(!delete_watchpoint(no))
+      printf("The watchpoint %s is no exist\n",arg);
+    }
+  return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -75,7 +142,11 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 	{ "si", "Execute n steps program", cmd_si},
 	{ "info", "Print registers", cmd_info },
-
+	{ "x", "x N EXPR.\tEvaluate the value of the expression EXPR and use the result as the starting memory address, output in hexadecimal form N consecutive 4 bytes" , cmd_x},
+	{"p","p $eax+1\tEvaluate the value of the expression EXPR, which is supported by EXPR.",cmd_p},
+  {"d","d no\tDelete the watchpoint.",cmd_d},
+  {"w","w EXPR\tWhen the value of expression EXPR changes,program execution is suspended.",cmd_w},
+	
   /* TODO: Add more commands */
 
 };
