@@ -67,7 +67,17 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args) {
-  isa_reg_display();
+	char *arg = strtok(NULL," ");
+	if(arg == NULL)
+		return 0;
+	else if(strcmp(arg,"r") == 0)
+		isa_reg_display();
+	else if(strcmp(arg,"w") == 0)
+    list_watchpoint();
+    //printf("info w haven't write");
+	else { 
+		printf("You should write info f/w");
+	}
 	return 0;
 }
 
