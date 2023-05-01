@@ -109,7 +109,6 @@ static int cmd_p(char *args){
 }
 
 static int cmd_w(char *args){
-  printf("1234\n");
   if(args == NULL){
     Log("Press the w expr./n ");
   }
