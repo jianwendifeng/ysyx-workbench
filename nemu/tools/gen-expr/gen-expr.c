@@ -50,7 +50,7 @@ static void gen_space(int n){
 }
 
 static void gen_num(){
-	int num = choose(256);
+	int num = choose(10);
 	sprintf(&tmp[len],"%d",num);
 	len++;
 }
