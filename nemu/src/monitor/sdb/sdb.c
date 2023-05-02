@@ -29,6 +29,7 @@ void list_watchpoint();
 bool delete_watchpoint(int no);
 void scan_watchpoint(vaddr_t pc);
 int set_watchpoint(char *e);
+int test_expr();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -75,7 +76,7 @@ static int cmd_info(char *args) {
 	else if(strcmp(arg,"w") == 0)
     list_watchpoint();
     //printf("info w haven't write");
-	else { 
+	else {  
 		printf("You should write info f/w");
 	}
 	return 0;
@@ -88,7 +89,7 @@ static int cmd_x(char *args){
     }
 	int len,addr,i;
 	sscanf(args,"%d %x",&len,&addr);
-	for(i=0;i<len;i++ ) {
+	for(i= 0;i<len;i++ ) {
 		printf("0x%ox\t0x%0lx\n",addr,vaddr_read(addr,4));
 		addr+=4;
 	}
@@ -97,10 +98,10 @@ static int cmd_x(char *args){
 }
 
 static int cmd_p(char *args){
-	if(args != NULL){
+	if(args != NULL){ 
 		bool success;
 		word_t p_temp=expr(args,&success);
-		if(success){
+		if(success){ 
 			printf("%lu\n",p_temp);
 		}
 		else {printf("Bad expression\n");}
@@ -112,7 +113,7 @@ static int cmd_w(char *args){
   if(args == NULL){
     Log("Press the w expr./n ");
   }
-  else{
+  else{ 
     printf("Begin set\n");
     int no = set_watchpoint(args);
     printf("success set watchpoint\n");
@@ -139,6 +140,14 @@ static int cmd_d(char *args){
   return 0;
 }
 
+static int cmd_t(char *args){
+	printf("Enter the number need to be calculated.Max number 10000\n");
+	int test_num;
+	if(scanf("%d",&test_num))		test_expr(test_num);
+	else Log("Error number.\n");
+	return 0;
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -155,7 +164,7 @@ static struct {
 	{"p","p $eax+1\tEvaluate the value of the expression EXPR, which is supported by EXPR.",cmd_p},
   {"d","d no\tDelete the watchpoint.",cmd_d},
   {"w","w EXPR\tWhen the value of expression EXPR changes,program execution is suspended.",cmd_w},
-	
+	{"t","t\ttest cmd_p can success run.",cmd_t},	
   /* TODO: Add more commands */
 
 };
