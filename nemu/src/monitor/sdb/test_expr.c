@@ -9,12 +9,12 @@ int test_expr(int n){
 		printf("Failed to open the 'input' file.\n ");
 		return 1;
 	}
-	char buf[65535+128];
-	char expr_buf[65535];
+	char buf[1024+128];
+	char expr_buf[1024];
 
 	int answer,i=0;
 	bool success,result;
-	while(fgets(buf,65535,fp) != NULL){						//逐行扫描
+	while(fgets(buf,1024,fp) != NULL){						//逐行扫描
 		sscanf(buf,"%d %[^\n]",&answer,expr_buf);
 		result = expr(buf,&success);
 		if((!success) && (answer != result)) {
