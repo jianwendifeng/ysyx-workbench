@@ -70,7 +70,7 @@ static void gen_rand_op(){
 
 static void gen_rand_expr() {
 	int case_num = choose(3);
-	if(len >= 1024) case_num = 0;
+	if(len >= 32) case_num = 0;
 	switch(case_num){ 
 		case 0: gen_num();break;
 		case 1: gen('(');gen_rand_expr();gen(')');break;
