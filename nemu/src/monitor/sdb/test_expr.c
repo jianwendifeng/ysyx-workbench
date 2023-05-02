@@ -27,7 +27,8 @@ int test_expr(int n){
 		}
 		printf("%d exprissions had success calculted.\n",i);
 	
-	fclose(fp);
 	}
+	fclose(fp);
+
 	return 0;
 }
