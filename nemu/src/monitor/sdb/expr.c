@@ -54,8 +54,8 @@ static struct rule {
 	{"!",'!'},
 };
 
-#define NR_REGEX ARRLEN(rules)
-
+//#define NR_REGEX ARRLEN(rules)
+#define NR_REGEX 65535
 static regex_t re[NR_REGEX] = {};
 
 /* Rules are used for many times.
@@ -78,7 +78,7 @@ void init_regex() {
 typedef struct token {
   int type;
   //char str[32];
-	char str[65536+128];
+	char str[65535+128];
 } Token;
 
 static Token tokens[32] __attribute__((used)) = {};
