@@ -12,20 +12,20 @@ int test_expr(int n){
 	char buf[1024+128];
 	char expr_buf[1024];
 
-	int answer,i=0;
+	int answer,i=0,k=0;
 	bool success,result;
 	while(fgets(buf,1024,fp) != NULL){						//逐行扫描
 		sscanf(buf,"%d %[^\n]",&answer,expr_buf);
 		result = expr(buf,&success);
+		i++;
 		if((!success) && (answer != result)) {
 			printf("Failed to calculate the exprission.\t %s\nCorrect answer is %d.\tExpr answer is %d.\n",buf,answer,result);
 	}
 		else {
-			i++;
-			printf("The %d exprissions had success calculted.\n",i);
+			k++;
 		}
-		printf("There %d exprissions had success calculted.\n",i);
-	
+		printf("The %d exprissions had success calculted.\n",k);
+		printf("There %d exprissions had  calculted.\n",i);
 	}
 	fclose(fp);
 
