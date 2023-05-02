@@ -54,8 +54,7 @@ static struct rule {
 	{"!",'!'},
 };
 
-//#define NR_REGEX ARRLEN(rules)
-#define NR_REGEX 65535
+#define NR_REGEX ARRLEN(rules)
 static regex_t re[NR_REGEX] = {};
 
 /* Rules are used for many times.
