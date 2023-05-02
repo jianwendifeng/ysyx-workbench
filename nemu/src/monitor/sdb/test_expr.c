@@ -24,7 +24,7 @@ int test_expr(int n){
 			i++;
 			printf("The %d exprissions had success calculted.\n",i);
 		}
-		printf("NO %d exprissions had success calculted.\n",i);
+		printf("There %d exprissions had success calculted.\n",i);
 	
 	}
 	fclose(fp);
