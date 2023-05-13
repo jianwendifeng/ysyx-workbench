@@ -14,7 +14,7 @@ int test_expr(int n){
 
 	int answer,i=0,k=0;
 	bool success,result;
-	while(fgets(buf,1024,fp) != NULL){						//逐行扫描
+	while(fgets(buf,1024,fp) != NULL && n--){						//逐行扫描
 		sscanf(buf,"%d %[^\n]",&answer,expr_buf);
 
 		result = expr(buf,&success);
