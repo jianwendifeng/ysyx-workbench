@@ -13,7 +13,8 @@ int test_expr(int n){
 	char expr_buf[1024];
 
 	int answer,i=0,k=0;
-	bool success,result;
+	bool success;
+	int result;
 	while(fgets(buf,1024,fp) != NULL && n--){						//逐行扫描
 		sscanf(buf,"%d %[^\n]",&answer,expr_buf);
 		printf("%s\n",buf);
