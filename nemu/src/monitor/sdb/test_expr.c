@@ -20,7 +20,7 @@ int test_expr(int n){
 		result = expr(buf,&success);
 		i++;
 		if((!success) && (answer != result)) {
-			printf("Failed to calculate the exprission.\t %s\nCorrect answer is %d.\tExpr answer is %d.\n",buf,answer,result);
+			//printf("Failed to calculate the exprission.\t %s\nCorrect answer is %d.\tExpr answer is %d.\n",buf,answer,result);
 	}
 		else {
 			k++;
