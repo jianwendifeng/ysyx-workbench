@@ -65,7 +65,7 @@ void init_regex() {
   char error_msg[128];
   int ret;
 
-  for (i = 0; i < NR_REGEX; i ++) {
+  for (i = 0; i  < NR_REGEX; i ++) {
     ret = regcomp(&re[i], rules[i].regex, REG_EXTENDED);
     if (ret != 0) {
       regerror(ret, &re[i], error_msg, 128);
@@ -148,9 +148,9 @@ static int find_dominated_op(int s,int e,bool *success){
 	int i;
 	int bracket_level = 0;
 	int dominated_op = -1;
-	for(i = s ; i <= e ; i++){
+	for(i = s ; i <=  e ; i++){
 		switch(tokens[i].type)
-		{
+		{ 
 			case TK_DEC: case TK_HEX: break;
 			
 			case'(': 

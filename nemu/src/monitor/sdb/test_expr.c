@@ -13,13 +13,14 @@ int test_expr(int n){
 	char expr_buf[1024];
 
 	int answer,i=0,k=0;
-	bool success,result;
-	while(fgets(buf,1024,fp) != NULL){						//逐行扫描
+	bool success;
+	int result;
+	while(fgets(buf,1024,fp) != NULL && n--){						//逐行扫描
 		sscanf(buf,"%d %[^\n]",&answer,expr_buf);
-
+		printf("buf:%s\n",buf);
 		result = expr(buf,&success);
 		i++;
-		if((!success) && (answer != result)) {
+		if((!success)&&(result != answer)) {
 			printf("Failed to calculate the exprission.\t %s\nCorrect answer is %d.\tExpr answer is %d.\n",buf,answer,result);
 	}
 		else {
