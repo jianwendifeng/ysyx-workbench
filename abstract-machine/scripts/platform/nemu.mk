@@ -24,9 +24,9 @@ image: $(IMAGE).elf
 
 run: image
 	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) run ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin	
-	@echo "c" | $(NEMU_HOME)/build/nemu -i $(IMAGE).bin
-	@echo "q" | $(NEMU_HOME)/build/nemu -i $(IMAGE).bin
-
+	@echo "Running $(ISA)..."
+	@echo "c" | $(NEMU_HOME)/build/nemu -i $(IMAGE).bin > /dev/null 2>&1
+	@echo "q" | $(NEMU_HOME)/build/nemu -i $(IMAGE).bin > /dev/null 2>&1
 
 
 gdb: image
