@@ -69,7 +69,6 @@ static int cmd_si(char *args) {
 }
 
 static int cmd_info(char *args) {
-	printf("args:%s\n",args);
 	char *arg = strtok(NULL," ");
 	if(arg == NULL)
 		return 0;
@@ -153,13 +152,13 @@ static int cmd_t(char *args){
 static int cmd_sir(char *args){
 	char *arg = strtok(NULL, " ");
 	int step;
-	char *p = "r";
+	char *infor = "r";
 	if(args == NULL) step = 1;
 	else sscanf(arg,"%d",&step);
 	while(step)
 	{
 		cpu_exec(1);
-		cmd_info(p);
+		cmd_info(infor);
 		step--;
 	}
 	return 0;
