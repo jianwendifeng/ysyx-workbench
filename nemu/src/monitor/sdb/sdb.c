@@ -182,7 +182,7 @@ static struct {
   {"d","d no\tDelete the watchpoint.",cmd_d},
   {"w","w EXPR\tWhen the value of expression EXPR changes,program execution is suspended.",cmd_w},
 	{"t","t\ttest cmd_p can success run.",cmd_t},
-	{"sir N", "sir N\tsi N and info r.",cmd_sir},	
+	{"sir", "sir N\tsi N and info r.",cmd_sir},	
   /* TODO: Add more commands */
 
 };
