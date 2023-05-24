@@ -158,6 +158,7 @@ static int cmd_sir(char *args){
 	while(step)
 	{
 		cpu_exec(1);
+		printf("infor:%s\n",infor);
 		cmd_info(infor);
 		step--;
 	}
