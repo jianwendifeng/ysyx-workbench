@@ -152,7 +152,7 @@ static int cmd_t(char *args){
 static int cmd_sir(char *args){
 	char *arg = strtok(NULL, " ");
 	int step;
-	char *infor = "r";
+	char *infor = " r ";
 	if(args == NULL) step = 1;
 	else sscanf(arg,"%d",&step);
 	while(step)
