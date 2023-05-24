@@ -70,6 +70,7 @@ static int cmd_si(char *args) {
 
 static int cmd_info(char *args) {
 	char *arg = strtok(NULL," ");
+	printf("arg:%s\targs:%s\n",arg,args);
 	if(arg == NULL)
 		return 0;
 	else if(strcmp(arg,"r") == 0)
