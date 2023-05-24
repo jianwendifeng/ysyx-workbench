@@ -149,6 +149,22 @@ static int cmd_t(char *args){
 	return 0;
 }
 
+static int cmd_sir(char *args){
+	char *arg = strtok(NULL, " ");
+	int step;
+	char *r = "info r";
+	if(args == NULL) step = 1;
+	else sscanf(arg,"%d",&step);
+	while(step)
+	{
+		cpu_exec(1);
+		cmd_info(r);
+		step--;
+	}
+	return 0;
+	
+}
+
 static int cmd_help(char *args);
 
 static struct {
@@ -165,7 +181,8 @@ static struct {
 	{"p","p $eax+1\tEvaluate the value of the expression EXPR, which is supported by EXPR.",cmd_p},
   {"d","d no\tDelete the watchpoint.",cmd_d},
   {"w","w EXPR\tWhen the value of expression EXPR changes,program execution is suspended.",cmd_w},
-	{"t","t\ttest cmd_p can success run.",cmd_t},	
+	{"t","t\ttest cmd_p can success run.",cmd_t},
+	{"sir N", "sir N\tsi N and info r.",cmd_sir},	
   /* TODO: Add more commands */
 
 };
