@@ -152,13 +152,13 @@ static int cmd_t(char *args){
 static int cmd_sir(char *args){
 	char *arg = strtok(NULL, " ");
 	int step;
-	char *r = "r";
+	char *p = "r";
 	if(args == NULL) step = 1;
 	else sscanf(arg,"%d",&step);
 	while(step)
 	{
 		cpu_exec(1);
-		cmd_info(r);
+		cmd_info(p);
 		step--;
 	}
 	return 0;
