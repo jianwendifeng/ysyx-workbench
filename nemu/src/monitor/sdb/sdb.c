@@ -166,7 +166,7 @@ static int cmd_sir(char *args){
 }
 
 static int cmd_point(char *args){
-	char *arg = strtok(args," ");
+	char *arg = strtok(args,"%s");
 	if(arg == NULL) printf("Wrong point.\n");
 	else
 	{
