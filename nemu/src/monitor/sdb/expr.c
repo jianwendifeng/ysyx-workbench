@@ -22,7 +22,7 @@
 
 enum {
   TK_NOTYPE = 256, TK_EQ,
-	TK_OR,TK_AND,TK_NEQ,TK_DEC,TK_HEX,TK_DEREF,TK_MINUS,	
+	TK_OR,TK_AND,TK_NEQ,TK_DEC,TK_HEX,TK_DEREF,TK_MINUS,TK_REG,	
   /* TODO: Add more token types */
 
 };
@@ -46,7 +46,7 @@ static struct rule {
   {"\\)", ')'},					// right parenthesis	
   {"[0-9]{1,10}", TK_DEC},							// decimal
   {"0x[0-9a-fA-F]{1,16}", TK_HEX},		// hexadecima
-																			
+	{"\\$[a-zA-z]+[0-9]*",TK_REG},  	// reg																		
 	{"%",'%'}, 
 	{"!=", TK_NEQ},
 	{"&&", TK_AND},
