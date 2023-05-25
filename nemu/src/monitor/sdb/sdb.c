@@ -173,7 +173,7 @@ static int cmd_point(char *args){
 	else
 	{
 		sscanf(args,"%s",pc);
-		while(*pc != cpu_pc && num<128){
+		while(*pc != cpu_pc && num<128 && nemu_state.state != NEMU_RUNNING){
 			//printf("pc:%s,cpu.pc:%#lx\n",pc,cpu_pc);
 			cpu_exec(1);
 			num++;
