@@ -172,10 +172,11 @@ static int cmd_point(char *args){
 	else
 	{
 		sscanf(args,"%s",pc);
-		while(*pc != cpu.pc){
-			printf("pc:%s,cpu.pc:%#lx\n",pc,cpu_pc);
-			break;
+		while(*pc != cpu_pc){
+			//printf("pc:%s,cpu.pc:%#lx\n",pc,cpu_pc);
+			cpu_exec(1);
 		}
+		cmd_info("r");
 	}
 	return 0;
 }
