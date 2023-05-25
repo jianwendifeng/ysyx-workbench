@@ -170,7 +170,7 @@ static int cmd_point(char *args){
 	if(args == NULL) printf("Wrong point.\n");
 	else
 	{
-		sscanf("args","%[0-9]", arg);
+		sscanf(args,"%[0-9]", arg);
 		printf("arg:%s\n",arg);
 	}
 	return 0;
