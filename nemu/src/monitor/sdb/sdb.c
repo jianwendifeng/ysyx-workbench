@@ -173,6 +173,7 @@ static int cmd_point(char *args){
 		sscanf(args,"%[0-9]",pc);
 		while(*pc != cpu.pc){
 			printf("pc:%s,cpu.pc:%ld\n",pc,cpu.pc);
+			break;
 		}
 	}
 	return 0;
