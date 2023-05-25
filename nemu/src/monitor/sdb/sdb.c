@@ -168,13 +168,15 @@ static int cmd_sir(char *args){
 static int cmd_point(char *args){
 	char *pc = strtok(NULL," "); 
 	long int cpu_pc = (long int)cpu.pc;
+	int num=0;
 	if(args == NULL) printf("Wrong point.Input point ADDR.\n");
 	else
 	{
 		sscanf(args,"%s",pc);
-		while(*pc != cpu_pc){
+		while(*pc != cpu_pc && num<128){
 			//printf("pc:%s,cpu.pc:%#lx\n",pc,cpu_pc);
 			cpu_exec(1);
+			num++;
 		}
 		cmd_info("r");
 	}
