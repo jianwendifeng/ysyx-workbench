@@ -102,7 +102,7 @@ static int cmd_p(char *args){
 	if(args != NULL){ 
 		bool success;
 		word_t p_temp=expr(args,&success);
-		if(success){ 
+		if(success){  
 			printf("%lu\n",p_temp);
 		}
 		else {printf("Bad expression\n");}
@@ -115,25 +115,22 @@ static int cmd_w(char *args){
     Log("Press the w $pc = ADDR/n ");
   }
   else{ 
-    /*printf("Begin set\n");
+    printf("Begin set\n");
     int no = set_watchpoint(args);
     printf("success set watchpoint\n");
     if(no != -1){
       printf("Set watchpoint #%d\n",no);
     }else{
       printf("Bad expression.\n");
-    }*/
-    set_watchpoint(args);
+    }
   }
-
-
 
   return 0;
 }
 
 static int cmd_d(char *args){
   char *arg = strtok(NULL, " ");
-  if (args ==  NULL){
+  if (args ==  NULL){ 
     printf("Press 'd number'\n");
     return 0;
   }else{
@@ -159,13 +156,23 @@ static int cmd_sir(char *args){
 	if(args == NULL) step = 1;
 	else sscanf(arg,"%d",&step);
 	while(step)
-	{
+	{ 
 		cpu_exec(1);
 		isa_reg_display();
 		step--;
 	}
 	return 0;
 	
+}
+
+static int cmd_point(char *args){
+	char *arg = strtok(args," ");
+	if(arg == NULL) printf("Wrong point.\n");
+	else
+	{
+		printf("arg:%s\n",arg);
+	}
+	return 0;
 }
 
 static int cmd_help(char *args);
@@ -186,7 +193,8 @@ static struct {
   {"w","w EXPR\tWhen the value of expression EXPR changes,program execution is suspended.",cmd_w},
 	{"t","t\ttest cmd_p can success run.",cmd_t},
 	{"sir", "sir N\tsi N and info r.",cmd_sir},	
-  /* TODO: Add more commands */
+	{"point","point pc\tbreak point at $pc=addr.",cmd_point},
+	/* TODO: Add more commands */
 
 };
 
