@@ -112,18 +112,22 @@ static int cmd_p(char *args){
 
 static int cmd_w(char *args){
   if(args == NULL){
-    Log("Press the w expr./n ");
+    Log("Press the w $pc = ADDR/n ");
   }
   else{ 
-    printf("Begin set\n");
+    /*printf("Begin set\n");
     int no = set_watchpoint(args);
     printf("success set watchpoint\n");
     if(no != -1){
       printf("Set watchpoint #%d\n",no);
     }else{
       printf("Bad expression.\n");
-    }
+    }*/
+    set_watchpoint(args);
   }
+
+
+
   return 0;
 }
 
