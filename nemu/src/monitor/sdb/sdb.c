@@ -165,7 +165,7 @@ static int cmd_sir(char *args){
 	
 }
 
-static int cmd_point(char *args){
+/*static int cmd_point(char *args){
 	char *pc = strtok(NULL," "); 
 	long int cpu_pc = (long int)cpu.pc;
 	int num=0;
@@ -181,7 +181,7 @@ static int cmd_point(char *args){
 		cmd_info("r");
 	}
 	return 0;
-}
+}*/
 
 static int cmd_help(char *args);
 
@@ -201,7 +201,7 @@ static struct {
   {"w","w EXPR\tWhen the value of expression EXPR changes,program execution is suspended.",cmd_w},
 	{"t","t\ttest cmd_p can success run.",cmd_t},
 	{"sir", "sir N\tsi N and info r.",cmd_sir},	
-	{"point","point pc\tbreak point at $pc=addr.",cmd_point},
+	//{"point","point pc\tbreak point at $pc=addr.",cmd_point},
 	/* TODO: Add more commands */
 
 };
