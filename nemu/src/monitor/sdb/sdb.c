@@ -171,7 +171,7 @@ static int cmd_point(char *args){
 	if(args == NULL) printf("Wrong point.Input point ADDR.\n");
 	else
 	{
-		sscanf(args,"%[0-9]",pc);
+		sscanf(args,"%[0-9a-Z]",pc);
 		while(*pc != cpu.pc){
 			printf("pc:%s,cpu.pc:%#lx\n",pc,cpu_pc);
 			break;
