@@ -29,7 +29,7 @@ void isa_reg_display() {
 	 {
 		 printf ("%s		"FMT_WORD"\t	%ld\n",regs[i],cpu.gpr[i],cpu.gpr[i]);
 	 }
-	 printf ("%s		"FMT_WORD"","pc", cpu.pc);
+	 printf ("%s		"FMT_WORD"\n","pc", cpu.pc);
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
