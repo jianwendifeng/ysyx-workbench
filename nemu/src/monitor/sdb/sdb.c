@@ -55,7 +55,7 @@ static int cmd_c(char *args) {
 }
 
 
-static int cmd_q(char *args) { 
+static int cmd_q(char *args) {
   return -1;
 }
 
@@ -102,7 +102,7 @@ static int cmd_p(char *args){
 	if(args != NULL){ 
 		bool success;
 		word_t p_temp=expr(args,&success);
-		if(success){ 
+		if(success){  
 			printf("%lu\n",p_temp);
 		}
 		else {printf("Bad expression\n");}
@@ -112,7 +112,7 @@ static int cmd_p(char *args){
 
 static int cmd_w(char *args){
   if(args == NULL){
-    Log("Press the w expr./n ");
+    Log("Press the w $pc = ADDR/n ");
   }
   else{ 
     printf("Begin set\n");
@@ -124,12 +124,13 @@ static int cmd_w(char *args){
       printf("Bad expression.\n");
     }
   }
+
   return 0;
 }
 
 static int cmd_d(char *args){
   char *arg = strtok(NULL, " ");
-  if (args ==  NULL){
+  if (args ==  NULL){ 
     printf("Press 'd number'\n");
     return 0;
   }else{
@@ -149,6 +150,39 @@ static int cmd_t(char *args){
 	return 0;
 }
 
+static int cmd_sir(char *args){
+	char *arg = strtok(NULL, " ");
+	int step;
+	if(args == NULL) step = 1;
+	else sscanf(arg,"%d",&step);
+	while(step)
+	{ 
+		cpu_exec(1);
+		isa_reg_display();
+		step--;
+	}
+	return 0;
+	
+}
+
+/*static int cmd_point(char *args){
+	char *pc = strtok(NULL," "); 
+	long int cpu_pc = (long int)cpu.pc;
+	int num=0;
+	if(args == NULL) printf("Wrong point.Input point ADDR.\n");
+	else
+	{
+		sscanf(args,"%s",pc);
+		while(*pc != cpu_pc && num<128 && nemu_state.state != NEMU_RUNNING){
+			printf("pc:%s,cpu.pc:%#lx\n",pc,cpu_pc);
+			cpu_exec(1);
+			num++;
+		}
+		cmd_info("r");
+	}
+	return 0;
+}*/
+
 static int cmd_help(char *args);
 
 static struct {
@@ -165,8 +199,10 @@ static struct {
 	{"p","p $eax+1\tEvaluate the value of the expression EXPR, which is supported by EXPR.",cmd_p},
   {"d","d no\tDelete the watchpoint.",cmd_d},
   {"w","w EXPR\tWhen the value of expression EXPR changes,program execution is suspended.",cmd_w},
-	{"t","t\ttest cmd_p can success run.",cmd_t},	
-  /* TODO: Add more commands */
+	{"t","t\ttest cmd_p can success run.",cmd_t},
+	{"sir", "sir N\tsi N and info r.",cmd_sir},	
+	//{"point","point pc\tbreak point at $pc=addr.",cmd_point},
+	/* TODO: Add more commands */
 
 };
 
