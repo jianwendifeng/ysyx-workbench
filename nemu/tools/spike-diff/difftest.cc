@@ -13,7 +13,7 @@
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
 
-#include "mmu.h"
+//#include "mmu.h"
 #include "sim.h"
 #include "../../include/common.h"
 #include <difftest-def.h>
@@ -30,7 +30,7 @@ static std::vector<std::pair<reg_t, mem_t*>> difftest_mem(
 static std::vector<int> difftest_hartids;
 static debug_module_config_t difftest_dm_config = {
   .progbufsize = 2,
-  .max_bus_master_bits = 0,//.max_sba_data_width = 0,
+  .max_bus_master_bits = 0,	//.max_sba_data_width = 0,
   .require_authentication = false,
   .abstract_rti = 0,
   .support_hasel = true,
@@ -77,7 +77,7 @@ void sim_t::diff_set_regs(void* diff_context) {
 void sim_t::diff_memcpy(reg_t dest, void* src, size_t n) {
   mmu_t* mmu = p->get_mmu();
   for  (size_t i = 0; i < n; i++) {
-     mmu->store_uint8(dest+i, *((uint8_t*)src+i));//mmu->store<uint8_t>(dest+i, *((uint8_t*)src+i));
+     mmu->store_uint8(dest+i, *((uint8_t*)src+i));	//mmu->store<uint8_t>(dest+i, *((uint8_t*)src+i));
   }
 }
 
