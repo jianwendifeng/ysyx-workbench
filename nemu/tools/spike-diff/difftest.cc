@@ -105,7 +105,7 @@ __EXPORT void difftest_exec(uint64_t n) {
   s->diff_step(n);
 }
 
-__E XPORT void difftest_init(int port) {
+__EXPORT void difftest_init(int port) {
   difftest_htif_args.push_back("");
   /*s = new sim_t(DEFAULT_ISA, DEFAULT_PRIV, DEFAULT_VARCH, 1, false, false,
       0, 0, NULL, reg_t(-1), difftest_mem, difftest_plugin_devices, difftest_htif_args,
