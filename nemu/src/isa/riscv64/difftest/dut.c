@@ -20,7 +20,7 @@
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) 
 {
 	word_t ref_pc = ref_r->pc;
-	printf("ref_r:%lx\tpc %#lx\n",ref_pc,pc);
+	printf("ref_r:%lx\tpc %#lx\n",ref_pc,nemu_state.halt_pc);
  	return false;
 }
 
