@@ -20,8 +20,9 @@
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) 
 {
 	word_t ref_pc = ref_r->pc;
-	printf("ref_r:%ld\tpc %#lx\n",ref_pc,pc);
- 	return false;
+ 	if(ref_pc-4 == pc){
+	return false;}
+	return true;
 }
 
 void isa_difftest_attach() {
