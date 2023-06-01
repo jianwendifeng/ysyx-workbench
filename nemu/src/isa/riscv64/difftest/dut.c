@@ -22,7 +22,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc)
 	int i;
 	for(i=0;i<32;i++)
 		{
-			printf("reg_name:\t%ld:\t%#lx\t\tpc_name:\t%ld\t%#lx\n",ref_r->gpr[i],ref_r->gpr[i],cpu.gpr[i],cpu.gpr[i]);
+			printf("%dreg_name:\t%ld:\t%#lx\t\tpc_name:\t%ld\t%#lx\n",i,ref_r->gpr[i],ref_r->gpr[i],cpu.gpr[i],cpu.gpr[i]);
 		}
 
 	return true;
