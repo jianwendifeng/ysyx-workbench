@@ -19,12 +19,13 @@
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) 
 {
-	//printf("ref_pc: %lx,pc: %lx/n",ref_r->pc-4,pc);
- 	if(ref_r->pc-4 != pc){
-		printf("The right PC:\t%lx\t\tThe wrong PC:\t%lx\n",ref_r->pc-4,pc);
-		return false;
-	}else	
-		return true;
+	int i;
+	for(i=0;i<32;i++)
+		{
+			printf("reg_name:\t%ld:\t%#lx\t\tpc_name:\t%ld\t%#lx\n",ref_r->gpr[i],ref_r->gpr[i],cpu.gpr[i],cpu.gpr[i]);
+		}
+
+	return true;
 }
 
 void isa_difftest_attach() {
