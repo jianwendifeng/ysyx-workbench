@@ -101,7 +101,7 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 
 void difftest_step(vaddr_t pc, vaddr_t npc) {
   CPU_state ref_r;
-printf("ref_r:%lx\tnpc:%lx\t\n",ref_r.pc,npc);
+	panic("ref_r:= "	FMT_WORD	"npc:%lx\t\n",ref_r.pc,npc);
 
   if (skip_dut_nr_inst > 0) {
     ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
