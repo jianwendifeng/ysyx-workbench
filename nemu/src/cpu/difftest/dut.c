@@ -106,7 +106,6 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
     ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
       skip_dut_nr_inst = 0;
-			printf("ref_r:=	%lx\tnpc:%lx\t\n",ref_r.pc,npc);
       checkregs(&ref_r, npc);
       return;
     }
