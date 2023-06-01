@@ -41,7 +41,7 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
   int rs1 = BITS(i, 19, 15);
   int rs2 = BITS(i, 24, 20);
   *rd     = BITS(i, 11, 7);
-  switch (type) {   
+  switch (type) {    
     case TYPE_I: src1R();          immI(); break;
     case TYPE_U:                   immU(); break;
     case TYPE_S: src1R(); src2R(); immS(); break;
@@ -99,7 +99,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0100000 ????? ????? 101 ????? 01110 11", sraw   , R, R(rd) = SEXT(BITS(src1,31,31) | (src1 >> src2),32) );	//may wrong
   INSTPAT("0100000 ????? ????? 101 ????? 00100 11", srai   , I, R(rd) = SEXT(src1 >> BITS(imm,5,0),32) );
 	INSTPAT("0000000 ????? ????? 001 ????? 00100 11", slli   , I, R(rd) = src1 << BITS(imm,5,0) );
-	INSTPAT("0000000 ????? ????? 101 ????? 00110 11", srliw  , I, R(rd) = SEXT(src1 >> imm,30) );	//may wrong
+	INSTPAT("0000000 ????? ????? 101 ????? 00110 11", srliw  , I, R(rd) = SEXT((sword_t)(src1 >> imm),32) );	//may wrong
 
   //INSTPAT("??????? ????? ????? 011 ????? 01000 11", sd		 , S, Mw(src1 +imm, 8, src2));	//64
 	INSTPAT("??????? ????? ????? 010 ????? 01000 11", sw     , S, Mw(src1 +imm, 4, src2));	//32
