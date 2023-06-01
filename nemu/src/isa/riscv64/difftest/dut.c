@@ -17,8 +17,19 @@
 #include <cpu/difftest.h>
 #include "../local-include/reg.h"
 
-bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
-  return false;
+bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) 
+{
+	int i;
+	for(i=0;i<32;i++)
+		{
+			if(ref_r->gpr[i] != cpu.gpr[i] ){
+				printf("Wrong reg value:%#lx\tRight reg value:%#lx\n",ref_r->gpr[i],cpu.gpr[i]);
+				printf("ref_r->pc:%#lx\n",ref_r->pc);
+				pc = ref_r->pc;	
+			return false;
+			}
+		}
+	return true;
 }
 
 void isa_difftest_attach() {
