@@ -27,7 +27,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc)
 				//printf("Wrong pc:%#lx\tRight pc:%#lx\nWrong reg value:%#lx\tRight value:%#lx\n",ref_r->pc,ref_r->pc,cpu.gpr[i],ref_r->gpr[i]);
 				printf("Wrong pc:%#lx\tRight pc:%#lx\nWrong reg value:%#lx\tRight value:%#lx\n",ref_r->pc,pc,cpu.gpr[i],ref_r->gpr[i]);
 				
-				isa_reg_display();
+				//isa_reg_display();
 			return false;
 			}
 		}
