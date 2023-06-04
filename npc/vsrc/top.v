@@ -1,4 +1,38 @@
 module top(
+	input clk,
+	input rst,
+	output [63:0] npc_data
+);
+	
+	module pc()
+
+endmodule
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*module top(
   input clk,
   input rst,
   output [15:0] led
@@ -28,5 +62,5 @@ module light(
     end
   end
 endmodule
-
+*/
 
