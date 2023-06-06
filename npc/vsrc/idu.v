@@ -9,8 +9,6 @@ module RegisterFile #(ADDR_WIDTH = 1, DATA_WIDTH = 1) (
   always @(posedge clk) begin
     if (wen) rf[waddr] <= wdata;
   end
-
-	
 endmodule
 
 
