@@ -1,32 +1,44 @@
 module top(
-  input clk,
-  input rst,
-  output [15:0] led
+	input clk,
+	input rst,
+	output [31:0] npc_data
 );
 
+wire [31:0] if_id_pc;
 
-
-light light1(
+ifu ifu0(
 	.clk(clk),
 	.rst(rst),
-	.led(led)
+	.ifu_out(if_id_pc)
 );
 
-endmodule
+wire [6:0] id_ex_op;
+wire [14:12] id_ex_funct3;
+wire [31:20] id_ex_imm;
+wire [31:0] id_ex_src1;
+wire [31:0] ex_id_src1;
 
-module light(
-  input clk,
-  input rst,
-  output reg [15:0] led
+idu idu0(
+	.clk(clk),
+	.id_inst(if_id_pc),
+	.id_op(id_ex_op),
+	.id_funct3(id_ex_funct3),
+	.id_src1_rdata(id_ex_src1),
+	.id_src1_wdata(ex_id_src1),
+	.id_imm(id_ex_imm)
 );
-  reg [31:0] count;
-  always @(posedge clk) begin
-    if (rst) begin led <= 1; count <= 0; end
-    else begin
-      if (count == 0) led <= {led[14:0], led[15]};
-      count <= (count >= 5000000 ? 32'b0 : count + 1);
-    end
-  end
+
+
+exu exu0(
+	.ex_src1(id_ex_src1),
+	.ex_funct3(id_ex_funct3),
+	.ex_imm(id_ex_imm),
+	.ex_result(ex_id_src1)
+);
+
+assign npc_data = ex_id_src1;
+
+
 endmodule
 
 
