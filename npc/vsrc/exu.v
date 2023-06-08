@@ -1,11 +1,13 @@
 `define OP_ADDI 0010011
 `define FUNCT3_ADDI 000
 module exu(
-	input [31:0] src1,imm,
-	output	[31:0] ex_data
+	input [31:0] ex_src1,
+	input [11:0] ex_imm,
+	input [14:12] ex_funct3,
+	output	[31:0] ex_result
 );
 
-assign ex_data = src1 + imm;
+assign ex_result = ex_src1 + {20'b0,ex_imm};
 
 /*always @	(posedge clk) begin
 	if(clk) begin
