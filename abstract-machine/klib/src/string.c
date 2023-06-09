@@ -90,7 +90,7 @@ void *memmove(void *dst, const void *src, size_t n) {
       pdst[i-1] = psrc[i-1];
     }
   }
-  return 0;
+  return dst;
 } 
 
 void *memcpy(void *out, const void *in, size_t n) {
@@ -99,7 +99,7 @@ void *memcpy(void *out, const void *in, size_t n) {
   while(n){
     pout[n-1] = pin[n-1];
   }
-  return 0;
+  return out;
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
