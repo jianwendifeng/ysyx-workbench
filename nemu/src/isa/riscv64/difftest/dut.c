@@ -24,12 +24,12 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc)
 		{
 			if(ref_r->gpr[i] != cpu.gpr[i] ){
 				printf("NO.%d,Wrong reg value:%#lx\tRight reg value:%#lx\n",i,cpu.gpr[i],ref_r->gpr[i]);
-				printf("ref_r->pc:%#lx\n",ref_r->pc);
-				pc = ref_r->pc;	
 			return false;
 			}
 		}
+	if(ref_r->pc == cpu.pc)
 	return true;
+	else return false;
 }
 
 void isa_difftest_attach() {
