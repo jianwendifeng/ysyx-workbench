@@ -67,10 +67,10 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 
 void *memset(void *s, int c, size_t n) {
   unsigned char *p = (unsigned char *)s;
-  unsigned char value = (unsigned char)c;
-  size_t i;
-  for(i=0;i<n;i++){
-    p[i] = value;
+  while(n > 0){
+    *p = (unsigned char)c;
+    p++;
+    n--;
   }
   return s;
 }
@@ -90,7 +90,7 @@ void *memmove(void *dst, const void *src, size_t n) {
       pdst[i-1] = psrc[i-1];
     }
   }
-  return dst;
+  return 0;
 } 
 
 void *memcpy(void *out, const void *in, size_t n) {
@@ -99,7 +99,7 @@ void *memcpy(void *out, const void *in, size_t n) {
   while(n){
     pout[n-1] = pin[n-1];
   }
-  return out;
+  return 0;
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
