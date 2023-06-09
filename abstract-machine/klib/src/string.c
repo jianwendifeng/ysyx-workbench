@@ -39,14 +39,11 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  size_t len = 0;
-  while(dst != NULL){
-    len++;
-  }
-  while(dst != NULL){
-    dst[len] = src[len];
-    len++;
-  }
+  size_t len = strlen(dst);
+  size_t i;
+	for(i=0;src[i]!='\0';i++){
+		dst[len+i] = src[i];
+	}
   return dst;
 }
 
