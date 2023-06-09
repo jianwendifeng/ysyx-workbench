@@ -26,7 +26,12 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc)
 			return false;
 			}
 		}
-	return(ref_r->pc == cpu.pc);
+	if(ref_r->pc != cpu.pc) {
+		printf("Wrong pc %#lx,Right pc %#lx\n",cpu.pc,ref_r->pc);
+		return false;
+	}
+
+	return true;
 }
 
 void isa_difftest_attach() {
