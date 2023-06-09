@@ -57,7 +57,7 @@ int strcmp(const char *s1, const char *s2) {
 
 int strncmp(const char *s1, const char *s2, size_t n) {
   int i=0;
-  while(i != n){
+  while(i !=  n){
     if(s1[i] < s2[i]) return -1;
     else if(s1[i] > s2[i]) return 1;
     i++;
@@ -90,23 +90,23 @@ void *memmove(void *dst, const void *src, size_t n) {
       pdst[i-1] = psrc[i-1];
     }
   }
-  return 0;
+  return dst;
 } 
 
 void *memcpy(void *out, const void *in, size_t n) {
   unsigned char *pout = (unsigned char*)out;
   const unsigned char *pin = (const unsigned char*)in;
-  while(n){
+  while(n){ 
     pout[n-1] = pin[n-1];
   }
-  return 0;
+  return out;
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
   const unsigned char *ps1 = (const unsigned char*)s1;
   const unsigned char *ps2 = (const unsigned char*)s2;
   size_t i;
-  for(i = 0 ; i < n ; i++){
+  for(i = 0  ; i < n ; i++){
     if(ps1[i] < ps2[i]) return -1;
     else if(ps1[i] > ps2[i]) return 1;
   }
