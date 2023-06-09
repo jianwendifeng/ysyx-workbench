@@ -14,14 +14,12 @@ size_t strlen(const char *s) {
 }
 
 char *strcpy(char *dst, const char *src) {
-  char *p = dst;
-	while(*src != '\0'){
-		*dst = *src;
-    dst++;
-    src++;
+  size_t i;
+	for(i = 0 ; src[i] != '\0' ; i++){
+		dst[i] = src[i];
 	}
-	*dst = '\0';
-  return p;
+	dst[i+1] = '\0';
+ return dst;	
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
