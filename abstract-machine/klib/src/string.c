@@ -99,6 +99,7 @@ void *memcpy(void *out, const void *in, size_t n) {
   const unsigned char *pin = (const unsigned char*)in;
   while(n){ 
     pout[n-1] = pin[n-1];
+		n--;
   }
   return out;
 }
