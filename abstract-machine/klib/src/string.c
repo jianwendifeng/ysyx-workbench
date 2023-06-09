@@ -44,6 +44,7 @@ char *strcat(char *dst, const char *src) {
 	for(i=0;src[i]!='\0';i++){
 		dst[len+i] = src[i];
 	}
+	dst[len+i+1] = '\0';
   return dst;
 }
 
