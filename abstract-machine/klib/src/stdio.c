@@ -18,21 +18,41 @@ int sprintf(char *out, const char *fmt, ...) {
 	va_start(ap, fmt);	//把参数列表拷贝到ap中
   int i = 0;
   char* buf = out;
+
   while(*fmt != '\0')
   {
     if(*fmt == '%')
     {
       fmt++;  //指针移动到%后面
-    }
-    switch(*fmt)
-    {
-      case 's': *buf = *va_arg(ap,char*) ;break;
-      case 'd': *buf = va_arg(ap,int);break;
-      default:return -1;
-    }
-    i++;
-		buf += strlen(fmt);
-    fmt++;
+    
+			switch(*fmt)
+			{
+				case 's': 
+					{
+						char *s = va_arg(ap,char*);	
+						int len = strlen(s);
+						strncpy(buf,s,len);
+						buf += len;
+						i++;
+						break;}
+				case 'd': 
+					{
+						int d = va_arg(ap,int);
+						int len = sprintf(buf,"%d",d);
+						buf += len;
+						i += len;
+						break;
+					}
+				default:
+					return -1;
+			}
+		}
+		else{
+			*buf = *fmt;
+			buf++;
+			fmt++;
+		}
+		fmt++;
   }
   *buf = '\0';
   va_end(ap);
