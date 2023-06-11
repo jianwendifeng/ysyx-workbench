@@ -18,11 +18,8 @@ void reverse(char s[]) {
 }
 
 void itoa(int n,char s[]){
-	int i,sign;
+	int i;
 
-	if((sign = n) < 0){
-		n = -n;
-	}
 	i=0;
 	do{
 		s[i++] = n %10 +'0';
