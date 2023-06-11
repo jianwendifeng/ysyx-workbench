@@ -98,7 +98,7 @@ int sprintf(char *out, const char *fmt, ...) {
   }
   out[len+1] = '\0';
   va_end(ap);
-  return len++;
+  return len;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
