@@ -17,12 +17,11 @@ int sprintf(char *out, const char *fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);	//把参数列表拷贝到ap中,
   int len=0;
-  int i=0;
 
 
-  while(fmt[i] != '\0'){
-    if(fmt[i] == '%'){
-      switch(fmt[i+1])
+  while(fmt[len] != '\0'){
+    if(fmt[len] == '%'){
+      switch(fmt[len+1])
       {
         case 's':
         {
