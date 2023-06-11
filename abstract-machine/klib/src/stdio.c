@@ -81,14 +81,14 @@ int sprintf(char *out, const char *fmt, ...) {
 
         default:
         {
-          out[len++] = *fmt;
+          out[len++] = fmt[i];
           i++;
           break;
         }
       }
     }
     else{
-          out[len++] = *fmt;
+          out[len++] = fmt[i];
           i++;
     }
   }
