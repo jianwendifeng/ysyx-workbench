@@ -16,7 +16,7 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 int sprintf(char *out, const char *fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);	//把参数列表拷贝到ap中
-  int i=0;
+  int i = 0;
   char* buf = out;
   while(*fmt != '\0')
   {
@@ -26,12 +26,13 @@ int sprintf(char *out, const char *fmt, ...) {
     }
     switch(*fmt)
     {
-      case 's': *buf = *va_arg(ap,char*); buf += strlen(buf);break;
-      case 'd': *buf = va_arg(ap,int);  buf += strlen(buf);break;
+      case 's': *buf = *va_arg(ap,char*) ;break;
+      case 'd': *buf = va_arg(ap,int);break;
       default:return -1;
     }
     i++;
     fmt++;
+		buf++;
   }
   *buf = '\0';
   va_end(ap);
