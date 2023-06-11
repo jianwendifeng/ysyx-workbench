@@ -61,7 +61,8 @@ int sprintf(char *out, const char *fmt, ...) {
         {
           arg_s = va_arg(ap,char *);
           for(int j = 0; arg_s[j] != '\0';j++){
-            out[len++] = arg_s[j];
+            out[len] = arg_s[j];
+						len++;
           }
           i += 2;
           break;
@@ -72,7 +73,8 @@ int sprintf(char *out, const char *fmt, ...) {
         arg_i = va_arg(ap,int);
         itoa(arg_i,arg_i_s);
         for(int j = 0;arg_i_s[j] != '\0';j++){
-          out[len++] = arg_i_s[j];
+          out[len] = arg_i_s[j];
+					len++;
         }
 
         i += 2;
@@ -81,20 +83,22 @@ int sprintf(char *out, const char *fmt, ...) {
 
         default:
         {
-          out[len++] = fmt[i];
+          out[len] = fmt[i];
+					len++;
           i++;
           break;
         }
       }
     }
     else{
-          out[len++] = fmt[i];
+          out[len] = fmt[i];
+					len++;
           i++;
     }
   }
   out[len+1] = '\0';
   va_end(ap);
-  return len;
+  return len++;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
