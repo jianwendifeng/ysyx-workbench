@@ -5,6 +5,14 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
+void int_to_char(int num,char* str){
+  int i=0;
+  do{
+    str[i++] = num % 10; 
+    num /= 10;
+  }while(num > 0);
+  str[i] = '\0';
+}
 int printf(const char *fmt, ...) {
   panic("Not implemented");
 }
@@ -17,7 +25,6 @@ int sprintf(char *out, const char *fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);	//把参数列表拷贝到ap中,
   int len=0;
-
 
   while(*fmt != '\0'){
     if(*fmt == '%'){
@@ -35,7 +42,12 @@ int sprintf(char *out, const char *fmt, ...) {
         case 'd':
        {
         int num = va_arg(ap,int);
-        out[len++] = num;
+        char int_num[256];
+        int_to_char(num,int_num);
+        int i=0;
+        while(int_num[i] != '\0'){
+          out[len++] = int_num[i++];
+        }
         break;
        }
 
