@@ -15,44 +15,46 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...) {
 	va_list ap;
-	va_start(ap, fmt);	//把参数列表拷贝到ap中
-  int i = 0;
-  char* buf = out;
+	va_start(ap, fmt);	//把参数列表拷贝到ap中,
+  int len=0;
+  int i=0;
 
-  while(*fmt != '\0')
-  {
-    if(*fmt == '%')
-    {
-      fmt++;  //指针移动到%后面
-      switch(*fmt)
-			{
-				case 's': 
-					{
-						char *s = va_arg(ap,char*);	
-						int len = strlen(s);
-						strncpy(buf,s,len);
-						buf += len;
-            fmt+=len;
-						i++;
-						break;}
-				case 'd': 
-					{
-						int d = va_arg(ap,int);
-						int len = sprintf(buf,"%d",d);
-						buf += len;
-            fmt+=len;
-						i += len;
-						break;
-					}
-				default:
-					return -1;
-			}
-		}
-		
+
+  while(fmt[i] != '\0'){
+    if(fmt[i] == '%'){
+      switch(fmt[i+1])
+      {
+        case 's':
+        {
+          char* str = va_arg(ap,char*);
+          while(*str != '\0'){
+            out[len++] = *str++;
+          }
+          break;
+        }
+
+        case 'd':
+       {
+        int num = va_arg(ap,int);
+        out[len++] = num;
+        break;
+       }
+
+        default:
+        {
+          out[len++] = *fmt;
+          break;
+        }
+      }
+    }
+    else{
+       out[len++] = *fmt;
+    }
+    fmt++;
   }
-  *buf = '\0';
+  out[len++] = '\0';
   va_end(ap);
-  return i;
+  return len;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
