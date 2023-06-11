@@ -24,8 +24,7 @@ int sprintf(char *out, const char *fmt, ...) {
     if(*fmt == '%')
     {
       fmt++;  //指针移动到%后面
-    
-			switch(*fmt)
+      switch(*fmt)
 			{
 				case 's': 
 					{
@@ -47,12 +46,7 @@ int sprintf(char *out, const char *fmt, ...) {
 					return -1;
 			}
 		}
-		else{
-			*buf = *fmt;
-			buf++;
-			fmt++;
-		}
-		fmt++;
+		
   }
   *buf = '\0';
   va_end(ap);
