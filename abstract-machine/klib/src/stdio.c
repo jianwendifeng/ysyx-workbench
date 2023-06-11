@@ -3,25 +3,38 @@
 #include <klib-macros.h>
 #include <stdarg.h>
 
+
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-void int_to_char(int num,char* str){
-  int i=0;
-  do{
-    str[i++] = num % 10; 
-    num /= 10;
-  }while(num > 0);
-  str[i] = '\0';
- 
-  int j = i;
-  int tmp;
-  while(j/2){
-    tmp = str[j];
-    str[j] = str[i-j];    
-    str[i-j] = tmp;
-    j--;
-  }
+void reverse(char s[]) {
+    int i, j;
+    char temp;
+    
+    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
+        temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
+    }
 }
+
+void itoa(int n,char s[]){
+	int i,sign;
+
+	if((sign = n) < 0){
+		n = -n;
+	}
+	i=0;
+	do{
+		s[i++] = n%10 +'0';
+	}while((n /= 10) > 0);
+
+	if(sign < 0)
+	{
+		s[i++] = '-';
+	}	
+	reverse(s);
+}
+
 
 int printf(const char *fmt, ...) {
   panic("Not implemented");
@@ -35,45 +48,51 @@ int sprintf(char *out, const char *fmt, ...) {
 	va_list ap;
 	va_start(ap, fmt);	//把参数列表拷贝到ap中,
   int len=0;
+  int arg_i;
+  char arg_i_s[1024];
+  char *arg_s;
+  int i=0;
 
-  while(*fmt != '\0'){
-    if(*fmt == '%'){
-      switch(*++fmt)
+  while(fmt[i] != '\0'){
+    if(fmt[i] == '%'){
+      switch(fmt[i+1])
       {
         case 's':
         {
-          char* str = va_arg(ap,char*);
-          while(*str != '\0'){
-            out[len++] = *str++;
+          arg_s = va_arg(ap,char *);
+          for(int j = 0; arg_s[j] != '\0';j++){
+            out[len++] = arg_s[j];
           }
+          i += 2;
           break;
         }
 
         case 'd':
        {
-        int num = va_arg(ap,int);
-        char int_num[256];
-        int_to_char(num,int_num);
-        int i=0;
-        while(int_num[i] != '\0'){
-          out[len++] = int_num[i++];
+        arg_i = va_arg(ap,int);
+        itoa(arg_i,arg_i_s);
+        for(int j = 0;arg_i_s[j] != '\0';j++){
+          out[len++] = arg_i_s[j];
         }
+
+        i += 2;
         break;
        }
 
         default:
         {
           out[len++] = *fmt;
+          i++;
           break;
         }
       }
     }
     else{
-       out[len++] = *fmt;
+          out[len++] = *fmt;
+          i++;
     }
-    fmt++;
   }
-  out[len] = '\0';
+  out[len+1] = '\0';
   va_end(ap);
   return len;
 }
