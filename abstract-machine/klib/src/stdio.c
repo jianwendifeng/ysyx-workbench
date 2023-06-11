@@ -28,7 +28,7 @@ int sprintf(char *out, const char *fmt, ...) {
     {
       case 's': *buf = *va_arg(ap,char*); break;
       case 'd': *buf = va_arg(ap,int);  break;
-      default:panic("Sprintf haven't complement.");
+      default:panic("Sprintf this type haven't implemented.");
     }
     i++;
     buf++;
