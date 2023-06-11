@@ -12,7 +12,17 @@ void int_to_char(int num,char* str){
     num /= 10;
   }while(num > 0);
   str[i] = '\0';
+ 
+  int j = i;
+  int tmp;
+  while(j/2){
+    tmp = str[j];
+    str[j] = str[i-j];    
+    str[i-j] = tmp;
+    j--;
+  }
 }
+
 int printf(const char *fmt, ...) {
   panic("Not implemented");
 }
