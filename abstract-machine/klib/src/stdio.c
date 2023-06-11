@@ -32,6 +32,7 @@ int sprintf(char *out, const char *fmt, ...) {
 						int len = strlen(s);
 						strncpy(buf,s,len);
 						buf += len;
+            fmt+=len;
 						i++;
 						break;}
 				case 'd': 
@@ -39,6 +40,7 @@ int sprintf(char *out, const char *fmt, ...) {
 						int d = va_arg(ap,int);
 						int len = sprintf(buf,"%d",d);
 						buf += len;
+            fmt+=len;
 						i += len;
 						break;
 					}
