@@ -14,7 +14,27 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 }
 
 int sprintf(char *out, const char *fmt, ...) {
-  panic("Not implemented");
+	va_list ap;
+	va_start(ap, fmt);	//把参数列表拷贝到ap中
+  int i=0;
+  char* buf = out;
+  while(*fmt != '\0')
+  {
+    if(*fmt == '%')
+    {
+      fmt++;
+    }
+    switch(*fmt)
+    {
+      case 's': *buf = *va_arg(ap,char*); break;
+      case 'd': *buf = va_arg(ap,int);  break;
+      default:panic("Sprintf haven't complement.");
+    }
+    i++;
+    buf++;
+    fmt++;
+  }
+  return i;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
@@ -25,4 +45,4 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
   panic("Not implemented");
 }
 
-#endif
+#endif	
