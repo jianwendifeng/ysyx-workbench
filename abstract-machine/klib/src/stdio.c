@@ -19,9 +19,9 @@ int sprintf(char *out, const char *fmt, ...) {
   int len=0;
 
 
-  while(fmt[len] != '\0'){
-    if(fmt[len] == '%'){
-      switch(fmt[len+1])
+  while(*fmt != '\0'){
+    if(*fmt == '%'){
+      switch(*++fmt)
       {
         case 's':
         {
@@ -51,7 +51,7 @@ int sprintf(char *out, const char *fmt, ...) {
     }
     fmt++;
   }
-  out[len++] = '\0';
+  out[len] = '\0';
   va_end(ap);
   return len;
 }
