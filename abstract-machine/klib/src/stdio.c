@@ -31,8 +31,8 @@ int sprintf(char *out, const char *fmt, ...) {
       default:return -1;
     }
     i++;
+		buf += strlen(fmt);
     fmt++;
-		buf++;
   }
   *buf = '\0';
   va_end(ap);
