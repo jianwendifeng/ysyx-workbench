@@ -26,12 +26,11 @@ int sprintf(char *out, const char *fmt, ...) {
     }
     switch(*fmt)
     {
-      case 's': *buf = *va_arg(ap,char*); break;
-      case 'd': *buf = va_arg(ap,int);  break;
-      default:panic("Sprintf this type haven't implemented.");
+      case 's': *buf = *va_arg(ap,char*); buf += strlen(buf);break;
+      case 'd': *buf = va_arg(ap,int);  buf += strlen(buf);break;
+      default:return -1;
     }
     i++;
-    buf++;
     fmt++;
   }
   *buf = '\0';
