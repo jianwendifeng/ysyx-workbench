@@ -46,13 +46,12 @@ int sprintf(char *out, const char *fmt, ...) {
     if(fmt[i] == '%')
     {
       i++;  //指针移动到%后面
-    
       switch(fmt[i])
       {
         case 's': {
            arg_s = va_arg(ap,char*);
             for(int j = 0 ; arg_s[j] != '\0' ; j++){
-            out[len++] = arg_s[j++];
+            out[len++] = arg_s[j];
             }
              break;
          }
@@ -60,7 +59,7 @@ int sprintf(char *out, const char *fmt, ...) {
            arg_i = va_arg(ap,int);  
            itoa(arg_i,arg_i_s);
            for(int j = 0 ; arg_i_s[j] != '\0' ; j++){
-             out[len++] = arg_i_s[j++];
+             out[len++] = arg_i_s[j];
            }
            break;
          }
