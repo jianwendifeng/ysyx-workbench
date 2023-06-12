@@ -53,7 +53,7 @@ int sprintf(char *out, const char *fmt, ...) {
             for(int j = 0 ; arg_s[j] != '\0' ; j++){
             out[len++] = arg_s[j];
             }
-            i++;
+            i++;  //执行完成后fmt的指针再次后移
              break;
          }
        case 'd': {
