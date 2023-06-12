@@ -53,6 +53,7 @@ int sprintf(char *out, const char *fmt, ...) {
             for(int j = 0 ; arg_s[j] != '\0' ; j++){
             out[len++] = arg_s[j];
             }
+            i++;
              break;
          }
        case 'd': {
@@ -61,6 +62,7 @@ int sprintf(char *out, const char *fmt, ...) {
            for(int j = 0 ; arg_i_s[j] != '\0' ; j++){
              out[len++] = arg_i_s[j];
            }
+           i++;
            break;
          }
        default:{
