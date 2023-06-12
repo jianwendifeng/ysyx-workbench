@@ -25,9 +25,9 @@ static void reset(int n) {
 
 int main() {
 	nvboard_bind_all_pins(&top);
-	nvboard_init();
+	nvboard_init();	//initial nvboard
 	reset(10);
-/*  
+ 
 	//const std::unique_ptr<VerilatedContext> contextp{new VerilatedContext};
 	VerilatedContext* contextp = new VerilatedContext;
 	contextp->commandArgs(argc, argv);
@@ -39,35 +39,22 @@ Vtop *top = new Vtop{contextp};
 
 	top->trace(tfp,99);
 	tfp->open("wave.vcd");
-	*/
+	
 	
 	//while (!contextp->gotFinish()) { 
 	while(1) {  
 		//nvboard_update();
 		//single_cycle();
-		
-	/*	top->eva l(); 
-		int a = rand() & 1;
-		int b = rand() & 1;
-		top->a = a;
-			
-		top->b = b;
 		top->eval();
-		printf("a = %d, b = %d, f = %d\n", a, b, top->f);
-		assert(top->f == (a ^ b));
-
 		contextp->timeInc(1);
-		top->eval();
 		tfp->dump(contextp->time());
-*/	
 		single_cycle();
-		top.eval();
 		nvboard_update();
 		
 	}
-	//tfp->close();
-//	delete top;
-	//delete contextp;
+	tfp->close();
+	delete top;
+	delete contextp;
 	nvboard_quit();
 	return 0;
 }

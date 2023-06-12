@@ -29,7 +29,7 @@ module inst_rom(
 
 endmodule
 
-module ifu (
+module ifu(
 	input clk,
 	input rst,
 	output reg [31:0] ifu_out
