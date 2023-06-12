@@ -86,7 +86,7 @@ int sprintf(char *out, const char *fmt, ...) {
           i++;
     }
   }
-  out[len+1] = '\0';
+  out[len] = '\0';
   va_end(ap);
   return len;
 }
