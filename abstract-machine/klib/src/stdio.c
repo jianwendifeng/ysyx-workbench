@@ -66,11 +66,11 @@ int sprintf(char *out, const char *fmt, ...) {
            break;
          }
        default:{
-         out[len++] = fmt[i];
+         out[len++] = fmt[i++];
        }
       }
     } else{
-      out[len++] = fmt[i];
+      out[len++] = fmt[i++];
     }
   }
   out[len++] = '\0';
