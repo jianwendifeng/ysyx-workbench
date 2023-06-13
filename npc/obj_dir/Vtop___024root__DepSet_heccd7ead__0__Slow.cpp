@@ -60,8 +60,6 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1aU] = 0x641233U;
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1cU] = 0x541533U;
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1dU] = 0xffffffe7U;
-    vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1eU] = 0x641233U;
-    vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1eU] = 0x641233U;
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i = 0x20U;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0U] = 0U;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0U] = 0U;
@@ -158,10 +156,11 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__0\n"); );
     // Body
-    vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memmory_addr 
-        = (0x1fU & vlSelf->top__DOT__ifu0__DOT__pc_rom);
-    vlSelf->top__DOT__if_id_pc = vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory
-        [vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memmory_addr];
+    vlSelf->top__DOT__if_id_pc = ((0x1dU >= (0x1fU 
+                                             & vlSelf->top__DOT__ifu0__DOT__pc_rom))
+                                   ? vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory
+                                  [(0x1fU & vlSelf->top__DOT__ifu0__DOT__pc_rom)]
+                                   : 0U);
     vlSelf->top__DOT__ex_id_src1 = ((0x13U == (0x7fU 
                                                & vlSelf->top__DOT__if_id_pc))
                                      ? ((0U == (7U 
@@ -230,10 +229,9 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__if_id_pc = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__ex_id_src1 = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__ifu0__DOT__pc_rom = VL_RAND_RESET_I(32);
-    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 30; ++__Vi0) {
         vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[__Vi0] = VL_RAND_RESET_I(32);
     }
-    vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memmory_addr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i = 0;
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
