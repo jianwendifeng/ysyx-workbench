@@ -20,9 +20,12 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
     Vtop___024root___eval_initial__TOP(vlSelf);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
+    vlSelf->__Vtrigrprev__TOP__top__DOT__ifu0__DOT__pc_rom 
+        = vlSelf->top__DOT__ifu0__DOT__pc_rom;
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
@@ -153,27 +156,7 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__stl(Vtop___024root* vlSelf) {
 }
 #endif  // VL_DEBUG
 
-VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___stl_sequent__TOP__0\n"); );
-    // Body
-    vlSelf->top__DOT__if_id_pc = vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory
-        [(0x1fU & vlSelf->top__DOT__ifu0__DOT__pc_rom)];
-    vlSelf->top__DOT__ex_id_src1 = ((0x13U == (0x7fU 
-                                               & vlSelf->top__DOT__if_id_pc))
-                                     ? ((0U == (7U 
-                                                & (vlSelf->top__DOT__if_id_pc 
-                                                   >> 0xcU)))
-                                         ? (vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf
-                                            [(0x1fU 
-                                              & (vlSelf->top__DOT__if_id_pc 
-                                                 >> 0xfU))] 
-                                            + (vlSelf->top__DOT__if_id_pc 
-                                               >> 0x14U))
-                                         : 0U) : 0U);
-    vlSelf->npc_data = vlSelf->top__DOT__ex_id_src1;
-}
+void Vtop___024root___nba_comb__TOP__0(Vtop___024root* vlSelf);
 
 VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
@@ -181,9 +164,7 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_stl\n"); );
     // Body
     if (vlSelf->__VstlTriggered.at(0U)) {
-        Vtop___024root___stl_sequent__TOP__0(vlSelf);
-        vlSelf->__Vm_traceActivity[1U] = 1U;
-        vlSelf->__Vm_traceActivity[0U] = 1U;
+        Vtop___024root___nba_comb__TOP__0(vlSelf);
     }
 }
 
@@ -199,6 +180,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__act(Vtop___024root* vlSelf) {
     if (vlSelf->__VactTriggered.at(0U)) {
         VL_DBG_MSGF("         'act' region trigger index 0 is active: @(posedge clk)\n");
     }
+    if (vlSelf->__VactTriggered.at(1U)) {
+        VL_DBG_MSGF("         'act' region trigger index 1 is active: @([changed] top.ifu0.pc_rom)\n");
+    }
 }
 #endif  // VL_DEBUG
 
@@ -213,6 +197,9 @@ VL_ATTR_COLD void Vtop___024root___dump_triggers__nba(Vtop___024root* vlSelf) {
     }
     if (vlSelf->__VnbaTriggered.at(0U)) {
         VL_DBG_MSGF("         'nba' region trigger index 0 is active: @(posedge clk)\n");
+    }
+    if (vlSelf->__VnbaTriggered.at(1U)) {
+        VL_DBG_MSGF("         'nba' region trigger index 1 is active: @([changed] top.ifu0.pc_rom)\n");
     }
 }
 #endif  // VL_DEBUG
@@ -236,8 +223,11 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i = VL_RAND_RESET_I(32);
+    vlSelf->__Vdly__top__DOT__ifu0__DOT__pc_rom = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
-    for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
+    vlSelf->__Vtrigrprev__TOP__top__DOT__ifu0__DOT__pc_rom = VL_RAND_RESET_I(32);
+    vlSelf->__VactDidInit = 0;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = 0;
     }
 }
