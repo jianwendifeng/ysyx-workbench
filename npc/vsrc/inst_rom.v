@@ -5,6 +5,7 @@ module inst_rom(
 
 	reg [31:0] memory [31:0];
 	wire [31:0] memmory_addr = inst_addr - 32'h80000000;
+	
 	initial begin
 		//initial inst_reg
 		for(int i = 0 ;i <= 28 ; i+=4)begin
