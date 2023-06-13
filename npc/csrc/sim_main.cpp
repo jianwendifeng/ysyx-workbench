@@ -16,7 +16,7 @@ int main(int argc,char** argv) {
 	VerilatedVcdC *m_trace = new VerilatedVcdC;  
     dut->trace(m_trace, 5);               
     m_trace->open("waveform.vcd");
-	dut->clk = 0;
+	dut->clk = 1;
 	dut->rst = 1;
 	int i=0;
 	while (sim_time < 64) { 
