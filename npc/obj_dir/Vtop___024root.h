@@ -15,13 +15,13 @@ class Vtop___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
+    CData/*4:0*/ top__DOT__ifu0__DOT__inst_rom0__DOT__memmory_addr;
     CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
     VL_OUT(npc_data,31,0);
     IData/*31:0*/ top__DOT__if_id_pc;
     IData/*31:0*/ top__DOT__ex_id_src1;
     IData/*31:0*/ top__DOT__ifu0__DOT__pc_rom;
-    IData/*31:0*/ top__DOT__ifu0__DOT__inst_rom0__DOT__memmory_addr;
     IData/*31:0*/ top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i;
     IData/*31:0*/ top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i;
     IData/*31:0*/ __VstlIterCount;

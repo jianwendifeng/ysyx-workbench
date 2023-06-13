@@ -65,7 +65,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     for (int i = 0; i < 32; ++i) {
         tracep->declBus(c+2+i*1,"memory", true,(i+0), 31,0);
     }
-    tracep->declBus(c+76,"memmory_addr", false,-1, 31,0);
+    tracep->declBus(c+76,"memmory_addr", false,-1, 4,0);
     tracep->pushNamePrefix("unnamedblk1 ");
     tracep->declBus(c+34,"i", false,-1, 31,0);
     tracep->popNamePrefix(2);
@@ -198,7 +198,7 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+73,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[30]),32);
     bufp->fullIData(oldp+74,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[31]),32);
     bufp->fullIData(oldp+75,(vlSelf->top__DOT__ifu0__DOT__pc_rom),32);
-    bufp->fullIData(oldp+76,(vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memmory_addr),32);
+    bufp->fullCData(oldp+76,(vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memmory_addr),5);
     bufp->fullBit(oldp+77,(vlSelf->clk));
     bufp->fullBit(oldp+78,(vlSelf->rst));
     bufp->fullIData(oldp+79,(vlSelf->npc_data),32);

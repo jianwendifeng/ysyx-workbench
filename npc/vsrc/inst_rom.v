@@ -4,7 +4,6 @@ module inst_rom(
 );
 
 	reg [31:0] memory [31:0];
-	reg [4:0] memmory_addr;
 
 	initial begin
 		//initial inst_reg
@@ -17,8 +16,8 @@ module inst_rom(
 	end
 
 	always @ (*)begin
-		memmory_addr = inst_addr - 32'h80000000;
-	 	inst_data = memory[memmory_addr];
+		memmory_addr = inst_addr;
+	 	inst_data = memory[inst_addr[4:0]];
  end
 
 endmodule
