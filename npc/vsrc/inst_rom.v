@@ -1,9 +1,10 @@
+/* verilator lint_off UNUSEDSIGNAL */
 module inst_rom(
 	input [31:0] inst_addr,
 	output reg [31:0] inst_data
 );
 
-	reg [31:0] memory [2^32-1:0];
+	reg [31:0] memory [31:0];
 
 	initial begin
 		//initial inst_reg
