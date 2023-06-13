@@ -32,11 +32,8 @@ VL_INLINE_OPT void Vtop___024root___nba_sequent__TOP__0(Vtop___024root* vlSelf) 
         = (0x1fU & (vlSelf->top__DOT__if_id_pc >> 7U));
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[__Vdlyvdim0__top__DOT__idu0__DOT__Reg0__DOT__rf__v0] 
         = __Vdlyvval__top__DOT__idu0__DOT__Reg0__DOT__rf__v0;
-    vlSelf->top__DOT__if_id_pc = ((0x1dU >= (0x1fU 
-                                             & vlSelf->top__DOT__ifu0__DOT__pc_rom))
-                                   ? vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory
-                                  [(0x1fU & vlSelf->top__DOT__ifu0__DOT__pc_rom)]
-                                   : 0U);
+    vlSelf->top__DOT__if_id_pc = vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory
+        [(0x1fU & vlSelf->top__DOT__ifu0__DOT__pc_rom)];
     vlSelf->top__DOT__ex_id_src1 = ((0x13U == (0x7fU 
                                                & vlSelf->top__DOT__if_id_pc))
                                      ? ((0U == (7U 

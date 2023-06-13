@@ -1,4 +1,4 @@
-/* verilator lint_off UNUSEDSIGNAL */
+/* verilator lint_off UNUSEDSIGNAL */ //inst_addr only use [4:0] bit,[31:5] haven't use
 module inst_rom(
 	input [31:0] inst_addr,
 	output reg [31:0] inst_data
@@ -9,7 +9,7 @@ module inst_rom(
 	initial begin
 		//initial inst_reg
 		for(int i = 0 ;i <= 28 ; i+=4)begin
-			memory[i+0] = 32'b00000000010101000001010100110011;	//#addi x6, x5, 20
+			memory[i+0] = 32'b00000000010101000001010100010011;	//#addi x6, x5, 20
 			memory[i+1] = 32'b11111111111111111111111111100111;	//#addi x8, x7, -7
 			memory[i+2] = 32'b00000000011001000001001000110011;	//#addi x10, x9, 100\
 			memory[i+2] = 32'b00000000011001000001001000110011;	//#addi x10, x9, 100
