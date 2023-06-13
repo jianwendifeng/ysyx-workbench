@@ -4,8 +4,8 @@ module inst_rom(
 );
 
 	reg [31:0] memory [31:0];
-	wire [31:0] memmory_addr = inst_addr - 32'h80000000;
-	
+	wire [31:0] memmory_addr;
+
 	initial begin
 		//initial inst_reg
 		for(int i = 0 ;i <= 28 ; i+=4)begin
@@ -17,7 +17,8 @@ module inst_rom(
 	end
 
 	always @ (*)begin
-	 inst_data = memory[memmory_addr];
+		memmory_addr = inst_addr - 32'h80000000;
+	 	inst_data = memory[memmory_addr];
  end
 
 endmodule
