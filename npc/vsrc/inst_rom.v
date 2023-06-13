@@ -4,7 +4,7 @@ module inst_rom(
 );
 
 	reg [31:0] memory [31:0];
-	wire [31:0] memmory_addr;
+	reg [31:0] memmory_addr;
 
 	initial begin
 		//initial inst_reg
