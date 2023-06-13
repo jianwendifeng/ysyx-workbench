@@ -16,7 +16,7 @@ module inst_rom(
 		end
 	end
 
-	always @ (inst_addr)begin
+	always @ (*)begin
 	 	inst_data = memory[inst_addr-32'h80000000];
  end
 
