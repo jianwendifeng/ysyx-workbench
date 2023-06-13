@@ -13,17 +13,24 @@ class Vtop___024root final : public VerilatedModule {
   public:
 
     // DESIGN SPECIFIC STATE
-    VL_IN8(a,0,0);
-    VL_IN8(b,0,0);
-    VL_OUT8(f,0,0);
+    VL_IN8(clk,0,0);
+    VL_IN8(rst,0,0);
+    CData/*0:0*/ __Vtrigrprev__TOP__clk;
     CData/*0:0*/ __VactContinue;
+    VL_OUT(npc_data,31,0);
+    IData/*31:0*/ top__DOT__if_id_pc;
+    IData/*31:0*/ top__DOT__ex_id_src1;
+    IData/*31:0*/ top__DOT__ifu0__DOT__pc_rom;
+    IData/*31:0*/ top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i;
+    IData/*31:0*/ top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i;
     IData/*31:0*/ __VstlIterCount;
-    IData/*31:0*/ __VicoIterCount;
     IData/*31:0*/ __VactIterCount;
+    VlUnpacked<IData/*31:0*/, 32> top__DOT__ifu0__DOT__inst_rom0__DOT__memory;
+    VlUnpacked<IData/*31:0*/, 32> top__DOT__idu0__DOT__Reg0__DOT__rf;
+    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
-    VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<0> __VactTriggered;
-    VlTriggerVec<0> __VnbaTriggered;
+    VlTriggerVec<1> __VactTriggered;
+    VlTriggerVec<1> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vtop__Syms* const vlSymsp;

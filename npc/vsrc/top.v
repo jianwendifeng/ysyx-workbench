@@ -30,6 +30,7 @@ idu idu0(
 
 
 exu exu0(
+	.ex_op(id_ex_op),
 	.ex_src1(id_ex_src1),
 	.ex_funct3(id_ex_funct3),
 	.ex_imm(id_ex_imm),
