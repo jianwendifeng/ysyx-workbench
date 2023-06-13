@@ -79,6 +79,8 @@ run: $(BIN)
 
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "Write this Makefile by yourself."
 	verilator -Wall --cc --exe --build ./csrc/$ sim_main.cpp ./vsrc/$ top.v --trace	-Ivsrc
+	make -C obj_dir -f Vtop.mk Vtop
+	./obj_dir/Vtop 
+	gtkwave waveform.vcd 
 include ../Makefile
