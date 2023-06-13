@@ -12,12 +12,12 @@ module inst_rom(
 			memory[i+0] = 32'b00000000010101000000010100010011;	//#addi x6, x5, 20
 			memory[i+1] = 32'b11111111111111111111111111100111;	//#addi x8, x7, -7
 			memory[i+2] = 32'b00000000011001000001001000110011;	//#addi x10, x9, 100\
-			memory[i+2] = 32'b00000000011001000001001000110011;	//#addi x10, x9, 100
+			memory[i+3] = 32'b00000000011001000001001000110011;	//#addi x10, x9, 100
 		end
 	end
 
 	
-	 	assign inst_data = memory[inst_addr-32'h80000000];
+assign inst_data = memory[inst_addr-32'h80000000];
 
 
 endmodule
