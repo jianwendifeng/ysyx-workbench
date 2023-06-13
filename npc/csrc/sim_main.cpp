@@ -17,10 +17,10 @@ int main(int argc,char** argv) {
     dut->trace(m_trace, 5);               
     m_trace->open("waveform.vcd");
 	dut->clk = 0;
-	dut->rst = 0;
+	dut->rst = 1;
 	int i=0;
 	while (sim_time < 64) { 
- 		if(i < 2) {
+ 		if(i <= 2) {
 			dut->rst = !dut->rst;
 			i++;
 		}
