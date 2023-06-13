@@ -3,7 +3,7 @@ module inst_rom(
 	output reg [31:0] inst_data
 );
 
-	reg [31:0] memory [31:0];
+	reg [31:0] memory [2^32-1:0];
 
 	initial begin
 		//initial inst_reg
