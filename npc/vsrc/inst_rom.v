@@ -16,7 +16,6 @@ module inst_rom(
 	end
 
 	always @ (*)begin
-		memmory_addr = inst_addr;
 	 	inst_data = memory[inst_addr[4:0]];
  end
 
