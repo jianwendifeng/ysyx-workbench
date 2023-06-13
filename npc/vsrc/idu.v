@@ -23,4 +23,5 @@ module idu (//#(RESET_VAL = 0) (
 		id_funct3 	= id_inst[14:12];
 		id_imm		= id_inst[31:20];	//imm value
 	end
+	
 endmodule
