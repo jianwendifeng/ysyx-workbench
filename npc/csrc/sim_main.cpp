@@ -20,7 +20,7 @@ int main(int argc,char** argv) {
 	dut->rst = 0;
 	int i=0;
 	while (sim_time < 64) { 
- 		if(i < 4) {
+ 		if(i < 3) {
 			dut->rst = !dut->rst;
 			i++;
 		}
