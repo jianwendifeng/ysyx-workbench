@@ -15,7 +15,7 @@ module exu(
 	case (ex_op)
 		`OP_ADDI : begin
 			case (ex_funct3)
-				FUNCT3_ADDI:  ex_result = ex_src1 + {20'b0,ex_imm};	//clk use <= ,this not have clk
+				`FUNCT3_ADDI:  ex_result = ex_src1 + {20'b0,ex_imm};	//clk use <= ,this not have clk
 				default: ex_result = 32'b0;
 			endcase
 		end
