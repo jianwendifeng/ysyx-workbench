@@ -20,6 +20,8 @@ VL_ATTR_COLD void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
     Vtop___024root___eval_initial__TOP(vlSelf);
+    vlSelf->__Vm_traceActivity[1U] = 1U;
+    vlSelf->__Vm_traceActivity[0U] = 1U;
     vlSelf->__Vtrigrprev__TOP__clk = vlSelf->clk;
 }
 
@@ -58,6 +60,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1bU] = 0x540513U;
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1cU] = 0xffffffe7U;
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[0x1dU] = 0x641233U;
+    vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i = 0x1eU;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0U] = 0U;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0U] = 0U;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[1U] = 1U;
@@ -91,6 +94,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0x1dU] = 0x1dU;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0x1eU] = 0x1eU;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0x1fU] = 0x1fU;
+    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i = 0x20U;
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {
@@ -176,6 +180,8 @@ VL_ATTR_COLD void Vtop___024root___eval_stl(Vtop___024root* vlSelf) {
     // Body
     if (vlSelf->__VstlTriggered.at(0U)) {
         Vtop___024root___stl_sequent__TOP__0(vlSelf);
+        vlSelf->__Vm_traceActivity[1U] = 1U;
+        vlSelf->__Vm_traceActivity[0U] = 1U;
     }
 }
 
@@ -223,8 +229,13 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[__Vi0] = VL_RAND_RESET_I(32);
     }
+    vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i = 0;
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
+    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i = VL_RAND_RESET_I(32);
     vlSelf->__Vtrigrprev__TOP__clk = VL_RAND_RESET_I(1);
+    for (int __Vi0 = 0; __Vi0 < 2; ++__Vi0) {
+        vlSelf->__Vm_traceActivity[__Vi0] = 0;
+    }
 }
