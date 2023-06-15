@@ -21,13 +21,10 @@ class Vtop___024root final : public VerilatedModule {
     IData/*31:0*/ top__DOT__if_id_pc;
     IData/*31:0*/ top__DOT__ex_id_src1;
     IData/*31:0*/ top__DOT__ifu0__DOT__pc_rom;
-    IData/*31:0*/ top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i;
-    IData/*31:0*/ top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i;
     IData/*31:0*/ __VstlIterCount;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__ifu0__DOT__inst_rom0__DOT__memory;
     VlUnpacked<IData/*31:0*/, 32> top__DOT__idu0__DOT__Reg0__DOT__rf;
-    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VactTriggered;
     VlTriggerVec<1> __VnbaTriggered;
