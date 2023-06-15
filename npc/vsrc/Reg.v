@@ -12,7 +12,7 @@ module Reg #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
     // 初始化
   initial begin
     rf[0] = 32'b0;  // 寄存器0不进行初始化
-    for (integer i = 0; i < 2**ADDR_WIDTH; i = i + 1) begin
+    for (integer i = 0; i < ADDR_WIDTH; i = i + 1) begin
       rf[i] = i;
     end
   end

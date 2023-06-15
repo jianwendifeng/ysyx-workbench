@@ -11,13 +11,13 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     // Init
     const int c = vlSymsp->__Vm_baseCode;
     // Body
-    tracep->declBit(c+76,"clk", false,-1);
-    tracep->declBit(c+77,"rst", false,-1);
-    tracep->declBus(c+78,"npc_data", false,-1, 31,0);
+    tracep->declBit(c+49,"clk", false,-1);
+    tracep->declBit(c+50,"rst", false,-1);
+    tracep->declBus(c+51,"npc_data", false,-1, 31,0);
     tracep->pushNamePrefix("top ");
-    tracep->declBit(c+76,"clk", false,-1);
-    tracep->declBit(c+77,"rst", false,-1);
-    tracep->declBus(c+78,"npc_data", false,-1, 31,0);
+    tracep->declBit(c+49,"clk", false,-1);
+    tracep->declBit(c+50,"rst", false,-1);
+    tracep->declBus(c+51,"npc_data", false,-1, 31,0);
     tracep->declBus(c+35,"if_id_pc", false,-1, 31,0);
     tracep->declBus(c+36,"id_ex_op", false,-1, 6,0);
     tracep->declBus(c+37,"id_ex_funct3", false,-1, 14,12);
@@ -32,7 +32,7 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+40,"ex_result", false,-1, 31,0);
     tracep->popNamePrefix(1);
     tracep->pushNamePrefix("idu0 ");
-    tracep->declBit(c+76,"clk", false,-1);
+    tracep->declBit(c+49,"clk", false,-1);
     tracep->declBus(c+35,"id_inst", false,-1, 31,0);
     tracep->declBus(c+40,"id_src1_wdata", false,-1, 31,0);
     tracep->declBus(c+36,"id_op", false,-1, 6,0);
@@ -40,27 +40,27 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+39,"id_src1_rdata", false,-1, 31,0);
     tracep->declBus(c+38,"id_imm", false,-1, 11,0);
     tracep->pushNamePrefix("Reg0 ");
-    tracep->declBus(c+79,"ADDR_WIDTH", false,-1, 31,0);
-    tracep->declBus(c+80,"DATA_WIDTH", false,-1, 31,0);
-    tracep->declBit(c+76,"clk", false,-1);
+    tracep->declBus(c+52,"ADDR_WIDTH", false,-1, 31,0);
+    tracep->declBus(c+53,"DATA_WIDTH", false,-1, 31,0);
+    tracep->declBit(c+49,"clk", false,-1);
     tracep->declBus(c+40,"wdata", false,-1, 31,0);
     tracep->declBus(c+41,"waddr", false,-1, 4,0);
-    tracep->declBit(c+81,"wen", false,-1);
+    tracep->declBit(c+54,"wen", false,-1);
     tracep->declBus(c+42,"raddr", false,-1, 4,0);
     tracep->declBus(c+39,"rdata", false,-1, 31,0);
-    for (int i = 0; i < 32; ++i) {
+    for (int i = 0; i < 5; ++i) {
         tracep->declBus(c+43+i*1,"rf", true,(i+0), 31,0);
     }
     tracep->pushNamePrefix("unnamedblk1 ");
     tracep->declBus(c+1,"i", false,-1, 31,0);
     tracep->popNamePrefix(3);
     tracep->pushNamePrefix("ifu0 ");
-    tracep->declBit(c+76,"clk", false,-1);
-    tracep->declBit(c+77,"rst", false,-1);
+    tracep->declBit(c+49,"clk", false,-1);
+    tracep->declBit(c+50,"rst", false,-1);
     tracep->declBus(c+35,"ifu_out", false,-1, 31,0);
-    tracep->declBus(c+75,"pc_rom", false,-1, 31,0);
+    tracep->declBus(c+48,"pc_rom", false,-1, 31,0);
     tracep->pushNamePrefix("inst_rom0 ");
-    tracep->declBus(c+75,"inst_addr", false,-1, 31,0);
+    tracep->declBus(c+48,"inst_addr", false,-1, 31,0);
     tracep->declBus(c+35,"inst_data", false,-1, 31,0);
     for (int i = 0; i < 32; ++i) {
         tracep->declBus(c+2+i*1,"memory", true,(i+0), 31,0);
@@ -69,10 +69,10 @@ VL_ATTR_COLD void Vtop___024root__trace_init_sub__TOP__0(Vtop___024root* vlSelf,
     tracep->declBus(c+34,"i", false,-1, 31,0);
     tracep->popNamePrefix(2);
     tracep->pushNamePrefix("pc0 ");
-    tracep->declBus(c+82,"RESET_VAL", false,-1, 31,0);
-    tracep->declBit(c+76,"clk", false,-1);
-    tracep->declBit(c+77,"rst", false,-1);
-    tracep->declBus(c+75,"pc_out", false,-1, 31,0);
+    tracep->declBus(c+55,"RESET_VAL", false,-1, 31,0);
+    tracep->declBit(c+49,"clk", false,-1);
+    tracep->declBit(c+50,"rst", false,-1);
+    tracep->declBus(c+48,"pc_out", false,-1, 31,0);
     tracep->popNamePrefix(3);
 }
 
@@ -156,9 +156,11 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
                                     >> 0xcU))),3);
     bufp->fullSData(oldp+38,((vlSelf->top__DOT__if_id_pc 
                               >> 0x14U)),12);
-    bufp->fullIData(oldp+39,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf
-                             [(0x1fU & (vlSelf->top__DOT__if_id_pc 
-                                        >> 0xfU))]),32);
+    bufp->fullIData(oldp+39,(((4U >= (7U & (vlSelf->top__DOT__if_id_pc 
+                                            >> 0xfU)))
+                               ? vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf
+                              [(7U & (vlSelf->top__DOT__if_id_pc 
+                                      >> 0xfU))] : 0U)),32);
     bufp->fullIData(oldp+40,(vlSelf->top__DOT__ex_id_src1),32);
     bufp->fullCData(oldp+41,((0x1fU & (vlSelf->top__DOT__if_id_pc 
                                        >> 7U))),5);
@@ -169,39 +171,12 @@ VL_ATTR_COLD void Vtop___024root__trace_full_sub_0(Vtop___024root* vlSelf, Veril
     bufp->fullIData(oldp+45,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[2]),32);
     bufp->fullIData(oldp+46,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[3]),32);
     bufp->fullIData(oldp+47,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[4]),32);
-    bufp->fullIData(oldp+48,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[5]),32);
-    bufp->fullIData(oldp+49,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[6]),32);
-    bufp->fullIData(oldp+50,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[7]),32);
-    bufp->fullIData(oldp+51,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[8]),32);
-    bufp->fullIData(oldp+52,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[9]),32);
-    bufp->fullIData(oldp+53,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[10]),32);
-    bufp->fullIData(oldp+54,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[11]),32);
-    bufp->fullIData(oldp+55,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[12]),32);
-    bufp->fullIData(oldp+56,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[13]),32);
-    bufp->fullIData(oldp+57,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[14]),32);
-    bufp->fullIData(oldp+58,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[15]),32);
-    bufp->fullIData(oldp+59,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[16]),32);
-    bufp->fullIData(oldp+60,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[17]),32);
-    bufp->fullIData(oldp+61,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[18]),32);
-    bufp->fullIData(oldp+62,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[19]),32);
-    bufp->fullIData(oldp+63,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[20]),32);
-    bufp->fullIData(oldp+64,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[21]),32);
-    bufp->fullIData(oldp+65,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[22]),32);
-    bufp->fullIData(oldp+66,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[23]),32);
-    bufp->fullIData(oldp+67,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[24]),32);
-    bufp->fullIData(oldp+68,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[25]),32);
-    bufp->fullIData(oldp+69,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[26]),32);
-    bufp->fullIData(oldp+70,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[27]),32);
-    bufp->fullIData(oldp+71,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[28]),32);
-    bufp->fullIData(oldp+72,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[29]),32);
-    bufp->fullIData(oldp+73,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[30]),32);
-    bufp->fullIData(oldp+74,(vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[31]),32);
-    bufp->fullIData(oldp+75,(vlSelf->top__DOT__ifu0__DOT__pc_rom),32);
-    bufp->fullBit(oldp+76,(vlSelf->clk));
-    bufp->fullBit(oldp+77,(vlSelf->rst));
-    bufp->fullIData(oldp+78,(vlSelf->npc_data),32);
-    bufp->fullIData(oldp+79,(5U),32);
-    bufp->fullIData(oldp+80,(0x20U),32);
-    bufp->fullBit(oldp+81,(1U));
-    bufp->fullIData(oldp+82,(0x80000000U),32);
+    bufp->fullIData(oldp+48,(vlSelf->top__DOT__ifu0__DOT__pc_rom),32);
+    bufp->fullBit(oldp+49,(vlSelf->clk));
+    bufp->fullBit(oldp+50,(vlSelf->rst));
+    bufp->fullIData(oldp+51,(vlSelf->npc_data),32);
+    bufp->fullIData(oldp+52,(5U),32);
+    bufp->fullIData(oldp+53,(0x20U),32);
+    bufp->fullBit(oldp+54,(1U));
+    bufp->fullIData(oldp+55,(0x80000000U),32);
 }
