@@ -136,15 +136,10 @@ VL_ATTR_COLD void Vtop___024root___stl_sequent__TOP__0(Vtop___024root* vlSelf) {
                                      ? ((0U == (7U 
                                                 & (vlSelf->top__DOT__if_id_pc 
                                                    >> 0xcU)))
-                                         ? (((4U >= 
-                                              (7U & 
-                                               (vlSelf->top__DOT__if_id_pc 
-                                                >> 0xfU)))
-                                              ? vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf
-                                             [(7U & 
-                                               (vlSelf->top__DOT__if_id_pc 
-                                                >> 0xfU))]
-                                              : 0U) 
+                                         ? (vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf
+                                            [(0x1fU 
+                                              & (vlSelf->top__DOT__if_id_pc 
+                                                 >> 0xfU))] 
                                             + (vlSelf->top__DOT__if_id_pc 
                                                >> 0x14U))
                                          : 0U) : 0U);
@@ -208,7 +203,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__memory[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->top__DOT__ifu0__DOT__inst_rom0__DOT__unnamedblk1__DOT__i = 0;
-    for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[__Vi0] = VL_RAND_RESET_I(32);
     }
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i = VL_RAND_RESET_I(32);
