@@ -7,7 +7,7 @@ module Reg #(ADDR_WIDTH = 5, DATA_WIDTH = 32) (
   output reg [DATA_WIDTH-1:0] rdata
 );
   
-	reg [DATA_WIDTH-1:0] rf [ADDR_WIDTH-1:0];
+	reg [DATA_WIDTH-1:0] rf [2**ADDR_WIDTH-1:0];
 
     // 初始化
   initial begin
