@@ -67,22 +67,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[2U] = 2U;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[3U] = 3U;
     vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[4U] = 4U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0U] = 8U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[1U] = 9U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[2U] = 0xaU;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[3U] = 0xbU;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[4U] = 0xcU;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0U] = 0x10U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[1U] = 0x11U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[2U] = 0x12U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[3U] = 0x13U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[4U] = 0x14U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[0U] = 0x18U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[1U] = 0x19U;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[2U] = 0x1aU;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[3U] = 0x1bU;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__rf[4U] = 0x1cU;
-    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i = 0x20U;
+    vlSelf->top__DOT__idu0__DOT__Reg0__DOT__unnamedblk1__DOT__i = 5U;
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {
