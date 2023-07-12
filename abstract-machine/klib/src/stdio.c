@@ -19,7 +19,7 @@ void reverse(char s[]) {
 void itoa(int n,char s[]){
        int i=0;
        do{
-               s[i++] = n %10 +'0';
+          s[i++] = n %10 +'0';
        }while((n /= 10) > 0);
        reverse(s);
 }
@@ -45,7 +45,7 @@ int sprintf(char *out, const char *fmt, ...) {
   {
     if(fmt[i] == '%')
     {
-      i++;  //指针移动到%后面
+      i++;  //fmt指针移动到%后面
       switch(fmt[i])
       {
         case 's': {
