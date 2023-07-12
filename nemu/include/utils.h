@@ -58,10 +58,10 @@ uint64_t get_time();
 
 #define log_write(...) IFDEF(CONFIG_TARGET_NATIVE_ELF, \
   do { \
-    extern FILE* log_fp; printf("itrace\n");\
+    extern FILE* log_fp; \
     extern bool log_enable(); \
     if (log_enable()) { \
-      fprintf(log_fp, __VA_ARGS__); int i = 0;printf("No.%d",i++);\
+      fprintf(log_fp, __VA_ARGS__); \
       fflush(log_fp); \
     } \
   } while (0) \
