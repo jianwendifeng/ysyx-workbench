@@ -32,31 +32,31 @@ static bool g_print_step = false;
 
 void device_update();
 
-/*struct ringbuf
+struct ringbuf
 {
   Decode instr[16];	//data
-  int num ;	
-} iringbuf;
+  //int num ;	
+} iringbuf = { 0 };
 
 void write_iringbuf(Decode *s){
-  iringbuf.instr[iringbuf.num%16] = *s;
-  iringbuf.num = (iringbuf.num++)%16;
+  //iringbuf.instr[iringbuf.num%16] = *s;
+  //ringbuf.num = (iringbuf.num++)%16;
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num+16;
-  while((i--) != iringbuf.num)
+  int i = 1;//iringbuf.num+16;
+  while((i--) != 0)//iringbuf.num)
   {
     log_write("%ld\t%d\n", iringbuf.instr[i%16].pc, iringbuf.instr->isa.inst.val);
   }
-}*/
+}
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); //itrace
-    //write_iringbuf(_this);  //irtrace
+    write_iringbuf(_this);  //irtrace
   }  
-  //if (nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }
+  if (nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
