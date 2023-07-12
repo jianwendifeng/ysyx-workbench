@@ -35,17 +35,17 @@ void device_update();
 struct ringbuf
 {
   Decode instr[16];	//data
-  //int num ;	
+  int num;	
 } iringbuf = { 0 };
 
 void write_iringbuf(Decode *s){
-  //iringbuf.instr[iringbuf.num%16] = *s;
-  //ringbuf.num = (iringbuf.num++)%16;
+  iringbuf.instr[iringbuf.num%16] = *s;
+  // iringbuf.num = (iringbuf.num++)%16;
 }
 
 void read_iringbuf(){
-  int i = 1;//iringbuf.num+16;
-  while((i--) != 0)//iringbuf.num)
+  int i = iringbuf.num+16;
+  while((i--) != iringbuf.num)
   {
     log_write("%ld\t%d\n", iringbuf.instr[i%16].pc, iringbuf.instr->isa.inst.val);
   }
