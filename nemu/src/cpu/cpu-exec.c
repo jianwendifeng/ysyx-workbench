@@ -41,9 +41,8 @@ struct ringbuf
 void write_iringbuf(Decode *s){
   iringbuf.instr[iringbuf.num%16] = *s;
   // iringbuf.num = (iringbuf.num++)%16;
-  int tmp = iringbuf.num++;
-  iringbuf.num = tmp %16;
-  // iringbuf.num = 1;
+  iringbuf.num++;
+  iringbuf.num = iringbuf.num%16;
 }
 
 void read_iringbuf(){
