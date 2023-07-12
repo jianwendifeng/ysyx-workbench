@@ -61,7 +61,7 @@ uint64_t get_time();
     extern FILE* log_fp; \
     extern bool log_enable(); \
     if (log_enable()) { \
-      fprintf(log_fp, __VA_ARGS__); \
+      fprintf(log_fp, __VA_ARGS__); int i = 0;printf("No.%d",i++);\
       fflush(log_fp); \
     } \
   } while (0) \
