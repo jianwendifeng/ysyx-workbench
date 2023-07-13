@@ -56,7 +56,7 @@ void init_mem() {
   Log("physical memory area [" FMT_PADDR ", " FMT_PADDR "]", PMEM_LEFT, PMEM_RIGHT);
 }
 
-extern void read_iringbuf();  //iringbuf output
+//extern void read_iringbuf();  //iringbuf output
 
 word_t paddr_read(paddr_t addr, int len) {
   if (likely(in_pmem(addr))) {return pmem_read(addr, len);} //else {read_iringbuf();}
