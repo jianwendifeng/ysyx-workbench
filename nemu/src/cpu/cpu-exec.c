@@ -49,14 +49,14 @@ void write_iringbuf(Decode *s){
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num + iringbuf_size;
-  do
+  int i = iringbuf.num + 1;
+  int n = iringbuf_size;
+  while(n--)
   {
-    if(iringbuf.num == -1) panic("address = ");
-    printf("%#lx\t\t%s\t\t\n",iringbuf.instr[iringbuf_size].pc,iringbuf.instr[i%iringbuf_size].logbuf);
+    printf("%#lx\t\t%s\t\t\n",iringbuf.instr[i % iringbuf_size].pc,iringbuf.instr[i % iringbuf_size].logbuf);
     printf("No.%d\tNO.i,num:%d\n",i,iringbuf.num-1);
+    i++;
   }
-  while((i++)%iringbuf_size != iringbuf.num-1);
   printf("\n\n");
 }
 
