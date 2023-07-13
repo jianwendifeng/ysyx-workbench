@@ -58,9 +58,11 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
+    printf("000000\n\n");
   if (likely(in_pmem(addr))) return pmem_read(addr, len);
+    printf("111111\n\n");
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
-  printf("000000\n\n");
+    printf("222222\n\n");
   out_of_bound(addr);
   return 0;
 }
