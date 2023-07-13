@@ -26,6 +26,8 @@
  */
 #define MAX_INST_TO_PRINT 10
 
+#define iringbuf_size 32
+
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
@@ -35,25 +37,25 @@ void device_update();
 
 struct ringbuf
 {
-  Decode instr[16];	//data
+  Decode instr[iringbuf_size];	//data
   int num;	
 } iringbuf;
 
 void write_iringbuf(Decode *s){
-  iringbuf.instr[iringbuf.num%16] = *s;
+  iringbuf.instr[iringbuf.num%iringbuf_size] = *s;
   // iringbuf.num = (iringbuf.num++)%16;  //undefined operation
   iringbuf.num++;
-  iringbuf.num = iringbuf.num%16;
+  iringbuf.num = iringbuf.num%iringbuf_size;
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num+16;
+  int i = iringbuf.num+iringbuf_size;
   do
   {
-    printf("%#lx\t\t%s\t\t\n",iringbuf.instr[i%16].pc,iringbuf.instr[i%16].logbuf);
-    printf("%d\t%d\n",i,i%16);
+    printf("%#lx\t\t%s\t\t\n",iringbuf.instr[iringbuf_size].pc,iringbuf.instr[i%iringbuf_size].logbuf);
+    printf("%d\t%d\n",i,i%iringbuf_size);
   }
-  while((i++)%16 != iringbuf.num-1);
+  while((i++)%iringbuf_size != iringbuf.num-1);
 }
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
@@ -64,7 +66,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
-  //if (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
+  if (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
   //if (likely(in_pmem(nemu_state.halt_pc )) && (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) ) { read_iringbuf(); }
   //if (out_of_bound(nemu_state.halt_pc )) { read_iringbuf(); } 
 }
