@@ -42,17 +42,17 @@ struct ringbuf
 } iringbuf={0};
 
 void write_iringbuf(Decode *s){
-  iringbuf.instr[iringbuf.num%iringbuf_size] = *s;
+  iringbuf.instr[iringbuf.num % iringbuf_size] = *s;
   // iringbuf.num = (iringbuf.num++)%16;  //undefined operation
   iringbuf.num++;
-  iringbuf.num = iringbuf.num%iringbuf_size;
+  iringbuf.num = iringbuf.num % iringbuf_size;
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num+iringbuf_size;
+  int i = iringbuf.num + iringbuf_size;
   do
   {
-    if(iringbuf.num == -1) assert(0);
+    if(iringbuf.num == -1) break;
     printf("%#lx\t\t%s\t\t\n",iringbuf.instr[iringbuf_size].pc,iringbuf.instr[i%iringbuf_size].logbuf);
     printf("No.%d\tNO.i,num:%d\n",i,iringbuf.num-1);
   }
