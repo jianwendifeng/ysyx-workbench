@@ -49,9 +49,8 @@ void read_iringbuf(){
   int i = iringbuf.num+16;
   while((i--) != iringbuf.num)
   {
-    printf ("%ld\t\t%s\t\t\n",iringbuf.instr[i%16].pc,iringbuf.instr[i%16].logbuf);
+    printf ("%#lx\t\t%s\t\t\n",iringbuf.instr[i%16].pc,iringbuf.instr[i%16].logbuf);
     printf("\n");
-    //log_write("%ld\t%d\n", iringbuf.instr[i%16].pc, iringbuf.instr->isa.inst.val);
   }
 }
 
