@@ -18,6 +18,8 @@
 #include <cpu/difftest.h>
 #include <locale.h>
 
+#include <memory/paddr.h>
+
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
@@ -64,7 +66,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   //if (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
-  
+  if (likely(in_pmem(nemu_state.halt_pc ))) { read_iringbuf(); }
   //if (out_of_bound(nemu_state.halt_pc )) { read_iringbuf(); } 
 }
 
