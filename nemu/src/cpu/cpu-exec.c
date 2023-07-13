@@ -49,27 +49,25 @@ void write_iringbuf(Decode *s){
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num-iringbuf_size;
+  int i = iringbuf.num+iringbuf_size;
   do
   {
     printf("%#lx\t\t%s\t\t\n",iringbuf.instr[iringbuf_size].pc,iringbuf.instr[i%iringbuf_size].logbuf);
     printf("No.%d\tNO.i,num:%d\n",i,iringbuf.num-1);
   }
-  while((i++)%iringbuf_size == iringbuf.num-1);
+  while((i++)%iringbuf_size != iringbuf.num-1);
   printf("\n\n");
 }
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); //itrace
-    write_iringbuf(_this);  //iringbuf
   }  
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  write_iringbuf(_this);  //iringbuf
   if (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
-  //if (likely(in_pmem(nemu_state.halt_pc )) && (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) ) { read_iringbuf(); }
-  //if (out_of_bound(nemu_state.halt_pc )) { read_iringbuf(); } 
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {
