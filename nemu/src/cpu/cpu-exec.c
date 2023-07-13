@@ -46,8 +46,8 @@ void write_iringbuf(Decode *s){
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num+16;
-  while((i--) != iringbuf.num)
+  int i = iringbuf.num;
+  while((i++) != iringbuf.num)
   {
     printf ("%#lx\t\t%s\t\t\n",iringbuf.instr[i%16].pc,iringbuf.instr[i%16].logbuf);
     printf("\n");
