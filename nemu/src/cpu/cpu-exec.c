@@ -56,6 +56,7 @@ void read_iringbuf(){
     printf("%d\t%d\n",i,i%iringbuf_size);
   }
   while((i++)%iringbuf_size != iringbuf.num-1);
+  printf("\n");
 }
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
