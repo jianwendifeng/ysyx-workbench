@@ -58,10 +58,10 @@ void read_iringbuf(){
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); //itrace
-
+    write_iringbuf(_this);  //iringbuf
   }  
 #endif
-      write_iringbuf(_this);  //iringbuf
+    
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   if (nemu_state.state == NEMU_ABORT) { read_iringbuf(); }  //output iringbuf
