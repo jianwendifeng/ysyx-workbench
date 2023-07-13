@@ -52,6 +52,7 @@ void read_iringbuf(){
   int i = iringbuf.num+iringbuf_size;
   do
   {
+    if(iringbuf.num == -1) assert(0);
     printf("%#lx\t\t%s\t\t\n",iringbuf.instr[iringbuf_size].pc,iringbuf.instr[i%iringbuf_size].logbuf);
     printf("No.%d\tNO.i,num:%d\n",i,iringbuf.num-1);
   }
@@ -66,7 +67,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
-      if(iringbuf.num == -1) assert(0);
+
   write_iringbuf(_this);  //iringbuf
   if (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
 }
