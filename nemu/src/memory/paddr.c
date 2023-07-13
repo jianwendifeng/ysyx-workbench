@@ -37,7 +37,6 @@ static void pmem_write(paddr_t addr, int len, word_t data) {
 }
 
 static void out_of_bound(paddr_t addr) {
-  printf("11111\t\n\n");
   panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR "] at pc = " FMT_WORD,
       addr, PMEM_LEFT, PMEM_RIGHT, cpu.pc);
 }
@@ -58,11 +57,8 @@ void init_mem() {
 }
 
 word_t paddr_read(paddr_t addr, int len) {
-    printf("000000\n\n");
   if (likely(in_pmem(addr))) return pmem_read(addr, len);
-    printf("111111\n\n");
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
-    printf("222222\n\n");
   out_of_bound(addr);
   return 0;
 }
