@@ -47,11 +47,12 @@ void write_iringbuf(Decode *s){
 
 void read_iringbuf(){
   int i = iringbuf.num+16;
-  while((i++)%16 != iringbuf.num-1)
+  do
   {
     printf ("%#lx\t\t%s\t\t\n",iringbuf.instr[i%16].pc,iringbuf.instr[i%16].logbuf);
     printf("%d\t%d\n",i,i%16);
   }
+  while((i++)%16 != iringbuf.num-1);
 }
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
