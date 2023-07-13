@@ -49,13 +49,13 @@ void write_iringbuf(Decode *s){
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num+iringbuf_size;
+  int i = iringbuf.num-iringbuf_size;
   do
   {
     printf("%#lx\t\t%s\t\t\n",iringbuf.instr[iringbuf_size].pc,iringbuf.instr[i%iringbuf_size].logbuf);
-    printf("No.%d\tNO.i,num%d\n",i,iringbuf.num-1);
+    printf("No.%d\tNO.i,num:%d\n",i,iringbuf.num-1);
   }
-  while((i++)%iringbuf_size != iringbuf.num-1);
+  while((i++)%iringbuf_size == iringbuf.num-1);
   printf("\n\n");
 }
 
