@@ -52,7 +52,7 @@ void read_iringbuf(){
   int i = iringbuf.num + iringbuf_size;
   do
   {
-    if(iringbuf.num == -1) break;
+    if(iringbuf.num == -1) panic("address = ");
     printf("%#lx\t\t%s\t\t\n",iringbuf.instr[iringbuf_size].pc,iringbuf.instr[i%iringbuf_size].logbuf);
     printf("No.%d\tNO.i,num:%d\n",i,iringbuf.num-1);
   }
