@@ -39,7 +39,7 @@ struct ringbuf
 {
   Decode instr[iringbuf_size];	//data
   int num;	
-} iringbuf;
+} iringbuf={0};
 
 void write_iringbuf(Decode *s){
   iringbuf.instr[iringbuf.num%iringbuf_size] = *s;
