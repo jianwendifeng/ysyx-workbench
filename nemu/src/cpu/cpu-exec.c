@@ -40,7 +40,7 @@ struct ringbuf
 
 void write_iringbuf(Decode *s){
   iringbuf.instr[iringbuf.num%16] = *s;
-  // iringbuf.num = (iringbuf.num++)%16;  //undefined operator
+  // iringbuf.num = (iringbuf.num++)%16;  //undefined operation
   iringbuf.num++;
   iringbuf.num = iringbuf.num%16;
 }
@@ -49,16 +49,17 @@ void read_iringbuf(){
   int i = iringbuf.num+16;
   while((i--) != iringbuf.num)
   {
-    log_write("%ld\t%d\n", iringbuf.instr[i%16].pc, iringbuf.instr->isa.inst.val);
+    isa_reg_display();
+    //log_write("%ld\t%d\n", iringbuf.instr[i%16].pc, iringbuf.instr->isa.inst.val);
   }
 }
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); //itrace
-    write_iringbuf(_this);  //irtrace
+    write_iringbuf(_this);  //iringbuf
   }  
-  if (nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }
+  if (nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }  //output iringbuf
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
