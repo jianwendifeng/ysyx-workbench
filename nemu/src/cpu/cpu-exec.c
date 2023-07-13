@@ -26,7 +26,7 @@
  */
 #define MAX_INST_TO_PRINT 10
 
-#define iringbuf_size 32
+#define iringbuf_size 32 //size of iringbuf
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -38,7 +38,8 @@ void device_update();
 struct ringbuf
 {
   Decode instr[iringbuf_size];	//data
-  int num;	
+  int num;
+
 } iringbuf={0};
 
 void write_iringbuf(Decode *s){
@@ -49,8 +50,9 @@ void write_iringbuf(Decode *s){
 }
 
 void read_iringbuf(){
-  int i = iringbuf.num + 1;
+  int i = iringbuf.num ;
   int n = iringbuf_size;
+  printf("\n");
   while(n--)
   {
     printf("%#lx\t\t%s\t\t\n",iringbuf.instr[i % iringbuf_size].pc,iringbuf.instr[i % iringbuf_size].logbuf);
