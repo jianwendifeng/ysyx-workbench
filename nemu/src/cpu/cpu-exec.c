@@ -52,15 +52,16 @@ void read_iringbuf(){
     printf("%#lx\t\t%s\t\t\n",iringbuf.instr[i%16].pc,iringbuf.instr[i%16].logbuf);
     printf("%d\t%d\n",i,i%16);
   }
-  while((i++)%16 != iringbuf.num-1&&i>0);
+  while((i++)%16 != iringbuf.num-1);
 }
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); //itrace
     write_iringbuf(_this);  //iringbuf
+    if (nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }
   }  
-  if (nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }  //output iringbuf
+    //output iringbuf
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
