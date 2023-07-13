@@ -17,10 +17,12 @@
 #include <memory/paddr.h>
 
 word_t vaddr_ifetch(vaddr_t addr, int len) {
+  printf("234\n\n");
   return paddr_read(addr, len);
 }
 
 word_t vaddr_read(vaddr_t addr, int len) {
+  printf("123\n\n");
   return paddr_read(addr, len);
 }
 
