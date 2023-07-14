@@ -57,19 +57,19 @@ void init_mem() {
 }
 
 
-
+int pri = 0;
 word_t paddr_read(paddr_t addr, int len) {
-  int i = 0;
-  printf("NO.paddr_read%d\tRead_addr  = %#x\n",i++,addr);
+  
+  printf("NO.paddr_read%d\tRead_addr  = %#x\n",pri++,addr);
   if (likely(in_pmem(addr))) {return pmem_read(addr, len);} 
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
   out_of_bound(addr);
   return 0;
 }
-
+  int pwi = 0;
 void paddr_write(paddr_t addr, int len, word_t data) {
-  int i = 0;
-  printf("NO.paddr_write:%d\tWrite_addr = %#x\n",i++,addr);
+
+  printf("NO.paddr_write:%d\tWrite_addr = %#x\n",pwi++,addr);
   if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; } 
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
   out_of_bound(addr);
