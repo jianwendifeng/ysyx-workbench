@@ -61,7 +61,7 @@ extern void isa_reg_display();
  int pri = 0;
 word_t paddr_read(paddr_t addr, int len) {
   pri++;
-  if(pri > 449 && pri < 450) isa_reg_display();
+  if(pri > 449 && pri < 450) {printf("No.%d\t",pri); isa_reg_display(); printf("\n");}
   //printf("NO.paddr_read%d\tRead_addr  = %#x\n",pri++,addr);
   if (likely(in_pmem(addr))) {return pmem_read(addr, len);} 
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
