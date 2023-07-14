@@ -56,20 +56,20 @@ void init_mem() {
   Log("physical memory area [" FMT_PADDR ", " FMT_PADDR "]", PMEM_LEFT, PMEM_RIGHT);
 }
 
-
+extern void read_iringbuf();
 int pri = 0;
 word_t paddr_read(paddr_t addr, int len) {
-  
+  if(pri == 449) read_iringbuf();
   printf("NO.paddr_read%d\tRead_addr  = %#x\n",pri++,addr);
   if (likely(in_pmem(addr))) {return pmem_read(addr, len);} 
   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
   out_of_bound(addr);
   return 0;
 }
-  extern void read_iringbuf();
+  
   int pwi = 0;
 void paddr_write(paddr_t addr, int len, word_t data) {
-  if(pwi == 449) read_iringbuf();
+  
   printf("NO.paddr_write:%d\tWrite_addr = %#x\n",pwi++,addr);
   if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; } 
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
