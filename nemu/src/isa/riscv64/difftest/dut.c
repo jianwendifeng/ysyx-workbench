@@ -19,7 +19,7 @@
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) 
 {
-	/*int i;
+	int i;
 	for(i=0;i<32;i++){
 			if(ref_r->gpr[i] != cpu.gpr[i] ){
 				printf("NO.%d Reg value,Wrong reg value:%#lx\tRight reg value:%#lx\n",i,cpu.gpr[i],ref_r->gpr[i]);
@@ -30,7 +30,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc)
 		printf("Wrong pc %#lx,Right pc %#lx\n",cpu.pc,ref_r->pc);
 		return false;
 	}
-*/
+
 	return true;
 }
 
