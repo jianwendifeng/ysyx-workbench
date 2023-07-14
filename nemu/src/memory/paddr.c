@@ -66,9 +66,10 @@ word_t paddr_read(paddr_t addr, int len) {
   out_of_bound(addr);
   return 0;
 }
+  extern void read_iringbuf();
   int pwi = 0;
 void paddr_write(paddr_t addr, int len, word_t data) {
-
+  if(pwi == 449) read_iringbuf();
   printf("NO.paddr_write:%d\tWrite_addr = %#x\n",pwi++,addr);
   if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; } 
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
