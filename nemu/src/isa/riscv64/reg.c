@@ -31,7 +31,7 @@ void isa_reg_display() {
 	 {
 		 printf ("%s\t\t0x%-20lx\t\t%ld\n",regs[i],cpu.gpr[i],cpu.gpr[i]);
 		
-		FILE *file = fopen("output.txt", "a");
+		FILE *file = fopen("undiffoutput.txt", "a");
     	if (file == NULL) {
         printf("无法打开文件。\n");
     	}
