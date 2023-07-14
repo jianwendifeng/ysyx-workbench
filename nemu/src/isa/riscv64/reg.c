@@ -28,6 +28,16 @@ void isa_reg_display() {
 	 for (i = 0; i < 32; i ++)
 	 {
 		 printf ("%s\t\t0x%-20lx\t\t%ld\n",regs[i],cpu.gpr[i],cpu.gpr[i]);
+		
+		FILE *file = fopen("output.txt", "w");
+    	if (file == NULL) {
+        printf("无法打开文件。\n");
+    	}
+
+    	fprintf(file, "%s\t\t0x%-20lx\t\t%ld\n",regs[i],cpu.gpr[i],cpu.gpr[i]);
+
+  		  // 关闭文件
+    	fclose(file);
 	 } 
 	 printf ("%s\t\t0x%lx\n","pc", cpu.pc);
 }
