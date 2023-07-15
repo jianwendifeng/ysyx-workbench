@@ -130,6 +130,7 @@ static void statistic() {
 
 long int instr_num(long int ins_num) {  //the num of intsruction having run
   ins_num = g_nr_guest_inst;
+  printf("int_num:%ld\tg_nr_guest_inst:%ld\n",ins_num,g_nr_guest_inst);
   return ins_num;
 }
 
