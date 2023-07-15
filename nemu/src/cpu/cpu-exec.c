@@ -71,7 +71,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
   write_iringbuf(_this);  //iringbuf
-  if (nemu_state.halt_ret != 0 || nemu_state.state == NEMU_ABORT) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
+  if (nemu_state.halt_ret != 0 || nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
 
 }
 
