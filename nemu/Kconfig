@@ -122,7 +122,7 @@ config CC_ASAN
   default n
 endmenu
 
-menu "Testing and Debugging"
+menu "Testing and Debugging"  #trace
 
 
 config TRACE
