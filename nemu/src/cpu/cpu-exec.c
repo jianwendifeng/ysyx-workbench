@@ -43,8 +43,8 @@ struct ringbuf
 
 } iringbuf={0};
 
-void write_iringbuf(Decode *s){
-  iringbuf.instr[iringbuf.num % iringbuf_size] = *s;
+void write_iringbuf(Decode s){
+  iringbuf.instr[iringbuf.num % iringbuf_size] = s;
   // iringbuf.num = (iringbuf.num++)%16;  //undefined operation
   iringbuf.num++;
   iringbuf.num = iringbuf.num % iringbuf_size;
@@ -70,7 +70,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
-  write_iringbuf(_this);  //iringbuf
+  //write_iringbuf(_this);  //iringbuf
   if (nemu_state.halt_ret != 0 || nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
 
 }
@@ -111,6 +111,7 @@ static void execute(uint64_t n) {
   for (;n > 0; n --) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
+    write_iringbuf(s);  //iringbuf
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) {
       break;
