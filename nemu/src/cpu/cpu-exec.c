@@ -138,7 +138,6 @@ void assert_fail_msg() {
 
 /* Simulate how the CPU works. */
 void cpu_exec(uint64_t n) {
-  instr_num();
   g_print_step = (n < MAX_INST_TO_PRINT);
   switch (nemu_state.state) {
     case NEMU_END: case NEMU_ABORT:
@@ -152,7 +151,7 @@ void cpu_exec(uint64_t n) {
   
 
   execute(n);
-
+  instr_num();
 
 
   uint64_t timer_end = get_time();
