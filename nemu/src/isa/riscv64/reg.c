@@ -31,15 +31,15 @@ void isa_reg_display() {
 	 {
 		 printf ("%s\t\t0x%-20lx\t\t%ld\n",regs[i],cpu.gpr[i],cpu.gpr[i]);
 		
-		FILE *file = fopen("undiffoutput.txt", "a");
-    	if (file == NULL) {
-        printf("无法打开文件。\n");
-    	}
+		// FILE *file = fopen("undiffoutput.txt", "a");
+    	// if (file == NULL) {
+        // printf("无法打开文件。\n");
+    	// }
 
-    	fprintf(file, "NO.%d\t%s\t\t0x%-20lx\t\t%ld\n",num,regs[i],cpu.gpr[i],cpu.gpr[i]);
+    	// fprintf(file, "NO.%d\t%s\t\t0x%-20lx\t\t%ld\n",num,regs[i],cpu.gpr[i],cpu.gpr[i]);
 
-  		  // 关闭文件
-    	fclose(file);
+  		//   // 关闭文件
+    	// fclose(file);
 	 } 
 	 printf ("%s\t\t0x%lx\n","pc", cpu.pc);
 }
