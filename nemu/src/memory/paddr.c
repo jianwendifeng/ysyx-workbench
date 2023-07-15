@@ -64,7 +64,8 @@ word_t paddr_read(paddr_t addr, int len) {
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"NO.Memory Read:\t""PC%#lx\t:%#x\n",cpu.pc,addr);
+      //Log("total guest instructions = " NUMBERIC_FMT, g_nr_guest_inst);
       fclose(file);
     #else
       FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
