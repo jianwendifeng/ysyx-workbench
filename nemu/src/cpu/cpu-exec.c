@@ -26,7 +26,7 @@
  */
 #define MAX_INST_TO_PRINT 10
 
-#define iringbuf_size 8 //size of iringbuf
+#define iringbuf_size 16 //size of iringbuf
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -111,8 +111,6 @@ static void execute(uint64_t n) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
-
-    //isa_reg_display();
 
     if (nemu_state.state != NEMU_RUNNING) {
       
