@@ -24,6 +24,8 @@ static uint8_t *pmem = NULL;
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #endif
 
+extern void instr_num(long int ins_num);
+
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
@@ -56,22 +58,24 @@ void init_mem() {
   Log("physical memory area [" FMT_PADDR ", " FMT_PADDR "]", PMEM_LEFT, PMEM_RIGHT);
 }
 
+long int ins_num = 0;
  
 word_t paddr_read(paddr_t addr, int len) {
-
   #ifdef CONFIG_MTRACE
     #ifdef CONFIG_DIFFTEST
+    instr_num(ins_num);
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"NO.Memory Read:\t""PC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"INSTRUCTION NO.%ldMemory Read:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
       //Log("total guest instructions = " NUMBERIC_FMT, g_nr_guest_inst);
       fclose(file);
     #else
+      instr_num(ins_num);
       FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"INSTRUCTION NO.%ldMemory Read:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
 
 
@@ -87,19 +91,19 @@ word_t paddr_read(paddr_t addr, int len) {
 }
   
 void paddr_write(paddr_t addr, int len, word_t data) {
-
+    instr_num(ins_num);
     #ifdef CONFIG_MTRACE
     #ifdef CONFIG_DIFFTEST
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"INSTRUCTION NO.%ldMemory Write:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
     #else
       FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"INSTRUCTION NO.%ldMemory Write:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
 
 

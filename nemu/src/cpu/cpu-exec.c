@@ -34,7 +34,7 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
 void device_update();
-void instr_num();
+void instr_num(long int ins_num);
 
 struct ringbuf
 {
@@ -111,7 +111,6 @@ static void execute(uint64_t n) {
   for (;n > 0; n --) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
-    instr_num();
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) {
       break;
@@ -129,9 +128,8 @@ static void statistic() {
   else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
 
-void instr_num(long int num) {
-  num = g_nr_guest_inst;
-  printf("NO.%ld\n",num);
+void instr_num(long int ins_num) {
+  ins_num = g_nr_guest_inst;
 }
 
 void assert_fail_msg() {
