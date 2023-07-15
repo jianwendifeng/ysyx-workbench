@@ -34,6 +34,7 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
 void device_update();
+void instr_num();
 
 struct ringbuf
 {
@@ -110,6 +111,7 @@ static void execute(uint64_t n) {
   for (;n > 0; n --) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
+    instr_num();
     trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) {
       break;
@@ -151,7 +153,6 @@ void cpu_exec(uint64_t n) {
   
 
   execute(n);
-  instr_num();
 
 
   uint64_t timer_end = get_time();
