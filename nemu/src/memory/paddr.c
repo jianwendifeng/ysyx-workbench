@@ -78,9 +78,6 @@ word_t paddr_read(paddr_t addr, int len) {
       fprintf(file,"INSTRUCTION NO.%ldMemory Read:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
     #endif
-
-  printf("Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);   //Mtrace
-
   #endif
 
   if (likely(in_pmem(addr))) {return pmem_read(addr, len);} 
@@ -106,9 +103,6 @@ void paddr_write(paddr_t addr, int len, word_t data) {
       fprintf(file,"INSTRUCTION NO.%ld\tMemory Write:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
     #endif
-
-  printf("Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);   //Mtrace
-
   #endif
 
   if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; } 
