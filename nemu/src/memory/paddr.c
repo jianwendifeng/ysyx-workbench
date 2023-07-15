@@ -94,13 +94,13 @@ void paddr_write(paddr_t addr, int len, word_t data) {
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Write:\t""PC%#lx\t:  Waddr:\t%#x\n",ins_num,cpu.pc,addr);
+      fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Write:\t""PC%#lx\t: Waddr:\t%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
     #else
       FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Write:\t""PC%#lx\t:  Waddr:\t%#x\n",ins_num,cpu.pc,addr);
+      fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Write:\t""PC%#lx\t: Waddr:\t%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
     #endif
   #endif
