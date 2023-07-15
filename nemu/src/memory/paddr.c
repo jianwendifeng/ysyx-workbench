@@ -38,9 +38,11 @@ static void pmem_write(paddr_t addr, int len, word_t data) {
 }
 
 extern void read_iringbuf();
+extern void write_iringbuf();
 
 
 static void out_of_bound(paddr_t addr) {
+  write_iringbuf(addr);  //iringbuf
   read_iringbuf();  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
   panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR "] at pc = " FMT_WORD,
       addr, PMEM_LEFT, PMEM_RIGHT, cpu.pc);
