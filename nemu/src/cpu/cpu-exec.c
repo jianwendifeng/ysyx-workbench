@@ -111,14 +111,6 @@ static void execute(uint64_t n) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
-
-    // FILE *file = fopen("undiffoutput.txt", "w");
-    //  if (file == NULL) {
-    //     printf("无法打开文件。\n");
-    // 	}
-    // fprintf(file, "NO.%d\t%s\t\t0x%-20lx\t\t%ld\n",num,regs[i],cpu.gpr[i],cpu.gpr[i]);
-    // fclose(file);
-    
     if (nemu_state.state != NEMU_RUNNING) {
       break;
     }

@@ -17,7 +17,7 @@ void reverse(char s[]) {
 }
 
 void itoa(int n,char s[]){
-       int i=0;
+       int i = 0;
        do{
           s[i++] = n %10 +'0';
        }while((n /= 10) > 0);
