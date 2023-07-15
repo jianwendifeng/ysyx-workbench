@@ -69,7 +69,7 @@ word_t paddr_read(paddr_t addr, int len) {
   #ifdef CONFIG_MTRACE
   ins_num = instr_num();
     #ifdef CONFIG_DIFFTEST
-      FILE *file = fopen("mtrace_difflog.txt", "a");if (file == NULL) {
+      FILE *file = fopen("mtrace_difflog_spike.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
       fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Read:\t""PC%#lx\t: Raddr:\t%#x\n",ins_num,cpu.pc,addr);
