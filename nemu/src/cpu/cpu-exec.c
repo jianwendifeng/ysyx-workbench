@@ -127,6 +127,10 @@ static void statistic() {
   else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
 
+void instr_num() {
+  printf("NO."NUMBERIC_FMT,g_nr_guest_inst);
+}
+
 void assert_fail_msg() {
   isa_reg_display();
   statistic();

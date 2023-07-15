@@ -17,7 +17,7 @@
 #include <memory/paddr.h>
 #include <device/mmio.h>
 #include <isa.h>
-#include "/home/todas/ysyx-workbench/nemu/src/cpu/cpu-exec.c"
+
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;
 #else // CONFIG_PMEM_GARRAY
@@ -64,7 +64,7 @@ word_t paddr_read(paddr_t addr, int len) {
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"NO." NUMBERIC_FMT "Memory Read:\t""PC%#lx\t:%#x\n",g_nr_guest_inst,cpu.pc,addr);
+      fprintf(file,"NO.Memory Read:\t""PC%#lx\t:%#x\n",cpu.pc,addr);
       //Log("total guest instructions = " NUMBERIC_FMT, g_nr_guest_inst);
       fclose(file);
     #else
