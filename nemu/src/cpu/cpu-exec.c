@@ -128,7 +128,7 @@ static void statistic() {
 }
 
 void instr_num() {
-  printf("NO."NUMBERIC_FMT,g_nr_guest_inst);
+  printf("NO."NUMBERIC_FMT"\n",g_nr_guest_inst);
 }
 
 void assert_fail_msg() {
