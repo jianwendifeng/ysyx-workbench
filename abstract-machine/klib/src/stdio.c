@@ -37,7 +37,7 @@ int sprintf(char *out, const char *fmt, ...) {
   va_start(ap, fmt);      //把参数列表拷贝到ap中,
   int len=0;
   int arg_i;
-  char arg_i_s[1024];
+  char arg_i_s[16];
   char *arg_s;
   int i = 0;
 
