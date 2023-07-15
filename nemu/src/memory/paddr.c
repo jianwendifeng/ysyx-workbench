@@ -65,14 +65,14 @@ word_t paddr_read(paddr_t addr, int len) {
   #ifdef CONFIG_MTRACE
   ins_num = instr_num();
     #ifdef CONFIG_DIFFTEST
-      FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
+      FILE *file = fopen("mtrace_difflog.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
       fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Read:\t""PC%#lx\t: Raddr:\t%#x\n",ins_num,cpu.pc,addr);
       //Log("total guest instructions = " NUMBERIC_FMT, g_nr_guest_inst);
       fclose(file);
     #else
-      FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
+      FILE *file = fopen("mtrace_undiff_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
       fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Read:\t""PC%#lx\t: Raddr:\t%#x\n",ins_num,cpu.pc,addr);
@@ -91,13 +91,13 @@ void paddr_write(paddr_t addr, int len, word_t data) {
     #ifdef CONFIG_MTRACE
     ins_num = instr_num();
     #ifdef CONFIG_DIFFTEST
-      FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
+      FILE *file = fopen("mtrace_difflog.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
       fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Write:\t""PC%#lx\t: Waddr:\t%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
     #else
-      FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
+      FILE *file = fopen("mtrace_undiff_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
       fprintf(file,"INSTRUCTION NO.%-8.0ld\tMemory Write:\t""PC%#lx\t: Waddr:\t%#x\n",ins_num,cpu.pc,addr);
