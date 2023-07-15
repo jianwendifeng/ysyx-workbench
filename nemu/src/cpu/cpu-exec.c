@@ -34,6 +34,8 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
 void device_update();
+
+#ifdef CONFIG_ITRACE_COND
 long int instr_num();
 
 struct ringbuf
@@ -61,6 +63,7 @@ void read_iringbuf(){
   }
   printf("\n\n");
 }
+#endif
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
@@ -70,9 +73,10 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
+  #ifdef CONFIG_ITRACE
   //write_iringbuf(_this);  //iringbuf
   if (nemu_state.halt_ret != 0 || nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
-
+  #endif
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {
@@ -109,7 +113,9 @@ static void exec_once(Decode *s, vaddr_t pc) {
 static void execute(uint64_t n) {
   Decode s;
   for (;n > 0; n --) {
-    write_iringbuf(s);  //iringbuf
+    #ifdef CONFIG_ITRACE
+      write_iringbuf(s);  //iringbuf
+    #endif
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
@@ -129,9 +135,11 @@ static void statistic() {
   else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
 
+#ifdef CONFIG_ITRACE
 long int instr_num() {  
   return g_nr_guest_inst; //the num of intsruction having run
 }
+#endif
 
 void assert_fail_msg() {
   isa_reg_display();
