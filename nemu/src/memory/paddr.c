@@ -17,7 +17,7 @@
 #include <memory/paddr.h>
 #include <device/mmio.h>
 #include <isa.h>
-
+#include "/home/todas/ysyx-workbench/nemu/src/cpu/cpu-exec.c"
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;
 #else // CONFIG_PMEM_GARRAY
@@ -56,8 +56,6 @@ void init_mem() {
   Log("physical memory area [" FMT_PADDR ", " FMT_PADDR "]", PMEM_LEFT, PMEM_RIGHT);
 }
 
-#define NUMBERIC_FMT MUXDEF(CONFIG_TARGET_AM, "%", "%'") PRIu64
-uint64_t g_nr_guest_inst = 0;
  
 word_t paddr_read(paddr_t addr, int len) {
 
