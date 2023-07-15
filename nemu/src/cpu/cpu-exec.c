@@ -112,7 +112,7 @@ static void execute(uint64_t n) {
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
 
-    isa_reg_display();
+    //isa_reg_display();
 
     if (nemu_state.state != NEMU_RUNNING) {
       
