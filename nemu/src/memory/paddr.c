@@ -56,6 +56,8 @@ void init_mem() {
   Log("physical memory area [" FMT_PADDR ", " FMT_PADDR "]", PMEM_LEFT, PMEM_RIGHT);
 }
 
+#define NUMBERIC_FMT MUXDEF(CONFIG_TARGET_AM, "%", "%'") PRIu64
+uint64_t g_nr_guest_inst = 0;
  
 word_t paddr_read(paddr_t addr, int len) {
 
@@ -64,7 +66,7 @@ word_t paddr_read(paddr_t addr, int len) {
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"NO.Memory Read:\t""PC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"NO." NUMBERIC_FMT "Memory Read:\t""PC%#lx\t:%#x\n",g_nr_guest_inst,cpu.pc,addr);
       //Log("total guest instructions = " NUMBERIC_FMT, g_nr_guest_inst);
       fclose(file);
     #else
