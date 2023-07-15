@@ -129,9 +129,9 @@ static void statistic() {
   else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
 
-void instr_num() {
-  printf("NO."NUMBERIC_FMT"\n",g_nr_guest_inst);
-  printf("NO.%ld\n",g_nr_guest_inst);
+void instr_num(long int num) {
+  num = g_nr_guest_inst;
+  printf("NO.%ld\t",num);
 }
 
 void assert_fail_msg() {
