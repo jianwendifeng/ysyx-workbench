@@ -56,7 +56,7 @@ void read_iringbuf(){
   printf("\n");
   while(n--)
   {
-    printf("%#lx\t\t%s\t\t\n",iringbuf.instr[i % iringbuf_size].pc,iringbuf.instr[i % iringbuf_size].logbuf);
+    printf("%s\t\t\n",iringbuf.instr[i % iringbuf_size].logbuf);
     i++;
   }
   printf("\n\n");
