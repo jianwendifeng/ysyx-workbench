@@ -75,7 +75,7 @@ word_t paddr_read(paddr_t addr, int len) {
       FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
      } 
-      fprintf(file,"INSTRUCTION NO.%.8ld\tMemory Read:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
+      fprintf(file,"INSTRUCTION NO.%-.8ld\tMemory Read:\t""PC%#lx\t:%#x\n",ins_num,cpu.pc,addr);
       fclose(file);
     #endif
   #endif
