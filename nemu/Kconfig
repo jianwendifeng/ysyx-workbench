@@ -144,7 +144,7 @@ config ITRACE
   bool "Enable instruction tracer"
   default y
 
-config MTRACE
+config MTRACE   #mtrace
   depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
   bool "Enable memory tracer"
   default y

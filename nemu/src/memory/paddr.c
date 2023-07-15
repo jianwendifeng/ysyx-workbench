@@ -56,12 +56,29 @@ void init_mem() {
   Log("physical memory area [" FMT_PADDR ", " FMT_PADDR "]", PMEM_LEFT, PMEM_RIGHT);
 }
 
-
  
 word_t paddr_read(paddr_t addr, int len) {
 
   #ifdef CONFIG_MTRACE
+    #ifdef CONFIG_DIFFTEST
+      FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
+        printf("无法打开文件\n");
+        return 1;
+     } 
+      sprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fclose(file);
+    #else
+      FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
+        printf("无法打开文件\n");
+        return 1;
+     } 
+      sprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fclose(file);
+
+
+    #endif
   printf("Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);   //Mtrace
+
   #endif
 
   if (likely(in_pmem(addr))) {return pmem_read(addr, len);} 
@@ -72,9 +89,27 @@ word_t paddr_read(paddr_t addr, int len) {
   
 void paddr_write(paddr_t addr, int len, word_t data) {
 
-  #ifdef CONFIG_MTRACE
-  printf("Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
-   #endif
+    #ifdef CONFIG_MTRACE
+    #ifdef CONFIG_DIFFTEST
+      FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
+        printf("无法打开文件\n");
+        return 1;
+     } 
+      sprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fclose(file);
+    #else
+      FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
+        printf("无法打开文件\n");
+        return 1;
+     } 
+      sprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fclose(file);
+
+
+    #endif
+  printf("Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);   //Mtrace
+
+  #endif
 
   if (likely(in_pmem(addr))) { pmem_write(addr, len, data); return; } 
   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
