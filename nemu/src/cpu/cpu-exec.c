@@ -34,7 +34,7 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
 void device_update();
-void instr_num(long int ins_num);
+long int instr_num(long int ins_num);
 
 struct ringbuf
 {
@@ -128,8 +128,9 @@ static void statistic() {
   else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
 
-void instr_num(long int ins_num) {
+long int instr_num(long int ins_num) {  //the num of intsruction having run
   ins_num = g_nr_guest_inst;
+  return ins_num;
 }
 
 void assert_fail_msg() {
