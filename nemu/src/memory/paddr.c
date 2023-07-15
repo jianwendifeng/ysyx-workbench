@@ -63,16 +63,14 @@ word_t paddr_read(paddr_t addr, int len) {
     #ifdef CONFIG_DIFFTEST
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
-        return 1;
      } 
-      sprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
       fclose(file);
     #else
       FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
-        return 1;
      } 
-      sprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"Memory Read:\tPC%#lx\t:%#x\n",cpu.pc,addr);
       fclose(file);
 
 
@@ -93,16 +91,14 @@ void paddr_write(paddr_t addr, int len, word_t data) {
     #ifdef CONFIG_DIFFTEST
       FILE *file = fopen("diff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
-        return 1;
      } 
-      sprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
       fclose(file);
     #else
       FILE *file = fopen("undiff_mtrace_log.txt", "a");if (file == NULL) {
         printf("无法打开文件\n");
-        return 1;
      } 
-      sprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
+      fprintf(file,"Memory Write:\tPC%#lx\t:%#x\n",cpu.pc,addr);
       fclose(file);
 
 
