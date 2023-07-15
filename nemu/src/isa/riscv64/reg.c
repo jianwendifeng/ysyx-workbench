@@ -23,14 +23,12 @@ const char *regs[] = {
   "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
 };
 
-int num=0;
 void isa_reg_display() {
 	int i;
-	num ++;
 	 for (i = 0; i < 32; i ++)
 	 {
 		 printf ("%s\t\t0x%-20lx\t\t%ld\n",regs[i],cpu.gpr[i],cpu.gpr[i]);
-		
+
 		// FILE *file = fopen("undiffoutput.txt", "a");
     	// if (file == NULL) {
         // printf("无法打开文件。\n");
