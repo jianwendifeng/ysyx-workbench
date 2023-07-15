@@ -131,7 +131,7 @@ static void statistic() {
 
 void instr_num(long int num) {
   num = g_nr_guest_inst;
-  printf("NO.%ld\t",num);
+  printf("NO.%ld\n",num);
 }
 
 void assert_fail_msg() {
