@@ -132,7 +132,7 @@ void init_monitor(int argc, char *argv[]) {
   init_difftest(diff_so_file, img_size, difftest_port);
 
   if(elf_file){
-    /* Initialize ftrace. */
+  /* Initialize ftrace. */
   init_ftrace(elf_file);
   }
   
