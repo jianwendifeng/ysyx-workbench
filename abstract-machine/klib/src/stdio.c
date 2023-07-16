@@ -6,20 +6,20 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 void reverse(char s[]) {
-    int i, j;
+    int q, w;
     char temp;
     
-    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
-        temp = s[i];
-        s[i] = s[j];
-        s[j] = temp;
+    for (q = 0, w = strlen(s)-1; q < w; q++, w--) {
+        temp = s[q];
+        s[q] = s[w];
+        s[w] = temp;
     }
 }
 
 void itoa(int n,char s[]){
-       int i = 0;
+       int m = 0;
        do{
-          s[i++] = n %10 +'0';
+          s[m++] = n %10 +'0';
        }while((n /= 10) > 0);
        reverse(s);
 }
