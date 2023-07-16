@@ -2,14 +2,14 @@
 #include <unistd.h>
 
 extern uint64_t g_nr_guest_inst;
-FILE *ftrace_fp = NULL;
+FILE *elf_fp = NULL;
 
 void init_ftrace(const char *ftrace_file) {
-  ftrace_fp = stdout;
+  elf_fp = stdout;
   if (ftrace_file != NULL) {
     FILE *fp = fopen(ftrace_file, "w");
     Assert(fp, "Can not open '%s'", ftrace_file);
-    ftrace_fp = fp;
+    elf_fp = fp;
   }
   Log("Log is written to %s", ftrace_file ? ftrace_file : "stdout");
 }
