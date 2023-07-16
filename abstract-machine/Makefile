@@ -122,36 +122,15 @@ $(DST_DIR)/%.o: %.S
 	@mkdir -p $(dir $@) && echo + AS $<
 	@$(AS) $(ASFLAGS) -c -o $@ $(realpath $<)
 
-### Rule (recursive make): build a dependent library AM_SRCS := platform/nemu/trm.c \
-           platform/nemu/ioe/ioe.c \
-           platform/nemu/ioe/timer.c \
-           platform/nemu/ioe/input.c \
-           platform/nemu/ioe/gpu.c \
-           platform/nemu/ioe/audio.c \
-           platform/nemu/ioe/disk.c \
-           platform/nemu/mpe.c
+### Rule (recursive make): build a dependent library (am, klib, ...)
+$(LIBS): %:
+	@$(MAKE) -s -C $(AM_HOME)/$* archive
 
-CFLAGS    += -fdata-sections -ffunction-sections
-LDFLAGS   += -T $(AM_HOME)/scripts/linker.ld \
-             --defsym=_pmem_start=0x80000000 --defsym=_entry_offset=0x0
-LDFLAGS   += --gc-sections -e _start
-NEMUFLAGS += -b	-l -e  $(shell dirname $(IMAGE).elf)/nemu-log.txt   #批处理-b
+### Rule (link): objects (`*.o`) and libraries (`*.a`) -> `IMAGE.elf`, the final ELF binary to be packed into image (ld)
+$(IMAGE).elf: $(OBJS) am $(LIBS)
+	@echo + LD "->" $(IMAGE_REL).elf
+	@$(LD) $(LDFLAGS) -o $(IMAGE).elf --start-group $(LINKAGE) --end-group
 
-CFLAGS += -DMAINARGS=\"$(mainargs)\"
-CFLAGS += -I$(AM_HOME)/am/src/platform/nemu/include
-.PHONY: $(AM_HOME)/am/src/platform/nemu/trm.c
-
-image: $(IMAGE).elf
-	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
-	@echo + OBJCOPY "->" $(IMAGE_REL).bin
-	@$(OBJCOPY) -S --set-section-flags .bss=alloc,contents -O binary $(IMAGE).elf $(IMAGE).bin 
-
-run: image
-	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) run ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin	
-
-
-gdb: image
-	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) gdb ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin
 ### Rule (archive): objects (`*.o`) -> `ARCHIVE.a` (ar)
 $(ARCHIVE): $(OBJS)
 	@echo + AR "->" $(shell realpath $@ --relative-to .)
