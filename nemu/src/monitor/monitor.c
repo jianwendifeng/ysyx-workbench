@@ -74,7 +74,7 @@ static int parse_args(int argc, char *argv[]) {
   const struct option table[] = {
     {"batch"    , no_argument      , NULL, 'b'},
     {"log"      , required_argument, NULL, 'l'},
-    {"ftrace"   , required_argument, NULL, 'f'},
+    {"elf"      , required_argument, NULL, 'e'},
     {"diff"     , required_argument, NULL, 'd'},
     {"port"     , required_argument, NULL, 'p'},
     {"help"     , no_argument      , NULL, 'h'},
@@ -87,7 +87,7 @@ static int parse_args(int argc, char *argv[]) {
       case 'p': sscanf(optarg, "%d", &difftest_port); break;
       case 'l': log_file = optarg; break;
       case 'd': diff_so_file = optarg; break;
-      case 'f': elf_file = optarg; break;
+      case 'e': elf_file = optarg; break;
       case 1: img_file = optarg; return 0;
       default:
         printf("Usage: %s [OPTION...] IMAGE [args]\n\n", argv[0]);
@@ -111,9 +111,7 @@ void init_monitor(int argc, char *argv[]) {
   /* Set random seed. */
   init_rand();
 
-    /* Initialize ftrace. */
-  init_ftrace(elf_file);
-
+    
   /* Open the log file. */
   init_log(log_file);
 
@@ -133,6 +131,11 @@ void init_monitor(int argc, char *argv[]) {
   /* Initialize differential testing. */
   init_difftest(diff_so_file, img_size, difftest_port);
 
+  if(elf_file){
+    /* Initialize ftrace. */
+  init_ftrace(elf_file);
+  }
+  
   /* Initialize the simple debugger. */
   init_sdb();
 
