@@ -75,3 +75,15 @@ uint64_t get_time();
 
 
 #endif
+
+#define elf_write(...) IFDEF(CONFIG_TARGET_NATIVE_ELF, \
+  do { \
+    extern FILE* elf_fp; \
+    extern bool elf_enable(); \
+    if (elf_enable()) { \
+      fprintf(elf_fp, __VA_ARGS__); \
+      fflush(elf_fp); \
+    } \
+  } while (0) \
+)
+
