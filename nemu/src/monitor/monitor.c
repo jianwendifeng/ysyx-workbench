@@ -111,11 +111,12 @@ void init_monitor(int argc, char *argv[]) {
   /* Set random seed. */
   init_rand();
 
+    /* Initialize ftrace. */
+  init_ftrace(ftrace_file);
+
   /* Open the log file. */
   init_log(log_file);
 
-  /* Initialize ftrace. */
-  init_ftrace(ftrace_file);
 
   /* Initialize memory. */
   init_mem();
