@@ -11,8 +11,10 @@ void reverse(char str[],int len){
     int end = len - 1;
     while(start < end){
         char tmp = str[start];
-        str[start++] = str[end];
-        str[end++] = tmp;
+        str[start] = str[end];
+        str[end] = tmp;
+        start++;
+        end--;
     }
 }
 
@@ -30,15 +32,15 @@ static int itoa(int num,char *str,int base){
 
     while(num != 0){
         int rem = num % base;
-        str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
+        str[i] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
+        i++;
         num = num / base;
     }
 
     if(neg == 1){
-        str[i++] = '-';
+        str[i] = '-';
+        i++;
     }
-
-    str[i] = '\0';
     reverse(str,i);
     return i;
 }
