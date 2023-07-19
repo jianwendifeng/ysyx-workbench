@@ -87,14 +87,14 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...)
 {
-  va_list args;
-  int len = 0;
+    va_list args;
+    int len = 0;
+	
+    va_start(args,fmt);
+    len = vsprintf(out,fmt,args);
+    va_end(args);
 
-  va_start(args,fmt);
-  len = vsprintf(out,fmt,args);
-  va_end(args);
-
-  return len;
+    return len;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
@@ -102,15 +102,7 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 }
 
 int printf(const char *fmt, ...) {
-//   va_list args;
-//   va_start(args,fmt);
-//   char ch;
-//   while(*fmt != '\0'){
-//     if(ch == '%'){
-//         fmt++;
-//         if(*fmt ==)
-//     }
-//   }
+
 panic("Not implemented");
 }
 
