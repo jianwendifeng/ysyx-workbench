@@ -74,8 +74,7 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
             }
         }
     }
-    out[len] = '\0';
-    len++;
+    out[len++] = '\0';
     return len;
 }
 
