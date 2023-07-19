@@ -33,6 +33,7 @@ static int itoa(int num,char *out,int base){
 
     while(num != 0){
         str[i] = num % base;
+        num = num/base;
         i++;
     }
 
