@@ -45,9 +45,9 @@ static int itoa(int num,char *fmt,int base){
 
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
     int len = 0;
-    while(*fmt != '\0'){
+    while(fmt[len] != '\0'){
         if(fmt[len] != '%' ){
-            out[len++] = *fmt;
+            out[len++] = *fmt++;
         }
         else{
             switch (fmt[len+1]){
