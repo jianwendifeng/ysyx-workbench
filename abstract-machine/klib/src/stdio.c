@@ -4,23 +4,27 @@
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
-#define SIZE_MAX_VSPRINTF 1024
+#define SIZE_MAX_BUF 1024
 
 
-void reverse(char* str,int len,char* output){
+void reverse(char str[],int len,char* out){
     int start = 0;
+    int end = len - 1;
     while(start < len){
-        *output++ = str[start++];
+        *out++ = str[end];
+        start++;
+        end--;
     }
 }
 
-static int itoa(int num,char *fmt,int base){
+static int itoa(int num,char *out,int base){
     int i = 0;
     int neg = 0;
-    char *str;
+    char str[SIZE_MAX_BUF];
     if(num == 0){
-        *fmt++ = '0';
-        return i++;
+        *out++ = '0';
+        i++;
+        return i;
     }
     else if(num < 0 && base == 10){     //negetive
         neg = 1;
@@ -28,16 +32,15 @@ static int itoa(int num,char *fmt,int base){
     }
 
     while(num != 0){
-        int tmp = num % base;
-        *str++ = tmp;
+        str[i] = num % base;
         i++;
     }
 
     if(neg == 1){
-        *fmt++ = '-';
+        *out++ = '-';
         i++;
     }
-    reverse(str,i,fmt);
+    reverse(str,i,out);
     
     return i;
 }
@@ -68,14 +71,13 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
             }
         }
     }
-
     out[len++] = '\0';
     return len;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
     int count = 0;
-    count = vsnprintf(out, SIZE_MAX_VSPRINTF, fmt, ap);
+    count = vsnprintf(out, SIZE_MAX_BUF, fmt, ap);
     return count;
 }
 
