@@ -4,6 +4,7 @@
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
+#define SIZE_MAX_VSPRINTF 1024
 
 
 void reverse(char* str,int len,char* output){
@@ -73,7 +74,7 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
     int count = 0;
-    count = vsnprintf(out, SIZE_MAX, fmt, ap);
+    count = vsnprintf(out, SIZE_MAX_VSPRINTF, fmt, ap);
     return count;
 }
 
