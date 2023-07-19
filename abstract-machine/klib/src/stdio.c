@@ -50,7 +50,6 @@ static int itoa(int num,char *str,int base){
 
 
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
-
     int len = 0;
     while(*fmt != '\0'){
         if(fmt[len] != '%' ){
