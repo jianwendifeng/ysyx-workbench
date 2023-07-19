@@ -9,7 +9,7 @@
 
 void reverse(char str[],int len,char* out){
     int start = 0;
-    int end = len - 1;
+    int end = len;
     while(start < len){
         *out++ = str[end];
         start++;
@@ -26,7 +26,7 @@ static int itoa(int num,char *out,int base){
         i++;
         return i;
     }
-    else if(num < 0 && base == 10){     //negetive
+    else if(num < 0){     //negetive
         neg = 1;
         num = -num;
     }
