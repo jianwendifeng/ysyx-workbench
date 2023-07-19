@@ -20,7 +20,7 @@ void reverse(char str[],int len){
 
 static int itoa(int num,char *str,int base){
     int i = 0;
-    int neg;
+    int neg = 0;
     if(num == 0){
         str[i] = '0';
         str[i] = '\0';
@@ -62,8 +62,9 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                 case 's':
                     char *ch = va_arg(ap,char*);
                      while (*ch != '\0') {
-                    *out++ = *ch++;
-                    len++;}
+                        *out++ = *ch++;
+                        len++;
+                    }
                     break;
                 default:
                     *out++ = *fmt++;
