@@ -33,8 +33,7 @@ static int itoa(int num,char *out,int base){
 
     while(num != 0){
         int rem = num % base;
-        str[i] = (rem > 9) ? (rem - 10) + 'a' : rem + '0'; // Convert rem to corresponding character
-        num = num / base;
+        str[i] = (rem > 9) ? (rem - 10) : rem + '0'; // Convert rem to corresponding character
         i++;
     }
 
