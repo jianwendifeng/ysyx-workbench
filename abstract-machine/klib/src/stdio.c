@@ -28,7 +28,7 @@ static int itoa(int num,char *str,int base){
     }
     else if(num < 0 && base == 10){     //10进制
         neg = 1;
-        num = 1-num;
+        num = -num;
     }
 
     while(num != 0){
@@ -42,10 +42,8 @@ static int itoa(int num,char *str,int base){
     }
 
     str[i] = '\0';
-
     reverse(str,i);
     return i;
-
 }
 
 
