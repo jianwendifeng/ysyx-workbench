@@ -50,8 +50,7 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
             out[len++] = *fmt;
         }
         else{
-            
-            switch (*fmt++){
+            switch (fmt[len+1]){
                 case 'd':
                     int tmp_int = va_arg(ap,int);
                     len += itoa(tmp_int,out,10);
