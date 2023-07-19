@@ -57,10 +57,12 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
         else{
             switch (fmt[len+1]){
                 case 'd':
+                    len++;
                     int tmp_int = va_arg(ap,int);
                     len += itoa(tmp_int,out,10);
                     break;
                 case 's':
+                    len++;
                     char *tmp_ch = va_arg(ap,char*);
                      while (*tmp_ch != '\0') {
                         out[len++] = *tmp_ch++;
