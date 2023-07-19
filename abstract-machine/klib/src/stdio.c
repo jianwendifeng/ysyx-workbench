@@ -23,7 +23,6 @@ static int itoa(int num,char *str,int base){
     int neg = 0;
     if(num == 0){
         str[i] = '0';
-        str[i] = '\0';
         return i;
     }
     else if(num < 0 && base == 10){     //10进制
@@ -66,7 +65,6 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                         *out++ = *tmp++;
                         len++;
                     }
-                    *out = '\0';
                     break;
                 default:
                     *out++ = *fmt++;
