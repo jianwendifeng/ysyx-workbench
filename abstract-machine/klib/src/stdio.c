@@ -9,7 +9,7 @@
 
 void reverse(char str[],int len,char* out){
     int start = 0;
-    int end = len;
+    int end = len + 1;
     while(start < len){
         *out++ = str[end];
         start++;
