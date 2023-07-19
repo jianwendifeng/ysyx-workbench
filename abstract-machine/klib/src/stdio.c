@@ -57,8 +57,9 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                 case 'd':
                 	fmt++;
                     int tmp_int = va_arg(ap,int);
-                    len += itoa(tmp_int,out,10);
-                    out+=2;
+                    int i = itoa(tmp_int,out,10);
+                    len += i;
+                    out += i;
                     break;
                 case 's':
                     fmt++;
