@@ -4,143 +4,124 @@
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
-#define BUF_SIZE 1024
 
-// 用于反转指定字符串
-static void reserve(char *s, int len) {
-  char *end = s + len - 1;
-  char tmp;
-  while (s < end) {
-    tmp = *s;
-    *s = *end;
-    *end = tmp;
-    s++;
-    end--;
-  }
-  return;
+
+void reverse(char str[],int len){
+    int start = 0;
+    int end = len - 1;
+    while(start < end){
+        char tmp = str[start];
+        str[start] = str[end];
+        str[end] = tmp;
+        start++;
+        end--;
+    }
 }
 
-int itoa( int value, char *string,int radix) { // FIXME:不是标准实现
-  assert (radix <= 36);
-  int positive = value >= 0; // sign
-  int bit = 0; // 用来记录某一位的数字
-  size_t i = 0; // 用来记录当前长度的
-  if (!positive) value = -value;
-  do
-  { // FIXME:HERE
-    bit = value % radix;
-    if (bit >= 10) { string[i++] = 'a' + bit - 10; }// 16进制中大于10的表示
-    else { putstr(string); string[i++] = '0' + bit; }
-    
-  } while ((value /= radix) > 0);
-  if (!positive) string[i++] = '-';
-  string[i] = '\0';
-  reserve(string, i);
-  return i;
-}
-
-// void reverse(char s[]) {
-//     int q, w;
-//     char temp;
-    
-//     for (q = 0, w = strlen(s)-1; q < w; q++, j--) {
-//         temp = s[q];
-//         s[q] = s[j];
-//         s[j] = temp;
-//     }
-// }
-
-// void itoa(int n,char s[]){
-//        int m = 0;
-//        do{
-//           s[m++] = n %10 +'0';
-//        }while((n /= 10) > 0);
-//        reverse(s);
-// }
-
-#define BUF_SIZE 1024
-
-
-int num_to_string(char *buffer, int num) {
-    int digits = 0;
-
-    if (num < 0) {
-        *buffer++ = '-';
-        num = -num;
-        digits++;
+static int itoa(int num,char *str,int base){
+    int i = 0;
+    int neg;
+    if(num == 0){
+        str[i] = '0';
+        str[i] = '\0';
+        return i;
+    }
+    else if(num < 0 && base == 10){     //10进制
+        neg = 1;
+        num = 1-num;
     }
 
-    if (num == 0) {
-        *buffer++ = '0';
-        digits++;
-    } else {
-        int rev_num = 0;
-        while (num > 0) {
-            rev_num = rev_num * 10 + (num % 10);
-            num /= 10;
-            digits++;
-        }
-        while (rev_num > 0) {
-            *buffer++ = '0' + (rev_num % 10);
-            rev_num /= 10;
-        }
+    while(num != 0){
+        int rem = num % base;
+        str[i++] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
+        num = num / base;
     }
 
-    return digits;
+    if(neg == 1){
+        str[i++] = '-';
+    }
+
+    str[i] = '\0';
+
+    reverse(str,i);
+    return i;
+
 }
 
-
-
-int printf(const char *fmt, ...) {
-  panic("Not implemented");
-}
 
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
-  assert(NULL != out);
-  assert(NULL != fmt);
 
-  int count;
-  int fmt_index;
-
-  for (count = 0, fmt_index = 0; fmt[fmt_index] != '\0' && count < n;)
-  {
-    if (fmt[fmt_index] != '%') { 
-      out[count] = fmt[fmt_index];
-      count++;
-      fmt_index++;
-    } else {
-      switch (fmt[fmt_index+1])
-      {
-      case '%':
-        out[count] = fmt[fmt_index];
-        count++;
-	      fmt_index += 2;
-        break;
-      case 'd':
-        count += itoa(va_arg(ap, int), out+count, 10);
-        fmt_index += 2;
-        break;
-      case 's':
-        strcpy(out+count, va_arg(ap, char*));
-        count += strlen(out + count);
-        fmt_index += 2;
-        break;
-      case 'c':
-        out[count] = (char)va_arg(ap, int);
-        count++;
-        fmt_index += 2;
-        break;
-      default:
-        out[count] = fmt[fmt_index];
-	    	out[count+1] = fmt[fmt_index+1];
-	    	count += 2;
-	    	fmt_index += 2;
-        break;
-      }
+    int len = 0;
+    //int p;
+    while(*fmt != '\0'){
+        if(fmt[len] != '%' ){
+            *out++ = *fmt++;
+            len++ ;
+        }
+        else{
+            switch (*fmt){
+                case 'd':
+                    len += itoa(va_arg(ap,int),out,10);
+                    break;
+                case 'c':
+                    *out++ = *fmt++;
+                    len++;
+                    break;
+                default:
+                    *out++ = *fmt++;
+                    len++;
+                    break;
+            }
+        }
+        
     }
-  }
-  out[count] = '\0';
-  return count;
+    out[len++] = '\0';
+    return len;
+//   assert(NULL != out);
+//   assert(NULL != fmt);
+
+//   int count;
+//   int fmt_index;
+
+//   for (count = 0, fmt_index = 0; fmt[fmt_index] != '\0' && count < n;)
+//   {
+//     if (fmt[fmt_index] != '%') { 
+//       out[count] = fmt[fmt_index];
+//       count++;
+//       fmt_index++;
+//     } else {
+//       switch (fmt[fmt_index+1])
+//       {
+//       case '%':
+//         out[count] = fmt[fmt_index];
+//         count++;
+// 	      fmt_index += 2;
+//         break;
+//       case 'd':
+//         count += itoa(va_arg(ap, int), out+count, 10);
+//         fmt_index += 2;
+//         break;
+//       case 's':
+//         strcpy(out+count, va_arg(ap, char*));
+//         count += strlen(out + count);
+//         fmt_index += 2;
+//         break;
+//       case 'c':
+//         out[count] = (char)va_arg(ap, int);
+//         count++;
+//         fmt_index += 2;
+//         break;
+//       default:
+//         out[count] = fmt[fmt_index];
+// 	    	out[count+1] = fmt[fmt_index+1];
+// 	    	count += 2;
+// 	    	fmt_index += 2;
+//         break;
+//       }
+//     }
+//   }
+//   out[count] = '\0';
+//   return count;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
@@ -165,6 +146,18 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   panic("Not implemented");
 }
 
+int printf(const char *fmt, ...) {
+//   va_list args;
+//   va_start(args,fmt);
+//   char ch;
+//   while(*fmt != '\0'){
+//     if(ch == '%'){
+//         fmt++;
+//         if(*fmt ==)
+//     }
+//   }
+panic("Not implemented");
+}
 
 
 #endif	
