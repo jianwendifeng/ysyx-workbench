@@ -52,7 +52,6 @@ static int itoa(int num,char *str,int base){
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
 
     int len = 0;
-    //int p;
     while(*fmt != '\0'){
         if(fmt[len] != '%' ){
             *out++ = *fmt++;
@@ -77,51 +76,6 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
     }
     out[len++] = '\0';
     return len;
-//   assert(NULL != out);
-//   assert(NULL != fmt);
-
-//   int count;
-//   int fmt_index;
-
-//   for (count = 0, fmt_index = 0; fmt[fmt_index] != '\0' && count < n;)
-//   {
-//     if (fmt[fmt_index] != '%') { 
-//       out[count] = fmt[fmt_index];
-//       count++;
-//       fmt_index++;
-//     } else {
-//       switch (fmt[fmt_index+1])
-//       {
-//       case '%':
-//         out[count] = fmt[fmt_index];
-//         count++;
-// 	      fmt_index += 2;
-//         break;
-//       case 'd':
-//         count += itoa(va_arg(ap, int), out+count, 10);
-//         fmt_index += 2;
-//         break;
-//       case 's':
-//         strcpy(out+count, va_arg(ap, char*));
-//         count += strlen(out + count);
-//         fmt_index += 2;
-//         break;
-//       case 'c':
-//         out[count] = (char)va_arg(ap, int);
-//         count++;
-//         fmt_index += 2;
-//         break;
-//       default:
-//         out[count] = fmt[fmt_index];
-// 	    	out[count+1] = fmt[fmt_index+1];
-// 	    	count += 2;
-// 	    	fmt_index += 2;
-//         break;
-//       }
-//     }
-//   }
-//   out[count] = '\0';
-//   return count;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
