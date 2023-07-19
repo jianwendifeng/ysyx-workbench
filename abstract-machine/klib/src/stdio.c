@@ -45,7 +45,7 @@ static int itoa(int num,char *out,int base){
 
 
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
-    int len = 0;
+     int len = 0;
     while(*fmt != '\0'){
         if(*fmt != '%' ){
         	*out++ = *fmt++; 
@@ -58,8 +58,8 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                 	fmt++;
                     int tmp_int = va_arg(ap,int);
                     int i = itoa(tmp_int,out,10);
-                    len += i;
                     out += i;
+                    len += i;
                     break;
                 case 's':
                     fmt++;
