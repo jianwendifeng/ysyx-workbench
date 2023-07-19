@@ -65,6 +65,7 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                         *out++ = *ch++;
                         len++;
                     }
+                    *out = '\0';
                     break;
                 default:
                     *out++ = *fmt++;
