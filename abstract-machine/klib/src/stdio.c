@@ -6,42 +6,38 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 
-void reverse(char str[],int len){
+void reverse(char* str,int len,char* output){
     int start = 0;
-    int end = len - 1;
-    while(start < end){
-        char tmp = str[start];
-        str[start] = str[end];
-        str[end] = tmp;
-        start++;
-        end--;
+    while(start < len){
+        *output++ = str[start++];
     }
 }
 
-static int itoa(int num,char *str,int base){
+static int itoa(int num,char *fmt,int base){
     int i = 0;
     int neg = 0;
+    char *str;
     if(num == 0){
-        str[i] = '0';
-        return i;
+        *fmt++ = '0';
+        return i++;
     }
-    else if(num < 0 && base == 10){     //10进制
+    else if(num < 0 && base == 10){     //negetive
         neg = 1;
         num = -num;
     }
 
     while(num != 0){
-        int rem = num % base;
-        str[i] = (rem > 9) ? (rem - 10) + 'a' : rem + '0';
+        int tmp = num % base;
+        *str++ = tmp;
         i++;
-        num = num / base;
     }
 
     if(neg == 1){
-        str[i] = '-';
+        *fmt++ = '-';
         i++;
     }
-    reverse(str,i);
+    reverse(str,i,fmt);
+    
     return i;
 }
 
@@ -50,30 +46,27 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
     int len = 0;
     while(*fmt != '\0'){
         if(fmt[len] != '%' ){
-            *out++ = *fmt++;
-            len++ ;
+            out[len++] = *fmt;
         }
         else{
             switch (*fmt){
                 case 'd':
-                    len += itoa(va_arg(ap,int),out,10);
+                    int tmp_int = va_arg(ap,int);
+                    len += itoa(tmp_int,out,10);
                     break;
                 case 's':
-                    char *ch = va_arg(ap,char*);
-                    char *tmp = ch;
-                     while (*tmp != '\0') {
-                        *out++ = *tmp++;
-                        len++;
+                    char *tmp_ch = va_arg(ap,char*);
+                     while (*tmp_ch != '\0') {
+                        out[len++] = *tmp_ch++;
                     }
                     break;
                 default:
-                    *out++ = *fmt++;
-                    len++;
+                    out[len++] = *fmt++; 
                     break;
             }
         }
-        
     }
+
     out[len++] = '\0';
     return len;
 }
