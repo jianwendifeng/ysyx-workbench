@@ -11,10 +11,8 @@ void reverse(char str[],int len){
     int end = len - 1;
     while(start < end){
         char tmp = str[start];
-        str[start] = str[end];
-        str[end] = tmp;
-        start++;
-        end--;
+        str[start++] = str[end];
+        str[end++] = tmp;
     }
 }
 
