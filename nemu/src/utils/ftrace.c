@@ -17,72 +17,73 @@ extern uint64_t g_nr_guest_inst;
 
 
 void init_ftrace(const char *elf_file) {
-  // FILE *elf_fp = fopen(elf_file, "rb");
-  //   if (elf_fp) {
+//   FILE *elf_fp = fopen(elf_file, "rb");
+//     if (elf_fp) {
         
-  //   // 读取 ELF 文件头
-  //   Elf64_Ehdr elf_header;
-  //   fread(&elf_header, sizeof(Elf64_Ehdr), 1, elf_fp);
+//     // 读取 ELF 文件头
+//     Elf64_Ehdr elf_header;
+//     fread(&elf_header, sizeof(Elf64_Ehdr), 1, elf_fp);
 
-  //   // 定位节头表
-  //   fseek(elf_fp, elf_header.e_shoff, SEEK_SET);
+//     // 定位节头表
+//     fseek(elf_fp, elf_header.e_shoff, SEEK_SET);
 
-  //   // 读取节头表
-  //   Elf64_Shdr section_header;
-  //   fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
+//     // 读取节头表
+//     Elf64_Shdr section_header;
+//     fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
 
-  //   // 定位到符号表节
-  //   int symbol_table_index = -1;
-  //   for (int i = 0; i < elf_header.e_shnum; i++) {
-  //       if (section_header.sh_type == SHT_SYMTAB) {
-  //           symbol_table_index = i;
-  //           break;
-  //       }
-  //       fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
-  //   }
+//     // 定位到符号表节
+//     int symbol_table_index = -1;
+//     for (int i = 0; i < elf_header.e_shnum; i++) {
+//         if (section_header.sh_type == SHT_SYMTAB) { //SHT_SYMTAB提供用于链接编辑的符号
+//             symbol_table_index = i;
+//             break;
+//         }
+//         fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
+//     }
 
-  //   if (symbol_table_index == -1) {
-  //       // 找不到符号表节，处理错误情况
-  //       fclose(elf_fp);
-  //       return 1;
-  //   }
+//     if (symbol_table_index == -1) {
+//         // 找不到符号表节，处理错误情况
+//         fclose(elf_fp);
+//         return 1;
+//     }
 
-  //   // 获取符号表节信息
-  //   fseek(elf_fp, elf_header.e_shoff + symbol_table_index * sizeof(Elf64_Shdr), SEEK_SET);
-  //   fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
+    
+//     // 获取符号表节信息
+//     fseek(elf_fp, elf_header.e_shoff + symbol_table_index * sizeof(Elf64_Shdr), SEEK_SET);
+//     fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
+    
+//     // //定位到符号表
+//     // fseek(elf_fp, section_header.sh_offset, SEEK_SET);
 
-  //  // 定位到字符串表节，用于获取符号名称
-  //   fseek(elf_fp, elf_header.e_shoff + elf_header.e_shstrndx * sizeof(Elf64_Shdr), SEEK_SET);
-  //   fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
-  //   char *strtab = malloc(section_header.sh_size);
-  //   fseek(elf_fp, section_header.sh_offset, SEEK_SET);
-  //   fread(strtab, section_header.sh_size, 1, elf_fp);
+//     // 读取符号表
+//     Elf64_Sym symbol;
+//     for (int i = 0; i < section_header.sh_size / sizeof(Elf64_Sym); i++) {
+//         fread(&symbol, sizeof(Elf64_Sym), 1, elf_fp);
 
-  //   // 定位到符号表
-  //   fseek(elf_fp, section_header.sh_offset, SEEK_SET);
+//         // 筛选出 FUNC 类型的符号
+//         if (ELF64_ST_TYPE(symbol.st_info) == STT_FUNC) {
+//             // 获取函数符号的名称和地址等信息
+//             const char *symbol_name = &strtab[symbol.st_name];
+//             Elf64_Addr symbol_addr = symbol.st_value;
+//             // 其他信息，根据需要获取
+//             // ...
 
-  //   // 读取符号表
-  //   Elf64_Sym symbol;
-  //   for (int i = 0; i < section_header.sh_size / sizeof(Elf64_Sym); i++) {
-  //       fread(&symbol, sizeof(Elf64_Sym), 1, elf_fp);
+//             // 在这里可以对函数符号进行进一步处理，或者将信息打印出来
+//             printf("Function: %s\n", symbol_name);
+//             printf("Address: 0x%llx\n", (unsigned long long)symbol_addr);
+//         }
+//     }
 
-  //       // 筛选出 FUNC 类型的符号
-  //       if (ELF64_ST_TYPE(symbol.st_info) == STT_FUNC) {
-  //           // 获取函数符号的名称和地址等信息
-  //           const char *symbol_name = &strtab[symbol.st_name];
-  //           Elf64_Addr symbol_addr = symbol.st_value;
-  //           // 其他信息，根据需要获取
-  //           // ...
+//    // 定位到字符串表节，用于获取符号名称
+//     fseek(elf_fp, elf_header.e_shoff + elf_header.e_shstrndx * sizeof(Elf64_Shdr), SEEK_SET);
+//     fread(&section_header, sizeof(Elf64_Shdr), 1, elf_fp);
+//     char *strtab = malloc(section_header.sh_size);
+//     fseek(elf_fp, section_header.sh_offset, SEEK_SET);
+//     fread(strtab, section_header.sh_size, 1, elf_fp);
 
-  //           // 在这里可以对函数符号进行进一步处理，或者将信息打印出来
-  //           printf("Function: %s\n", symbol_name);
-  //           printf("Address: 0x%llx\n", (unsigned long long)symbol_addr);
-  //       }
-  //   }
-
-  //   free(strtab); // 释放字符串表内存
-  //   fclose(elf_fp); // 关闭文件
-  //   }
+//     free(strtab); // 释放字符串表内存
+//     fclose(elf_fp); // 关闭文件
+//     }
 
 }
 

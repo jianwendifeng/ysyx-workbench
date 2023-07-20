@@ -17,14 +17,15 @@ void reverse(char str[],int len,char* out){
     }
 }
 
-static int itoa(int num,char *out,int base){
-    int len = 0;
+static char* itoa(int num,int base,int len){
+    len = 0;
 	char temp[SIZE_MAX_BUF]; 
 	int i = 0;
+    char *out = {0};
     if(num == 0) {
     	*out++ = 0;
     	len++;
-    	return len;
+    	return out;
 	}
 	if(num < 0 ){
 		*out++ = '-';
@@ -40,7 +41,7 @@ static int itoa(int num,char *out,int base){
 
 	}while(num  != 0 );
 	reverse(temp,i,out);
-    return len;
+    return out;
 }
 
 
@@ -57,9 +58,14 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                 case 'd':
                 	fmt++;
                     int tmp_int = va_arg(ap,int);
-                    int i = itoa(tmp_int,out,10);
-                    out += i;
+                    // int i = itoa(tmp_int,out,10);
+                    int i = 0;
+                    char *int_char = itoa(tmp_int,10,i);
                     len += i;
+                    do{
+                        *out++ = *int_char++; 
+                    }
+                    while(i--);
                     break;
                 case 's':
                     fmt++;
@@ -104,9 +110,31 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   panic("Not implemented");
 }
 
-int printf(const char *fmt, ...) {
 
-panic("Not implemented");
+
+int printf(const char *fmt, ...) {
+    // va_list args;
+    // int len = 0;
+    // va_start(args,fmt);
+    // while(*fmt != '\0'){
+    //     if(*fmt == '%'){
+    //         fmt++;
+    //         switch (*fmt){
+    //             case 'd':
+    //             	int tmp_int = va_arg(ap,int);
+    //                 len = itoa(tmp_int)
+    //             case 's':
+                    
+    //                 break;
+    //             default:
+    //                 break;
+    //         }
+    //     }
+    // }
+    
+    // va_end(args);
+    // putch(args);
+      panic("Not implemented");
 }
 
 
