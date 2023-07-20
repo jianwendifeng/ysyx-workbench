@@ -121,13 +121,15 @@ int printf(const char *fmt, ...) {
             fmt++;
             switch (*fmt){
                 case 'd':
+                    fmt++;
                 	int tmp_int = va_arg(args,int);
                     char* temp = itoa(tmp_int,10,len);
-                    fmt++;
+                    
                     do{
                         putch(*temp++);
                     }while(len--);
                 case 's':
+                    fmt++;
                     char* tmp_ch = va_arg(args,char*);
                     while(*tmp_ch != '\0'){
                         putch(*tmp_ch++);
