@@ -132,10 +132,8 @@ void init_monitor(int argc, char *argv[]) {
   /* Initialize differential testing. */
   init_difftest(diff_so_file, img_size, difftest_port);
 
-  if(elf_file){
   /* Initialize ftrace. */
   init_ftrace(elf_file);
-  }
   
   /* Initialize the simple debugger. */
   init_sdb();
