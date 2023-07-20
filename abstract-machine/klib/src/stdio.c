@@ -86,9 +86,9 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...)
 {   
-    // for (int i = 0; i < SIZE_MAX_BUF; i++) {
-    //     out[i] = 0; // 初始化 buf 缓冲区为全零
-    // }
+    for (int i = 0; i < SIZE_MAX_BUF; i++) {
+        out[i] = 0; // 初始化 buf 缓冲区为全零
+    }
     va_list args;
     int len = 0;
 	
