@@ -124,7 +124,6 @@ int printf(const char *fmt, ...) {
                     fmt++;
                 	int tmp_int = va_arg(args,int);
                     char* temp = itoa(tmp_int,10,len);
-                    
                     do{
                         putch(*temp++);
                     }while(len--);
@@ -144,7 +143,7 @@ int printf(const char *fmt, ...) {
     
     va_end(args);
     //panic("Not implemented");
-    return 0;
+    return 1;
 }
 
 
