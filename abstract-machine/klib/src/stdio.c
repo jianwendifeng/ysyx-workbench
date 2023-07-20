@@ -113,7 +113,7 @@ int printf(const char *fmt, ...) {
 
     len = vsnprintf(out, SIZE_MAX_BUF, fmt, args);
 
-    int i =0;
+    int i = 0;
     while((i<len) && (*out!='\0')){
         putch(out[i]);
     }
