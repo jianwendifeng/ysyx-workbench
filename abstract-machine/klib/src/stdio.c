@@ -143,7 +143,7 @@ int printf(const char *fmt, ...) {
     
     va_end(args);
     //panic("Not implemented");
-    return 1;
+    return 0;
 }
 
 
