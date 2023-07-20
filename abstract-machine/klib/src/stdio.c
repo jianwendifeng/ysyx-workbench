@@ -118,23 +118,28 @@ int printf(const char *fmt, ...) {
     int len;
     while(*fmt != '\0'){
         if(*fmt == '%'){
-            fmt++;
-            switch (*fmt){
+            switch (*fmt+1){
                 case 'd':
-                    fmt++;
+                    fmt+=2;
                 	int tmp_int = va_arg(args,int);
                     char* temp = itoa(tmp_int,10,len);
                     do{
                         putch(*temp++);
                     }while(len--);
                 case 's':
-                    fmt++;
+                    fmt+=2;
                     char* tmp_ch = va_arg(args,char*);
                     while(*tmp_ch != '\0'){
                         putch(*tmp_ch++);
                     }
-                    break;  
+                    break; 
+                case 'c':
+                    fmt+=2;
+                    char tmp_c = (char)va_arg(args,int);
+                    putch(tmp_c);
+                    break; 
                 default:
+                    putch(*fmt++);
                     putch(*fmt++);
                     break;
             }
