@@ -17,15 +17,14 @@ void reverse(char str[],int len,char* out){
     }
 }
 
-static char* itoa(int num,int base,int len){
-    len = 0;
+static int itoa(int num,char *out,int base){
+    int len = 0;
 	char temp[SIZE_MAX_BUF]; 
 	int i = 0;
-    char *out = {0};
     if(num == 0) {
     	*out++ = 0;
     	len++;
-    	return out;
+    	return len;
 	}
 	if(num < 0 ){
 		*out++ = '-';
@@ -41,7 +40,7 @@ static char* itoa(int num,int base,int len){
 
 	}while(num  != 0 );
 	reverse(temp,i,out);
-    return out;
+    return len;
 }
 
 
@@ -58,14 +57,9 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                 case 'd':
                 	fmt++;
                     int tmp_int = va_arg(ap,int);
-                    // int i = itoa(tmp_int,out,10);
-                    int i = 0;
-                    char *int_char = itoa(tmp_int,10,i);
+                    int i = itoa(tmp_int,out,10);
+                    out += i;
                     len += i;
-                    do{
-                        *out++ = *int_char++; 
-                    }
-                    while(i--);
                     break;
                 case 's':
                     fmt++;
@@ -110,16 +104,8 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   panic("Not implemented");
 }
 
-
-
 int printf(const char *fmt, ...) {
-//    int len;
-//    char* out = {0};
-//    len = sprintf(out,fmt);
-//    while((len--) && (*out != '\0') ){
-//     putch(*out++);
-//    }
-//    return 0;
+
 panic("Not implemented");
 }
 
