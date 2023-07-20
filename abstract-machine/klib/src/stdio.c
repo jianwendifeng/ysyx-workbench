@@ -107,11 +107,18 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 int printf(const char *fmt, ...) {
     int len = 0;
     char out[SIZE_MAX_BUF];
-    len = sprintf(out,fmt);
+
+    va_list args;
+    va_start(args,fmt);
+
+    len = vsprintf(out,fmt,args);
+
     int i =0;
     while((i<len) && (*out!='\0')){
         putch(out[i]);
     }
+
+    va_end(args);
     return 0;
 }
 
