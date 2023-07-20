@@ -113,45 +113,13 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 
 
 int printf(const char *fmt, ...) {
-    va_list args;
-    va_start(args,fmt);
-    int len;
-    while(*fmt != '\0'){
-        if(*fmt == '%'){
-            switch (*fmt+1){
-                case 'd':
-                    fmt+=2;
-                	int tmp_int = va_arg(args,int);
-                    char* temp = itoa(tmp_int,10,len);
-                    do{
-                        putch(*temp++);
-                    }while(len--);
-                    break;
-                case 's':
-                    fmt+=2;
-                    char* tmp_ch = va_arg(args,char*);
-                    while(*tmp_ch != '\0'){
-                        putch(*tmp_ch++);
-                    }
-                    break; 
-                case 'c':
-                    fmt+=2;
-                    char tmp_c = (char)va_arg(args,int);
-                    putch(tmp_c);
-                    break; 
-                default:
-                    putch(*fmt++);
-                    putch(*fmt++);
-                    break;
-            }
-        }
-        else {
-            putch(*fmt++);
-        }
-    }
-    
-    va_end(args);
-    return 0;
+   int len;
+   char* out = {0};
+   len = sprintf(out,fmt);
+   while((len--) && (*out != '\0') ){
+    putch(*out++);
+   }
+   return 0;
 }
 
 
