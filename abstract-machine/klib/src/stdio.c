@@ -5,7 +5,6 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 #define SIZE_MAX_BUF 128
-static char out[SIZE_MAX_BUF];
 
 void reverse(char str[],int len,char* out){
     int start = 0;
@@ -87,16 +86,15 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
 
 int sprintf(char *out, const char *fmt, ...)
 {   
-    for (int i = 0; i < SIZE_MAX_BUF; i++) {
-        out[i] = 0; // 初始化 buf 缓冲区为全零
-    }
+    // for (int i = 0; i < SIZE_MAX_BUF; i++) {
+    //     out[i] = 0; // 初始化 buf 缓冲区为全零
+    // }
     va_list args;
     int len = 0;
 	
     va_start(args,fmt);
     len = vsprintf(out,fmt,args);
     va_end(args);
-
     return len;
 }
 
@@ -106,7 +104,8 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 
 int printf(const char *fmt, ...) {
     int len = 0;
-  
+    static char out[SIZE_MAX_BUF];
+
 
     va_list args;
     va_start(args,fmt);
