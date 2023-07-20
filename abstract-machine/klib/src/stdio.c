@@ -126,6 +126,7 @@ int printf(const char *fmt, ...) {
                     do{
                         putch(*temp++);
                     }while(len--);
+                    break;
                 case 's':
                     fmt+=2;
                     char* tmp_ch = va_arg(args,char*);
