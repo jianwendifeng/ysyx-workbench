@@ -139,10 +139,12 @@ int printf(const char *fmt, ...) {
                     break;
             }
         }
+        else {
+            putch(*fmt++);
+        }
     }
     
     va_end(args);
-    //panic("Not implemented");
     return 0;
 }
 
