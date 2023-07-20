@@ -113,28 +113,36 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 
 
 int printf(const char *fmt, ...) {
-    // va_list args;
-    // int len = 0;
-    // va_start(args,fmt);
-    // while(*fmt != '\0'){
-    //     if(*fmt == '%'){
-    //         fmt++;
-    //         switch (*fmt){
-    //             case 'd':
-    //             	int tmp_int = va_arg(ap,int);
-    //                 len = itoa(tmp_int)
-    //             case 's':
-                    
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     }
-    // }
+    va_list args;
+    va_start(args,fmt);
+    int len;
+    while(*fmt != '\0'){
+        if(*fmt == '%'){
+            fmt++;
+            switch (*fmt){
+                case 'd':
+                	int tmp_int = va_arg(args,int);
+                    char* temp = itoa(tmp_int,10,len);
+                    fmt++;
+                    do{
+                        putch(*temp++);
+                    }while(len--);
+                case 's':
+                    char* tmp_ch = va_arg(args,char*);
+                    while(*tmp_ch != '\0'){
+                        putch(*tmp_ch++);
+                    }
+                    break;  
+                default:
+                    putch(*fmt++);
+                    break;
+            }
+        }
+    }
     
-    // va_end(args);
-    // putch(args);
-      panic("Not implemented");
+    va_end(args);
+    //panic("Not implemented");
+    return 0;
 }
 
 
