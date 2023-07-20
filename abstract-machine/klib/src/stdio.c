@@ -4,7 +4,7 @@
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
-#define SIZE_MAX_BUF 1024
+#define SIZE_MAX_BUF 128
 
 
 void reverse(char str[],int len,char* out){
