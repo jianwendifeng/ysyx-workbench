@@ -80,9 +80,9 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-    int count = 0;
-    count = vsnprintf(out, SIZE_MAX_BUF, fmt, ap);
-    return count;
+    int len = 0;
+    len = vsnprintf(out, SIZE_MAX_BUF, fmt, ap);
+    return len;
 }
 
 int sprintf(char *out, const char *fmt, ...)
