@@ -113,13 +113,14 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 
 
 int printf(const char *fmt, ...) {
-   int len;
-   char* out = {0};
-   len = sprintf(out,fmt);
-   while((len--) && (*out != '\0') ){
-    putch(*out++);
-   }
-   return 0;
+//    int len;
+//    char* out = {0};
+//    len = sprintf(out,fmt);
+//    while((len--) && (*out != '\0') ){
+//     putch(*out++);
+//    }
+//    return 0;
+panic("Not implemented");
 }
 
 
