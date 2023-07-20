@@ -5,7 +5,7 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 #define SIZE_MAX_BUF 128
-
+static char out[SIZE_MAX_BUF];
 
 void reverse(char str[],int len,char* out){
     int start = 0;
@@ -106,7 +106,7 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 
 int printf(const char *fmt, ...) {
     int len = 0;
-    char out[SIZE_MAX_BUF];
+  
 
     va_list args;
     va_start(args,fmt);
@@ -117,8 +117,6 @@ int printf(const char *fmt, ...) {
     while((i<len) && (*out!='\0')){
         putch(out[i++]);
     }
-
-
     va_end(args);
     return 1;
 
