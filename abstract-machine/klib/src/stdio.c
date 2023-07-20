@@ -105,22 +105,21 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
 }
 
 int printf(const char *fmt, ...) {
-    // int len = 0;
-    // char out[SIZE_MAX_BUF];
+    int len = 0;
+    char out[SIZE_MAX_BUF];
 
-    // va_list args;
-    // va_start(args,fmt);
+    va_list args;
+    va_start(args,fmt);
 
-    // len = vsnprintf(out, SIZE_MAX_BUF, fmt, args);
+    len = vsnprintf(out, SIZE_MAX_BUF, fmt, args);
 
-    // int i = 0;
-    // while((i<len) && (*out!='\0')){
-    //     putch(out[i]);
-    // }
+    int i = 0;
+    while((i<len) && (*out!='\0')){
+        putch(out[i]);
+    }
 
-    // va_end(args);
-    // return 0;
-    panic("Not implemented");
+    va_end(args);
+    return 1;
 
 }
 
