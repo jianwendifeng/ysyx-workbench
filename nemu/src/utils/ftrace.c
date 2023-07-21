@@ -18,13 +18,8 @@ extern uint64_t g_nr_guest_inst;
 
 void init_ftrace(const char *elf_file) {
   FILE *file = fopen(elf_file,"rb");
-  if(!file){
-    printf("Don't open ELF file\n");
-    //assert(1);
-  }
-
-        
-  // 读取 ELF 文件头
+  if(file){
+    // 读取 ELF 文件头
   Elf64_Ehdr elf_header;
   if(fread(&elf_header, sizeof(Elf64_Ehdr), 1, file) != 1){
     printf("Error reading ELF header\n");
@@ -66,6 +61,14 @@ void init_ftrace(const char *elf_file) {
             }
         }
     }
+  }else{
+     printf("Don't open ELF file\n");
+    //assert(1);
+  }
+
+        
+  
+    fclose(file);
 }
 
 
