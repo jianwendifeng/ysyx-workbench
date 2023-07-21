@@ -18,7 +18,7 @@ extern uint64_t g_nr_guest_inst;
 
 void init_ftrace(const char *elf_file) {
   FILE *file = fopen(elf_file,"rb");
-  if(file){
+  if(!file){
     printf("Don't open ELF file\n");
     assert(1);
   }
