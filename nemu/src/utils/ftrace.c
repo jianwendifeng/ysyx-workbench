@@ -20,7 +20,7 @@ void init_ftrace(const char *elf_file) {
   FILE *file = fopen(elf_file,"rb");
   if(!file){
     printf("Don't open ELF file\n");
-    assert(1);
+    //assert(1);
   }
 
         
@@ -28,7 +28,7 @@ void init_ftrace(const char *elf_file) {
   Elf64_Ehdr elf_header;
   if(fread(&elf_header, sizeof(Elf64_Ehdr), 1, file) != 1){
     printf("Error reading ELF header\n");
-    assert(1);
+    //assert(1);
   }
 
   // 定位节头表
@@ -40,7 +40,7 @@ void init_ftrace(const char *elf_file) {
       if (fread(&sectionHeader, sizeof(Elf64_Shdr), 1, file) != 1) {
           printf("Error reading section header");
           fclose(file);
-          assert(1);
+          //assert(1);
         }
       if (sectionHeader.sh_type == SHT_SYMTAB || sectionHeader.sh_type == SHT_DYNSYM) {
             stringTableIndex = sectionHeader.sh_link;
@@ -51,7 +51,7 @@ void init_ftrace(const char *elf_file) {
     if (stringTableIndex == -1) {
         printf("No symbol table found.\n");
         fclose(file);
-        assert(1);
+        //assert(1);
     }
 
     fseek(file, sectionHeader.sh_offset, SEEK_SET);
