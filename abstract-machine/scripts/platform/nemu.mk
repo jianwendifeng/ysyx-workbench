@@ -13,7 +13,6 @@ LDFLAGS   += -T $(AM_HOME)/scripts/linker.ld \
 LDFLAGS   += --gc-sections -e _start
 NEMUFLAGS += 	-b -l    $(shell dirname $(IMAGE).elf)/nemu-log.txt                #批处理-b  
 NEMUFLAGS += -e     $(/home/todas/ysyx-workbench/am-kernels/tests/cpu-tests/build)/$(IMAGE).elf
-).elf
 
 CFLAGS += -DMAINARGS=\"$(mainargs)\"
 CFLAGS += -I$(AM_HOME)/am/src/platform/nemu/include
