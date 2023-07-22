@@ -116,7 +116,8 @@ int printf(const char *fmt, ...) {
 
     int i = 0;
     while((i<len) && (*out!='\0')){
-        putch(out[i++]);
+        putch(out[i]);
+        i++;
     }
     va_end(args);
     return 1;
