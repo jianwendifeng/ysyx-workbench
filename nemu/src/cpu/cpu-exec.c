@@ -110,6 +110,8 @@ static void exec_once(Decode *s, vaddr_t pc) {
 #endif
 }
 
+extern void write_iringbuf(Decode s);
+
 static void execute(uint64_t n) {
   Decode s;
   for (;n > 0; n --) {
@@ -124,6 +126,10 @@ static void execute(uint64_t n) {
     }
     IFDEF(CONFIG_DEVICE, device_update());
     #
+
+    #ifdef CONFIG_ITRACE
+       write_iringbuf(s);  //iringbuf
+    #endif
   }
 }
 
