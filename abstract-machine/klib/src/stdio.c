@@ -74,13 +74,14 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
             }
         }
     }
-    out[len] = '\0';
+    //out[len] = '\0';
     return len;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
     int len = 0;
     len = vsnprintf(out, SIZE_MAX_BUF, fmt, ap);
+    out[len] = '\0';
     return len;
 }
 
@@ -95,6 +96,7 @@ int sprintf(char *out, const char *fmt, ...)
     va_start(args,fmt);
     len = vsprintf(out,fmt,args);
     va_end(args);
+    out[len] = '\0';
     return len;
 }
 
@@ -113,9 +115,10 @@ int printf(const char *fmt, ...) {
     len = vsnprintf(out, SIZE_MAX_BUF, fmt, args);
 
     int i = 0;
-    while((i<len) ){
+    while((i<len) && (*out!='\0')){
         putch(out[i++]);
     }
+    putch('\0');
     va_end(args);
     return 1;
 }
