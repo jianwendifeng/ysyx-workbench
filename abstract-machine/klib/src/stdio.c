@@ -113,10 +113,9 @@ int printf(const char *fmt, ...) {
     len = vsnprintf(out, SIZE_MAX_BUF, fmt, args);
 
     int i = 0;
-    while((i<len) && (*out!='\0')){
+    while((i<len) ){
         putch(out[i++]);
     }
-    putch('\0');
     va_end(args);
     return 1;
 }
