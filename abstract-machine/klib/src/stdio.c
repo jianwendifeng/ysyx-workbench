@@ -11,9 +11,6 @@ int snprintf(char *out, size_t n, const char *fmt, ...) {
   panic("Not implemented");
 }
 
-// int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
-//   panic("Not implemented");
-// }
 
 void reverse(char* num,int len,char* out){
 
@@ -26,7 +23,6 @@ void reverse(char* num,int len,char* out){
         start++;
         end--;
     }
-    //printf("\n");
 }
 
 int itoa(int num,char *out,int base){
@@ -65,7 +61,6 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
         	len++;
         }
         else{
-        	//fmt++;	//%
             switch (*++fmt){
                 case 'd':
                 	fmt++;
@@ -83,11 +78,10 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                     break;
                 default:
                     out[len++] = *fmt++;
-                	//out[len++] = *fmt++;
                     break;
             }
         }
-        //printf("out:%c\n",*out);
+  
     }
     out[len-1] = '\0';
     return len;
