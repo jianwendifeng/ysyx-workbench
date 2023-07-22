@@ -9,8 +9,8 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
   // kbd->keydown = 0;
   // kbd->keycode = AM_KEY_NONE;
   int kb = inl(KBD_ADDR);
-  kbd->keydown = (kb & KEYDOWN_MASK ? true : false);
-  
-  kbd->keycode = kb & ~KEYDOWN_MASK ;
-  if(kbd->keydown)printf("\n\nkb%d\tkeycode%d\n\n",kb,kbd->keycode);
+  kbd->keydown = (kb & KEYDOWN_MASK ? true : false); //1000000000000000 true
+  printf("keydown%d\n",kbd->keydown);
+  kbd->keycode = kb & ~KEYDOWN_MASK ;   //清除键盘扫描码中表示按键按下状态的最高位。
+
 }
