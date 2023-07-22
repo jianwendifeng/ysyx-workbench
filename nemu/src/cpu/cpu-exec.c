@@ -18,15 +18,12 @@
 #include <cpu/difftest.h>
 #include <locale.h>
 
-
 /* The assembly code of instructions executed is only output to the screen
  * when the number of instructions executed is less than this value.
  * This is useful when you use the `si' command.
  * You can modify this value as you want.
  */
 #define MAX_INST_TO_PRINT 10
-
-#define iringbuf_size 16 //size of iringbuf
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -35,48 +32,12 @@ static bool g_print_step = false;
 
 void device_update();
 
-#ifdef CONFIG_ITRACE_COND
-long int instr_num();
-
-struct ringbuf
-{
-  Decode instr[iringbuf_size];	//data
-  int num;
-
-} iringbuf={0};
-
-void write_iringbuf(Decode s){
-  iringbuf.instr[iringbuf.num % iringbuf_size] = s;
-  // iringbuf.num = (iringbuf.num++)%16;  //undefined operation
-  iringbuf.num++;
-  iringbuf.num = iringbuf.num % iringbuf_size;
-}
-
-void read_iringbuf(){
-  int i = iringbuf.num ;
-  int n = iringbuf_size;
-  printf("\n");
-  while(n--)
-  {
-    printf("%s\t\t\n",iringbuf.instr[i % iringbuf_size].logbuf);
-    i++;
-  }
-  printf("\n\n");
-}
-#endif
-
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
-  if (ITRACE_COND) { log_write("%s\n", _this->logbuf); //itrace
-  }  
+  if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
-
-  #ifdef CONFIG_ITRACE
-  //write_iringbuf(_this);  //iringbuf
-  if (nemu_state.halt_ret != 0 || nemu_state.state != NEMU_RUNNING) { read_iringbuf(); }  //when nemu output iringbuf.Difftest will change nemu.state.state = NEMU_ABROAT;nemu_state.hal_ret = pc
-  #endif
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {
@@ -116,12 +77,8 @@ static void execute(uint64_t n) {
     exec_once(&s, cpu.pc);
     g_nr_guest_inst ++;
     trace_and_difftest(&s, cpu.pc);
-    if (nemu_state.state != NEMU_RUNNING) {
-      break;
-    }
+    if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
-    #
-    
   }
 }
 
@@ -133,12 +90,6 @@ static void statistic() {
   if (g_timer > 0) Log("simulation frequency = " NUMBERIC_FMT " inst/s", g_nr_guest_inst * 1000000 / g_timer);
   else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
-
-#ifdef CONFIG_ITRACE
-long int instr_num() {  
-  return g_nr_guest_inst; //the num of intsruction having run
-}
-#endif
 
 void assert_fail_msg() {
   isa_reg_display();
@@ -156,7 +107,7 @@ void cpu_exec(uint64_t n) {
   }
 
   uint64_t timer_start = get_time();
-  
+
   execute(n);
 
   uint64_t timer_end = get_time();

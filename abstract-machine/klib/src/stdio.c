@@ -4,126 +4,86 @@
 #include <stdarg.h>
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
-#define SIZE_MAX_BUF 128
 
-void reverse(char str[],int len,char* out){
-    int start = 0;
-    int end = len -1;
-    while(start < len){
-        *out++ = str[end] + '0';
-        start++;
-        end--;
+void reverse(char s[]) {
+    int i, j;
+    char temp;
+    
+    for (i = 0, j = strlen(s)-1; i < j; i++, j--) {
+        temp = s[i];
+        s[i] = s[j];
+        s[j] = temp;
     }
 }
 
-static int itoa(int num,char *out,int base){
-    int len = 0;
-	char temp[SIZE_MAX_BUF]; 
-	int i = 0;
-    if(num == 0) {
-    	*out++ = 0;
-    	len++;
-    	return len;
-	}
-	if(num < 0 ){
-		*out++ = '-';
-		len++;
-		num = -num;
-	}
-	
-	do{
-    	temp[i] = (num % base) ;
-    	i++;
-    	num = num / base;
-    	len++;
-
-	}while(num  != 0 );
-	reverse(temp,i,out);
-    return len;
+void itoa(int n,char s[]){
+       int i=0;
+       do{
+               s[i++] = n %10 +'0';
+       }while((n /= 10) > 0);
+       reverse(s);
 }
 
-
-int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
-     int len = 0;
-    while(*fmt != '\0'){
-        if(*fmt != '%' ){
-        	*out++ = *fmt++; 
-        	len++;
-        }
-        else{
-        	
-            switch (*++fmt){
-                case 'd':
-                	fmt++;
-                    int tmp_int = va_arg(ap,int);
-                    int i = itoa(tmp_int,out,10);
-                    out += i;
-                    len += i;
-                    break;
-                case 's':
-                    fmt++;
-                    char *tmp_ch = va_arg(ap,char*);
-                     while (*tmp_ch != '\0') {
-                        *out++ = *tmp_ch++;
-                        len++;
-                    }
-                    break;
-                default:
-                    out[len++] = *fmt++;
-                    out[len++] = *fmt++;
-                    break;
-            }
-        }
-    }
-    //out[len] = '\0';
-    return len;
+int printf(const char *fmt, ...) {
+  panic("Not implemented");
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
-    int len = 0;
-    len = vsnprintf(out, SIZE_MAX_BUF, fmt, ap);
-    return len;
+  panic("Not implemented");
 }
 
-int sprintf(char *out, const char *fmt, ...)
-{   
-    for (int i = 0; i < SIZE_MAX_BUF; i++) {
-        out[i] = 0; // 初始化 buf 缓冲区为全零
+int sprintf(char *out, const char *fmt, ...) {
+	va_list ap;
+  va_start(ap, fmt);      //把参数列表拷贝到ap中,
+  int len=0;
+  int arg_i;
+  char arg_i_s[1024];
+  char *arg_s;
+  int i = 0;
+
+  while(fmt[i] != '\0')
+  {
+    if(fmt[i] == '%')
+    {
+      i++;  //指针移动到%后面
+      switch(fmt[i])
+      {
+        case 's': {
+           arg_s = va_arg(ap,char*);
+            for(int j = 0 ; arg_s[j] != '\0' ; j++){
+            out[len++] = arg_s[j];
+            }
+            i++;  //执行完成后fmt的指针再次后移
+             break;
+         }
+       case 'd': {
+           arg_i = va_arg(ap,int);  
+           itoa(arg_i,arg_i_s);
+           for(int j = 0 ; arg_i_s[j] != '\0' ; j++){
+             out[len++] = arg_i_s[j];
+           }
+            i++;
+           break;
+         }
+       default:{
+         out[len++] = fmt[i++];
+       }
+      }
+    } else{
+      out[len++] = fmt[i++];
     }
-    va_list args;
-    int len = 0;
-	
-    va_start(args,fmt);
-    len = vsprintf(out,fmt,args);
-    va_end(args);
-    return len;
+  }
+  out[len++] = '\0';
+  va_end(ap);
+  return len;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
   panic("Not implemented");
 }
 
-int printf(const char *fmt, ...) {
-    int len = 0;
-    static char out[SIZE_MAX_BUF];
-
-    for (int i = 0; i < SIZE_MAX_BUF; i++) {
-        out[i] = 0; // 初始化 buf 缓冲区为全零
-    }
-    va_list args;
-    va_start(args,fmt);
-
-    len = vsnprintf(out, SIZE_MAX_BUF, fmt, args);
-
-    int i = 0;
-    while((i<len) && (*out!='\0')){
-        putch(out[i]);
-        i++;
-    }
-    va_end(args);
-    return 1;
-
+int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
+  panic("Not implemented");
 }
-
 
 #endif	

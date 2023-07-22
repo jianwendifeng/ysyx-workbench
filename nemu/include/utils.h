@@ -75,15 +75,3 @@ uint64_t get_time();
 
 
 #endif
-
-#define ftrace_write(...) IFDEF(CONFIG_TARGET_NATIVE_ELF, \
-  do { \
-    extern FILE* ftrace_fp; \
-    extern bool ftrace_enable(); \
-    if (ftrace_enable()) { \
-      fprintf(ftrace_fp, __VA_ARGS__); \
-      fflush(ftrace_fp); \
-    } \
-  } while (0) \
-)
-

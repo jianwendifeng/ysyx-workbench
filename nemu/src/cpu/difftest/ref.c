@@ -18,18 +18,7 @@
 #include <difftest-def.h>
 #include <memory/paddr.h>
 
-// static void memory_copy(void *dest, void *src, size_t n){
-//   uint64_t *mc_dest = (uint64_t*) dest; 
-//   uint64_t *mc_src = (uint64_t*) src;
-//   if()
-// }
-
 __EXPORT void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
-  // if(direction == DIFFTEST_TO_REF){
-  //   memory_copy(guest_to_host(addr),buf,n); //copy to ref
-  // }else{
-  //   memory_copy(buf,guest_to_host(addr),n); //copy to dut
-  // }
   assert(0);
 }
 

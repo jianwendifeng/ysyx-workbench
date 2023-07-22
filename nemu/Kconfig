@@ -122,7 +122,7 @@ config CC_ASAN
   default n
 endmenu
 
-menu "Testing and Debugging"  #trace
+menu "Testing and Debugging"
 
 
 config TRACE
@@ -140,13 +140,8 @@ config TRACE_END
   default 10000
 
 config ITRACE
-  depends on ENGINE_INTERPRETER
-  bool "Enable instruction tracer"
-  default y
-
-config MTRACE   #mtrace
   depends on TRACE && TARGET_NATIVE_ELF && ENGINE_INTERPRETER
-  bool "Enable memory tracer"
+  bool "Enable instruction tracer"
   default y
 
 config ITRACE_COND
