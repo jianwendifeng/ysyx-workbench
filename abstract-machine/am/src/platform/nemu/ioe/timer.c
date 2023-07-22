@@ -4,8 +4,10 @@
 void __am_timer_init() {
 }
 
-void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  uptime->us = 0;
+void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {\
+  int low  = inl(RTC_ADDR);
+  int high = inl(RTC_ADDR+4);
+  uptime->us = high - low;
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {

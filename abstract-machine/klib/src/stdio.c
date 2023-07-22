@@ -110,4 +110,20 @@ int sprintf(char *out, const char *fmt, ...)
 }
 
 
+int printf(const char *fmt, ...) {
+  va_list ap;
+  char buf[SIZE_MAX_BUF];
+  va_start(ap, fmt);
+  int len = vsprintf(buf, fmt, ap);
+  va_end(ap);
+  int i=0;
+  while(i < len){
+    putch(buf[i++]);
+  }
+  return 0;
+}
+
+
+
+
 #endif	
