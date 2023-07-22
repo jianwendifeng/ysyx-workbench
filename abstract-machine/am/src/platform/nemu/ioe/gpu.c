@@ -41,9 +41,8 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 //     }
 //   }
 
-  int i,j;
-  for(i=0;(i<h) && (i<y);i++){
-    for(j=0;(j<w) && (j<x);j++){
+  for(int i=0; i < h ; i++){
+    for(int j = 0 ; j < w ; j++){
       fb[x*i+(y+j)*W] = pixels[w*i+j];
     }
   }
