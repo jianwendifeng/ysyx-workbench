@@ -51,7 +51,6 @@ static void decode_operand(Decode *s, int *rd, word_t *src1, word_t *src2, word_
   }
 }
 
-extern void write_iringbuf(Decode s);
 
 static int decode_exec(Decode *s) {
   int rd = 0;
@@ -139,18 +138,22 @@ static int decode_exec(Decode *s) {
 
   	R(0) = 0; // reset $zero to 0
 	
-	  #ifdef CONFIG_ITRACE
-       write_iringbuf(*s);  //iringbuf
-    #endif
-
+	
 
   	return 0;
 
 }
 
+extern void write_iringbuf(Decode s);
 
 
 int isa_exec_once(Decode *s) {
   s->isa.inst.val = inst_fetch(&s->snpc, 4);
+
+	#ifdef CONFIG_ITRACE
+       write_iringbuf(*s);  //iringbuf
+    #endif
+
+
   return decode_exec(s);
 }
