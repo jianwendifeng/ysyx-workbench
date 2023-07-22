@@ -30,7 +30,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
 
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
-  int x = ctl->x  , w = ctl->w , h = ctl->h;
+  int x = ctl->x , y = ctl->y , w = ctl->w , h = ctl->h;
   uint32_t* pixels = (uint32_t *)ctl->pixels;
   uint32_t* fb = (uint32_t *)(uintptr_t)FB_ADDR;
   //if((!w) || (!h)) return ;
@@ -43,7 +43,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 
   for(int i=0; i < h ; i++){          //i is height
     for(int j = 0 ; j < w ; j++){     //j is weight
-      fb[x+i+(j)*W] = pixels[w*i+j];
+      fb[x+i+(y+j)*W] = pixels[w*i+j];
     }
   }
 
