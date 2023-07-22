@@ -106,7 +106,9 @@ int printf(const char *fmt, ...) {
     int len = 0;
     static char out[SIZE_MAX_BUF];
 
-
+    for (int i = 0; i < SIZE_MAX_BUF; i++) {
+        out[i] = 0; // 初始化 buf 缓冲区为全零
+    }
     va_list args;
     va_start(args,fmt);
 
