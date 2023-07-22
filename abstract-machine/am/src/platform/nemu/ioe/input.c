@@ -12,5 +12,5 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
   kbd->keydown = (kb & KEYDOWN_MASK ? true : false);
   
   kbd->keycode = kb & ~KEYDOWN_MASK ;
-  if(kbd->keydown)printf("\n\nkb%ld\tkeycode%c\n\n",kb,kbd->keycode);
+  if(kbd->keydown)printf("\n\nkb%ld\tkeycode%d\n\n",kb,kbd->keycode);
 }
