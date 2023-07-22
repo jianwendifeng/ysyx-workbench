@@ -43,7 +43,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 
   for(int i=0; i < h ; i++){          //i is height
     for(int j = 0 ; j < w ; j++){     //j is weight
-      fb[x+i+(y+j)*W] = pixels[w*i+j];
+      fb[x+j+(y+i)*W] = pixels[w*i+j];
     }
   }
 
