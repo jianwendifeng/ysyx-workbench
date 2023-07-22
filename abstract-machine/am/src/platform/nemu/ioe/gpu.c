@@ -7,15 +7,18 @@
 #define H 300
 
 void __am_gpu_init() {
+  #ifdef CONFIG_VGA_SHOW_SCREEN
   int i;
   int w = W;  // TODO: get the correct width
   int h = H;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for (i = 0; i < w * h; i ++) fb[i] = i;
+  #endif
   outl(SYNC_ADDR, 1);
 }
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
+  #ifdef CONFIG_VGA_SHOW_SCREEN
    *cfg = (AM_GPU_CONFIG_T) {
     .present = true, 
     .has_accel = false,
@@ -23,13 +26,12 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
     .height = H,
     .vmemsz = W*H*sizeof(uint32_t)
   };
+  #endif
 }
-
-//fb[(y+j)*W+(x+i)] = *(pixels+j*w+i);
-
 
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
+  #ifdef CONFIG_VGA_SHOW_SCREEN
   int x = ctl->x , y = ctl->y , w = ctl->w , h = ctl->h;
   uint32_t* pixels = (uint32_t *)ctl->pixels;
   uint32_t* fb = (uint32_t *)(uintptr_t)FB_ADDR;
@@ -39,6 +41,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
       fb[(x + j) + (y + i)*W] = pixels[(w * i) + j];
     }
   }
+  #endif
 
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
