@@ -21,7 +21,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
     .has_accel = false,
     .width = W, 
     .height = H,
-    .vmemsz = 0
+    .vmemsz = W*H*sizeof(uint32_t)
   };
 }
 
@@ -38,7 +38,8 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   int i,j;
   for(i=0;(i<h) && (i<y);i++){
     for(j=0;(j<w) && (j<x);j++){
-      fb[x*i+j] = pixels[x*i+j];
+      //fb[x*i+j] = pixels[x*i+j];
+      fb[(y+i)*W+(x+j)] = *(pixels+i*w+j);
     }
   }
 
