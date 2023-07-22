@@ -3,23 +3,25 @@
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
+#define W 400
+#define H 300
+
 void __am_gpu_init() {
   int i;
-  int w = 25;  // TODO: get the correct width
-  int h = 300;  // TODO: get the correct height
+  int w = W;  // TODO: get the correct width
+  int h = H;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for (i = 0; i < w * h; i ++) fb[i] = i;
   outl(SYNC_ADDR, 1);
 }
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
-  uint32_t size = inl(VGACTL_ADDR);
-  uint32_t width =  (size >> 16);
-  uint32_t heigh =  size & 0xFFFF;
-  *cfg = (AM_GPU_CONFIG_T) {
-    .present = true, .has_accel = false,
-    .width = width, .height = heigh,
-    .vmemsz = 0
+   *cfg = (AM_GPU_CONFIG_T) {
+    .present = true, 
+    .has_accel = false,
+    .width = W, 
+    .height = H,
+    .vmemsz = W*H*sizeof(uint32_t)
   };
 }
 
