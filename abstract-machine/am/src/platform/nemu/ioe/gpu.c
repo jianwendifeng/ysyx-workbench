@@ -45,12 +45,11 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   if((!w) || (!h)) return ;
 
   int i,j;
-  for(i=0;i<y;i++){
-    for(j=0;j<x;j++){
-      *picture++ = *pixels++;
+  for(i=0;i<h;i++){
+    for(j=0;j<w;j++){
+      picture[(y+j)*W+(x+i)] = *(pixels+j*w+i);
     }
   }
-
 
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
