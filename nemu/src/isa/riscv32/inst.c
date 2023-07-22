@@ -72,8 +72,5 @@ static int decode_exec(Decode *s) {
 
 int isa_exec_once(Decode *s) {
   s->isa.inst.val = inst_fetch(&s->snpc, 4);
-  #ifdef CONFIG_ITRACE
-      write_iringbuf(s);  //iringbuf
-    #endif
   return decode_exec(s);
 }

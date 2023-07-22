@@ -144,7 +144,12 @@ static int decode_exec(Decode *s) {
 
 }
 
+extern void write_iringbuf(Decode s);
+
 int isa_exec_once(Decode *s) {
+	#ifdef CONFIG_ITRACE
+       write_iringbuf(*s);  //iringbuf
+    #endif
   s->isa.inst.val = inst_fetch(&s->snpc, 4);
   return decode_exec(s);
 }
