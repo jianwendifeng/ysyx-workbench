@@ -10,5 +10,5 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
   uint32_t kb = inl(KBD_ADDR);
   kbd->keydown = (kb & KEYDOWN_MASK ? true : false);
   
-  kbd->keycode = (kbd->keydown) ? (kb & ~KEYDOWN_MASK) : KEY_NONE ;
+  kbd->keycode = kb & ~KEYDOWN_MASK ;
 }
