@@ -73,7 +73,7 @@ int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
                     fmt++;
                     char *tmp_ch = va_arg(ap,char*);
                      while (*tmp_ch != '\0') {
-                        out[len++] = *tmp_ch++;
+                        out[++len] = *tmp_ch++;
                     }
                     break;
                 default:
