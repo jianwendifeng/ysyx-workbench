@@ -114,9 +114,9 @@ int printf(const char *fmt, ...) {
   va_list ap;
   char buf[SIZE_MAX_BUF];
    int i = 0 ;
-  // while (i<SIZE_MAX_BUF){
-  //   buf[i++] = 0;
-  // }
+  while (i<SIZE_MAX_BUF){
+    buf[i++] = 0;
+  }
   va_start(ap, fmt);
   int len = vsprintf(buf, fmt, ap);
   va_end(ap);
