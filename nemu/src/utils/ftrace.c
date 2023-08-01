@@ -3,6 +3,8 @@
 #include <elf.h>
 #include <stdio.h>
 
+#ifdef MTRACE
+
 #define func_num_max 64
 
 typedef struct
@@ -132,6 +134,7 @@ extern void ftrace_ret(vaddr_t pc,vaddr_t dnpc){
     ftrace_num--;
 }
 
+#endif
 
 
 

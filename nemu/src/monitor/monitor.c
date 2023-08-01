@@ -117,7 +117,7 @@ void init_monitor(int argc, char *argv[]) {
   init_log(log_file);
 
     /* Initialize ftrace. */
-  init_ftrace(elf_file);
+  IFDEF(MTRACE_COND, init_ftrace(elf_file));
 
   /* Initialize memory. */
   init_mem();

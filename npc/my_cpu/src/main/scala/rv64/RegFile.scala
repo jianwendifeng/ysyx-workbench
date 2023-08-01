@@ -17,7 +17,7 @@ class RegFile(xlen: Int) extends Module {
     val io = IO(new RegFileIO(xlen))
     val regs = Mem(32, UInt(xlen.W))
     
-    io.rdata1 :=  Mux(io.raddr1.orR && ren, regs(io.raddr1), 0.U)  //任意一位为1,io.raddr1.orR为true
-    io.rdata2 :=  Mux(io.raddr2.orR && ren, regs(io.raddr2), 0.U)
-    regs(io.waddr) := Mux(io.wen & io,waddr.orR , 0.U)
+    io.rdata1 :=  Mux(io.raddr1.orR && io.ren, regs(io.raddr1), 0.U)  //任意一位为1,io.raddr1.orR为true
+    io.rdata2 :=  Mux(io.raddr2.orR && io.ren, regs(io.raddr2), 0.U)
+    regs(io.waddr) := Mux(io.wen & io.waddr.orR , io.wdata ,0.U)
 }
