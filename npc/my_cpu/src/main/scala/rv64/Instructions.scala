@@ -1,4 +1,4 @@
-package rv64.idu
+package rv64
 
 import chisel3.util.BitPat
 //rv32I
