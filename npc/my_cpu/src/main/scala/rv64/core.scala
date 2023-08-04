@@ -24,12 +24,12 @@ class Core extends Module {
     val wbu = Module(new WBU(32))
 
     ifu.io.inst <> idu.io.inst
-    idu.io.alu_op <> exu.io.op
+    idu.io.alu_sel <> exu.io.alu_sel
     idu.io.rd <> exu.io.rd_in
-    idu.io.alu_fun3 <> exu.io.fun3
+    // idu.io.alu_fun3 <> exu.io.fun3
     //idu.io.immR = exu.io.immR
-    idu.io.data1 <> exu.io.data1
-    idu.io.data2 <> exu.io.data2
+    idu.io.a <> exu.io.a
+    idu.io.b <> exu.io.b
 
     exu.io.wen <> mem.io.wen_in
     exu.io.ren <> mem.io.ren_in
@@ -54,10 +54,10 @@ class Core extends Module {
     //检查端口
     io.pc := pc_reg
     io.exit := ifu.io.inst
-    io.idu_op := idu.io.alu_op
+    io.idu_op := idu.io.alu_sel
     io.exu_data := exu.io.data
-    io.exu_data1 := exu.io.data1
-    io.exu_data2 := exu.io.data2
+    io.exu_data1 := exu.io.a
+    io.exu_data2 := exu.io.b
     io.mem_data := mem.io.result_out
     io.wbu_data := wbu.io.data
 }
