@@ -29,7 +29,7 @@ class ALUIO(Xlen: Int) extends Bundle {
 
 class ALU(Xlen: Int) extends Module {
     val io = IO(new ALUIO(Xlen))
-    val shamt = io.b(4,0).asUINT
+    val shamt = io.b(4,0).asUInt
     
     // when(io.alu_sel === ALU_ADD ) {
     //     io.result := io.a + io.b
@@ -45,7 +45,7 @@ class ALU(Xlen: Int) extends Module {
         ALU_XOR     -> (io.a ^ io.b),
         ALU_SLL     -> (io.a << shamt),
         ALU_SRL     -> (io.a >> shamt),
-        ALU_SRA     -> (io.a.asSInt >> shamt).asUINT,
+        ALU_SRA     -> (io.a.asSInt >> shamt).asUInt,
         ALU_SLT     -> (io.a.asSInt < io.b.asSInt),
         ALU_SLTU    -> (io.a < io.b)
     ))

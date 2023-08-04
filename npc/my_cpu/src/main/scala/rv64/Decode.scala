@@ -67,12 +67,19 @@ object Decode {
     //               |       |       |     |          |          |    |     |       |       |    |  |      |
             //List(PC_4  , A_XXX,  B_XXX, IMM_X, ALU_XXX   , BR_XXX, N, ST_XXX, LD_XXX, WB_ALU, N, CSR.N, Y)        //riscv_mini format
     val map = Array(
-        ADD   -> List(ALU_ADD, A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
-        ADDI  -> List(ALU_ADD, A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
-        SUB   -> List(ALU_SUB, A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
-        OR    -> List(ALU_OR,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
-        ORI   -> List(ALU_OR,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
-        AND   -> List(ALU_AND, A_RS1, B_RS2, RF_Y, MEM_N, WB_Y)
+        ADD   -> List(ALU_ADD,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        ADDI  -> List(ALU_ADD,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        SUB   -> List(ALU_SUB,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        OR    -> List(ALU_OR,   A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        ORI   -> List(ALU_OR,   A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        AND   -> List(ALU_AND,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        XOR   -> List(ALU_XOR,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        SLL   -> List(ALU_SLL,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        SRL   -> List(ALU_SRL,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        SRA   -> List(ALU_SRA,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        SLT   -> List(ALU_SLT,  A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+        SLTU  -> List(ALU_SLTU, A_RS1, B_RS2, RF_Y, MEM_N, WB_Y),
+
     )
 }
 
