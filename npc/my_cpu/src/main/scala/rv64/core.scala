@@ -8,6 +8,7 @@ class Core extends Module {
         val inst = Input(UInt(32.W))
         val pc = Output(UInt(32.W))
         val exit = Output(UInt(32.W))
+        val inst_out = Output(UInt(32.W))
         val idu_op = Output(UInt(7.W))
         val exu_data = Output(UInt(32.W))
         val exu_data1 = Output(UInt(32.W))
@@ -22,28 +23,41 @@ class Core extends Module {
     val exu = Module(new EXU(32))
     val mem = Module(new MEM(32))
     val wbu = Module(new WBU(32))
+    val reg = Module(new RegFile(32))
+
+    reg.io.ren <> idu.io.ctr_signals_out.rf_en
+    reg.io.wen  <> wbu.io.wen
+    reg.io.raddr1 <> idu.io.rs1
+    reg.io.raddr2 <> idu.io.rs2
+    reg.io.rdata1 <> idu.io.rs1_data
+    reg.io.rdata2 <> idu.io.rs2_data
+    reg.io.waddr <> wbu.io.waddr_out
+    reg.io.wdata <> wbu.io.wdata_out
 
     ifu.io.inst <> idu.io.inst
-    idu.io.alu_sel <> exu.io.alu_sel
+    ifu.io.pc_out <> idu.io.pc
+    
     idu.io.rd <> exu.io.rd_in
-    // idu.io.alu_fun3 <> exu.io.fun3
-    //idu.io.immR = exu.io.immR
     idu.io.a <> exu.io.a
     idu.io.b <> exu.io.b
 
-    exu.io.wen <> mem.io.wen_in
-    exu.io.ren <> mem.io.ren_in
+    
+
     exu.io.rd_out <> mem.io.rd_in
     exu.io.data <> mem.io.result_in
 
-    mem.io.wen_out <> wbu.io.wen
-    mem.io.rd_out <> wbu.io.rd
-    mem.io.result_out <> wbu.io.data
+    mem.io.rd_out <> wbu.io.waddr_in
+    mem.io.result_out <> wbu.io.wdata_in
+
+    idu.io.ctr_signals_out <> exu.io.ctr_signals_in
+    exu.io.ctr_signals_out <> mem.io.ctr_signals_in
+    mem.io.ctr_signals_out <> wbu.io.ctr_signals_in
 
 
     val pc_reg = RegInit(0.U)
     pc_reg := pc_reg + 4.U(32.W)    
     ifu.io.pc_in := pc_reg  //ifu的pc输入
+    
 
 
 
@@ -54,12 +68,13 @@ class Core extends Module {
     //检查端口
     io.pc := pc_reg
     io.exit := ifu.io.inst
-    io.idu_op := idu.io.alu_sel
+    io.idu_op := idu.io.ctr_signals_out.alu_sel
+    io.inst_out := ifu.io.inst
     io.exu_data := exu.io.data
     io.exu_data1 := exu.io.a
     io.exu_data2 := exu.io.b
     io.mem_data := mem.io.result_out
-    io.wbu_data := wbu.io.data
+    io.wbu_data := wbu.io.wdata_out
 }
 
 object fetch_core_Generator extends App{

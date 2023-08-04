@@ -2,20 +2,9 @@ package rv64
 
 import chisel3._
 
-class RegFileIO(xlen: Int) extends Bundle {
-    val raddr1 = Input(UInt(5.W))
-    val raddr2 = Input(UInt(5.W))
-    val rdata1 = Output(UInt(xlen.W))
-    val rdata2 = Output(UInt(xlen.W))
-    val ren = Input(Bool())
-    val wen = Input(Bool())
-    val waddr = Input(UInt(5.W))
-    val wdata = Input(UInt(xlen.W))
-}
-
-class RegFile(xlen: Int) extends Module {
-    val io = IO(new RegFileIO(xlen))
-    val regs = Mem(32, UInt(xlen.W))
+class RegFile(Xlen: Int) extends Module {
+    val io = IO(new RegFileIO(Xlen))
+    val regs = Mem(32, UInt(Xlen.W))
     
     for(i <- 0 until 32){
         regs.write(i.U,i.U)

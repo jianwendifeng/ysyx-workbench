@@ -3,12 +3,6 @@ package rv64
 import chisel3._
 import chisel3.util._
 
-class IFUIO(Xlen: Int) extends Bundle {
-  val pc_in = Input(UInt(Xlen.W))
-  val inst_in = Input(UInt(Xlen.W))
-  val inst = Output(UInt(Xlen.W))
-  //val pc_out = Output(UInt(xlen.W))   //pc递增在core模块实现
-}
 
 class IFU(Xlen: Int) extends Module {
   val io = IO(new IFUIO(Xlen))
@@ -23,6 +17,7 @@ class IFU(Xlen: Int) extends Module {
 //   inst_reg := instrMem(io.pc_in)  //读取指令
 
   io.inst := inst_reg
+  io.pc_out := io.pc_in
 }
 
 

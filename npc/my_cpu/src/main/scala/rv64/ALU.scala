@@ -19,25 +19,13 @@ object ALU_Signals{
     val ALU_XXX  = 15.U(4.W)
 }
 
-class ALUIO(Xlen: Int) extends Bundle {
-    val alu_sel = Input(UInt(4.W))
-    val a = Input(UInt(Xlen.W))
-    val b = Input(UInt(Xlen.W))
-    
-    val result = Output(UInt(Xlen.W))
-}
+
 
 class ALU(Xlen: Int) extends Module {
     val io = IO(new ALUIO(Xlen))
     val shamt = io.b(4,0).asUInt
-    
-    // when(io.alu_sel === ALU_ADD ) {
-    //     io.result := io.a + io.b
-    // }.otherwise {
-    //     io.result := 0.U
-    // }
 
-    io.result := MuxLookup(io.alu_sel, 0.U, Array(
+    io.result := MuxLookup(io.ctr_signals_in.alu_sel, 0.U, Array(
         ALU_ADD     -> (io.a + io.b),
         ALU_SUB     -> (io.a - io.b),
         ALU_OR      -> (io.a | io.b),

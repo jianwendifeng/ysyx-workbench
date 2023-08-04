@@ -3,59 +3,54 @@ package rv64
 import chisel3._
 import chisel3.util._
 import ALU_Signals._
-
-class IDUIO(Xlen: Int) extends Bundle{
-    val inst = Input(UInt(32.W))
-
-    val alu_sel = Output(UInt(4.W))
-    val rd = Output(UInt(5.W))
-    // val alu_fun3 = Output(UInt(3.W))
-    //val immR = Output(UInt(7.W))
-    val a = Output(UInt(Xlen.W))
-    val b = Output(UInt(Xlen.W))
-}
+import Decode._
 
 class IDU(Xlen: Int) extends Module{
     val io = IO(new IDUIO(Xlen))
     val decode = Module(new Decode(Xlen))
-
-    // val op = io.inst(6,0)
-    val alu_sel = 0.U(4.W)
-    val rd = io.inst(11,7)
-    val src1 = io.inst(19,15)
-    val src2 = io.inst(24,20)
-    // val funct3 = io.inst(14,12)
-    //val immR = io.inst(31,25)
-    val ren = RegInit(false.B)
-    val wen = RegInit(false.B)
-
-    decode.io.inst <> io.inst
-    // decode.io.alu_sel <> alu_sel
-    decode.io.rf_en <> ren
-    decode.io.wb_en <> wen
+    decode.io.inst := io.inst
     
-
+    val ctr_signals = RegNext(decode.io.ctr_signals)
+    io.ctr_signals_out <> ctr_signals
+    
+    //立即数提取&扩展
     val imm_s = Cat(io.inst(31,25),io.inst(11,7))
-    val imm_s_sext = Cat(Fill(20,imm_s(11)),imm_s)
+    val imm_s_sext = Cat(Fill(20, imm_s(11)), imm_s)
+    val imm_i = io.inst(31,20)
+    val imm_i_sext = Cat(Fill(20, imm_i(11)), imm_i)
+
+    val imm = RegInit(0.U(Xlen.W))
+    imm := MuxLookup(decode.io.ctr_signals.imm_sel, 0.U,
+        Array(
+            IMM_I -> imm_i_sext,
+            IMM_S -> imm_s_sext,
+            IMM_X -> 0.U
+        )
+    )
+
+    val rs1_addr = io.inst(19,15)
+    val rs2_addr = io.inst(24,20)
+    io.rs1 := rs1_addr
+    io.rs2 := rs2_addr
 
     val a = RegInit(0.U(Xlen.W))
     val b = RegInit(0.U(Xlen.W))
+    a := MuxLookup(decode.io.ctr_signals.a_sel, io.rs1_data,
+        Array(
+            A_RS1 -> io.rs1_data,
+            A_PC  -> io.pc
+        )
+    )
 
-    //ren := Mux(decode.io.alu_sel === ALU_ADD,true.B, false.B)
+    b := MuxLookup(decode.io.ctr_signals.b_sel, io.rs2_data,
+        Array(
+            B_RS2 -> io.rs2_data,
+            B_IMM -> imm
+        )
+    )
 
-    val regFileInst = Module(new rv64.RegFile(Xlen))
-    
-    regFileInst.io.raddr1 := src1
-    regFileInst.io.raddr2 := src2
-    a := regFileInst.io.rdata1
-    b := regFileInst.io.rdata2
-    regFileInst.io.ren := ren
-    regFileInst.io.wen := wen
-    regFileInst.io.waddr := rd
-    regFileInst.io.wdata := 0.U
-
-    io.alu_sel := decode.io.alu_sel
-    io.rd := rd
+    val rd_addr = io.inst(11,7)
+    io.rd := rd_addr
     io.a := a
     io.b := b
 

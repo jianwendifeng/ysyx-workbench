@@ -21,8 +21,8 @@ class top extends Module {
 
   val core = Module(new Core())
   io.pc := core.io.pc
+  io.inst <> core.io.inst
   io.exit := core.io.exit
-  core.io.inst := io.inst
   io.idu_op := core.io.idu_op
   io.exu_data := core.io.exu_data
   io.exu_data1 := core.io.exu_data1
